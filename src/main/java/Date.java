@@ -1,7 +1,5 @@
-package search_engine;
-
 import java.lang.IllegalArgumentException;
-import libraries.Terminal;
+import utils.Terminal;
 
 public class Date {
   private Integer year;

@@ -1,5 +1,3 @@
-package search_engine;
-
 import java.lang.IllegalArgumentException;
 
 public class Review {

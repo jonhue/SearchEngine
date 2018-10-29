@@ -1,5 +1,3 @@
-package search_engine;
-
 public class Document {
   private String title;
   private String lang;

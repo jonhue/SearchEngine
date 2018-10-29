@@ -1,5 +1,3 @@
-package search_engine;
-
 import org.testng.annotations.*;
 import org.testng.Assert;
 

@@ -1,6 +1,4 @@
-package search_engine;
-
-import libraries.Terminal;
+import utils.Terminal;
 
 public class Author {
   private String firstName;
