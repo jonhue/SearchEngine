@@ -22,6 +22,7 @@ public class Date {
     return "<Date year=" + year + " month=" + month + " day=" + day + ">";
   }
 
+  /* Assuming that every month has precisely 30 days */
   public static Integer daysSince(Date date, Date reference) {
     return Date.monthsSince(date, reference) * 30 + (date.day - reference.day);
   }
@@ -85,21 +86,28 @@ public class Date {
 }
 
 /*
- *
- * Kommentare:
- *
- * In den meisten Fällen ist ein Kommentar ein Code-Smell. In der Regel deutet ein Kommentar darauf hin, dass der Code in
- * seiner Komplexität vereinfacht werden kann. Besonders wichtig, um Kommentare nicht notwendig werden zu lassen, ist
- * die Isolation von Funktionalität (nicht redundant!). Durch die Benennung von Methoden, kann Code leserlich,
- * verständlich und platzsparend gehalten werden.
- * Zudem werden Kommentare schnell zum Maintenance-Horror: Wenn sich der Code ändert müssen sich die Kommentare
- * ebenfalls anpassen. Das sorgt für unnötige Arbeit. Dazu besteht die Gefahr, dass einige Kommentare vergessen werden.
- * Daher ist self-documenting Code definitiv zu bevorzugen.
- *
- * Allerdings gibt es auch Einzelfälle, in denen Kommentare sinnvoll sein können:
- *
- *   * Der Code kann weder vereinfacht, noch aufgespalten, werden.
- *   * Der Code wurde auf eine bestimmte Weise alteriert, die nicht offensichtlich ist. Ein Kommentar erspart einer
- *     anderen Person, oder dem zukünftigen Selbst, das Refactorn.
- *   * Kommentare werden genutzt, um Dokumentation für eine API, Library, o.ä. zu generieren. Nutzer müssen sich so gar
- *     nicht erst den Code ansehen. */
+* Kommentare:
+*
+* In den meisten Fällen ist ein Kommentar ein Code-Smell. In der Regel deutet ein Kommentar darauf hin, dass der Code
+* in seiner Komplexität vereinfacht werden kann. Besonders wichtig, um Kommentare nicht notwendig werden zu lassen, ist
+* die Isolation von Funktionalität (nicht redundant!). Durch die Benennung von Methoden, kann Code leserlich,
+* verständlich und platzsparend gehalten werden.
+* Außerdem ist es sinnvoll Unit-Tests zu schreiben, die das Public Interface einer Klasse sowohl testen als auch
+* dokumentieren.
+* Zudem werden Kommentare schnell zum Maintenance-Horror: Wenn sich der Code ändert müssen sich die Kommentare
+* ebenfalls anpassen. Das sorgt für unnötige Arbeit. Dazu besteht die Gefahr, dass einige Kommentare vergessen werden.
+* Daher ist self-documenting Code definitiv zu bevorzugen.
+*
+* Allerdings gibt es auch Einzelfälle, in denen Kommentare sinnvoll sein können:
+*
+*   * Zur Beschreibung einer Klasse (sollte die Aufgabe der Klasse durch hohe objektorientierte Abstraktion nicht
+*     ersichtlich sein || sollte die Klasse in ihrer Komplexität weit über das hier vorliegende Maß hinausgehen).
+*   * Der Code kann weder vereinfacht, noch aufgespalten, werden.
+*   * Der Code wurde auf eine bestimmte Weise alteriert, die nicht offensichtlich ist. Ein Kommentar erspart einer
+*     anderen Person, oder dem zukünftigen Selbst, das Refactorn.
+*   * Kommentare werden genutzt, um Dokumentation für eine API, Library, o.ä. zu generieren. Nutzer müssen sich so gar
+*     nicht erst den Code ansehen.
+*
+* Insgesamt gilt, dass Kommentare nur dann nütlich sind, wenn sie die Kosten des Verstehens vom Code stärker verringern,
+* als sie die Kosten der Maintenance erhöhen.
+*/
