@@ -38,9 +38,9 @@ public class AuthorTest {
 
   @Test
   public void getAgeAt() {
-    final int expected = 18;
+    final Integer expected = 18;
     final Date today = new Date(2018, 10, 27);
-    final int actual = author.getAgeAt(today);
+    final Integer actual = author.getAgeAt(today);
 
     Assert.assertEquals(actual, expected);
   }

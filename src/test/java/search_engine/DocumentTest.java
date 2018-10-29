@@ -23,9 +23,9 @@ public class DocumentTest {
 
   @Test
   public void getAgeAt() {
-    final int expected = 348;
+    final Integer expected = 348;
     final Date today = new Date(2018, 10, 27);
-    final int actual = document.getAgeAt(today);
+    final Integer actual = document.getAgeAt(today);
 
     Assert.assertEquals(actual, expected);
   }

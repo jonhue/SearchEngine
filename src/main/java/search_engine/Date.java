@@ -1,19 +1,20 @@
 package search_engine;
 
+import java.lang.IllegalArgumentException;
 import libraries.Terminal;
 
 public class Date {
-  private int year;
-  private int month;
-  private int day;
+  private Integer year;
+  private Integer month;
+  private Integer day;
 
-  public Date(int year, int month, int day) {
+  public Date(Integer year, Integer month, Integer day) throws IllegalArgumentException {
     setYear(year);
     setMonth(month);
     setDay(day);
   }
 
-  public Date() {
+  public Date() throws IllegalArgumentException {
     setYear(Terminal.TODAYS_YEAR);
     setMonth(Terminal.TODAYS_MONTH);
     setDay(Terminal.TODAYS_DAY);
@@ -23,48 +24,64 @@ public class Date {
     return "<Date year=" + year + " month=" + month + " day=" + day + ">";
   }
 
-  public static int daysSince(Date date, Date reference) {
-    return Date.yearsSince(date, reference) * 360 + (date.month - reference.month) * 30 + (date.day - reference.day);
+  public static Integer daysSince(Date date, Date reference) {
+    return Date.monthsSince(date, reference) * 30 + (date.day - reference.day);
   }
 
-  public static int yearsSince(Date date, Date reference) {
+  private static Integer monthsSince(Date date, Date reference) {
+    return Date.yearsSince(date, reference) * 12 + (date.month - reference.month);
+  }
+
+  public static Integer yearsSince(Date date, Date reference) {
     return date.year - reference.year;
   }
 
-  public int getYear() {
+  public Integer getYear() {
     return year;
   }
 
-  public void setYear(int year) {
+  public void setYear(Integer year) {
     this.year = year;
   }
 
-  public int getMonth() {
+  public Integer getMonth() {
     return month;
   }
 
   public void setMonth(int month) {
+    if (month > 12) {
+      throw new IllegalArgumentException("Month cannot be higher than 12.");
+    } else if (month < 1) {
+      throw new IllegalArgumentException("Month cannot be lower than 1.");
+    }
+
     this.month = month;
   }
 
-  public int getDay() {
+  public Integer getDay() {
     return day;
   }
 
   public void setDay(int day) {
+    if (day > 31) {
+      throw new IllegalArgumentException("Day cannot be higher than 31.");
+    } else if (day < 1) {
+    throw new IllegalArgumentException("Day cannot be lower than 1.");
+  }
+
     this.day = day;
   }
 
-  private int daysSince1970() {
+  private Integer daysSince1970() {
     final Date reference = new Date(1970, 1, 1);
     return Date.daysSince(this, reference);
   }
 
-  public int getAgeInDaysAt(Date date) {
+  public Integer getAgeInDaysAt(Date date) {
     return Date.daysSince(date, this);
   }
 
-  public int getAgeInYearsAt(Date date) {
+  public Integer getAgeInYearsAt(Date date) {
     return Date.yearsSince(date, this);
   }
 }

@@ -23,32 +23,70 @@ public class DateTest {
 
   @Test
   public void daysSince() {
-    final int expected = 392;
-    final int actual = Date.daysSince(date, reference);
+    final Integer expected = 392;
+    final Integer actual = Date.daysSince(date, reference);
 
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void yearsSince() {
-    final int expected = 1;
-    final int actual = Date.yearsSince(date, reference);
+    final Integer expected = 1;
+    final Integer actual = Date.yearsSince(date, reference);
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void setMonth_throwsExceptionWhenLowerThanOne() throws IllegalArgumentException {
+    date.setMonth(0);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void setMonth_throwsExceptionWhenHigherThanThirteen() throws IllegalArgumentException {
+    date.setMonth(13);
+  }
+
+  @Test
+  public void setMonth_acceptsValuesBetweenOneAndTwelve() throws IllegalArgumentException {
+    final Integer expected = 6;
+    date.setMonth(6);
+    final Integer actual = date.getMonth();
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void setDay_throwsExceptionWhenLowerThanOne() throws IllegalArgumentException {
+    date.setDay(0);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void setDay_throwsExceptionWhenHigherThanThirtytwo() throws IllegalArgumentException {
+    date.setDay(32);
+  }
+
+  @Test
+  public void setDay_acceptsValuesBetweenOneAndThirtyone() throws IllegalArgumentException {
+    final Integer expected = 15;
+    date.setDay(15);
+    final Integer actual = date.getDay();
 
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void getAgeInDaysAt() {
-    final int expected = 392;
-    final int actual = reference.getAgeInDaysAt(date);
+    final Integer expected = 392;
+    final Integer actual = reference.getAgeInDaysAt(date);
 
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void getAgeInYearsAt() {
-    final int expected = 1;
-    final int actual = reference.getAgeInYearsAt(date);
+    final Integer expected = 1;
+    final Integer actual = reference.getAgeInYearsAt(date);
 
     Assert.assertEquals(actual, expected);
   }

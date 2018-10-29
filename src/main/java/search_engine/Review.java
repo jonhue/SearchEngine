@@ -1,6 +1,6 @@
 package search_engine;
 
-import javax.xml.bind.ValidationException;
+import java.lang.IllegalArgumentException;
 
 public class Review {
   private String content;
@@ -8,9 +8,9 @@ public class Review {
   private Document document;
   private String lang;
   private Date releaseDate;
-  private int rating;
+  private Integer rating;
 
-  public Review(Author author, Document document, String lang, Date releaseDate, int rating, String content) throws ValidationException {
+  public Review(Author author, Document document, String lang, Date releaseDate, Integer rating, String content) throws IllegalArgumentException {
     setAuthor(author);
     setDocument(document);
     setLang(lang);
@@ -63,21 +63,21 @@ public class Review {
     this.releaseDate = releaseDate;
   }
 
-  public int getRating() {
+  public Integer getRating() {
     return rating;
   }
 
-  public void setRating(int rating) throws ValidationException {
+  public void setRating(int rating) throws IllegalArgumentException {
     if (rating > 10) {
-      throw new ValidationException("Rating cannot be higher than 10.");
+      throw new IllegalArgumentException("Rating cannot be higher than 10.");
     } else if (rating < 0) {
-      throw new ValidationException("Rating cannot be lower than 0.");
+      throw new IllegalArgumentException("Rating cannot be lower than 0.");
     }
 
     this.rating = rating;
   }
 
-  public int getAgeAt(Date date) {
+  public Integer getAgeAt(Date date) {
     return releaseDate.getAgeInDaysAt(date);
   }
 }
