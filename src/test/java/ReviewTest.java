@@ -34,18 +34,18 @@ public class ReviewTest {
 
   @Test
   public void setRating_acceptsValuesBetweenZeroAndTen() throws IllegalArgumentException {
-    final Integer expected = 6;
+    final int expected = 6;
     review.setRating(6);
-    final Integer actual = review.getRating();
+    final int actual = review.getRating();
 
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void getAgeAt() {
-    final Integer expected = 348;
+    final int expected = 348;
     final Date today = new Date(2018, 10, 27);
-    final Integer actual = review.getAgeAt(today);
+    final int actual = review.getAgeAt(today);
 
     Assert.assertEquals(actual, expected);
   }

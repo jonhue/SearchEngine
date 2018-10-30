@@ -6,9 +6,9 @@ public class Review {
   private Document document;
   private String lang;
   private Date releaseDate;
-  private Integer rating;
+  private int rating;
 
-  public Review(Author author, Document document, String lang, Date releaseDate, Integer rating, String content) throws IllegalArgumentException {
+  public Review(Author author, Document document, String lang, Date releaseDate, int rating, String content) throws IllegalArgumentException {
     setAuthor(author);
     setDocument(document);
     setLang(lang);
@@ -61,7 +61,7 @@ public class Review {
     this.releaseDate = releaseDate;
   }
 
-  public Integer getRating() {
+  public int getRating() {
     return rating;
   }
 
@@ -75,7 +75,7 @@ public class Review {
     this.rating = rating;
   }
 
-  public Integer getAgeAt(Date date) {
+  public int getAgeAt(Date date) {
     return releaseDate.getAgeInDaysAt(date);
   }
 }

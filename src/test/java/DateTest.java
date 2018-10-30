@@ -21,16 +21,16 @@ public class DateTest {
 
   @Test
   public void daysSince() {
-    final Integer expected = 392;
-    final Integer actual = Date.daysSince(date, reference);
+    final int expected = 392;
+    final int actual = Date.daysSince(date, reference);
 
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void yearsSince() {
-    final Integer expected = 1;
-    final Integer actual = Date.yearsSince(date, reference);
+    final int expected = 1;
+    final int actual = Date.yearsSince(date, reference);
 
     Assert.assertEquals(actual, expected);
   }
@@ -47,9 +47,9 @@ public class DateTest {
 
   @Test
   public void setMonth_acceptsValuesBetweenOneAndTwelve() throws IllegalArgumentException {
-    final Integer expected = 6;
+    final int expected = 6;
     date.setMonth(6);
-    final Integer actual = date.getMonth();
+    final int actual = date.getMonth();
 
     Assert.assertEquals(actual, expected);
   }
@@ -66,25 +66,25 @@ public class DateTest {
 
   @Test
   public void setDay_acceptsValuesBetweenOneAndThirtyone() throws IllegalArgumentException {
-    final Integer expected = 15;
+    final int expected = 15;
     date.setDay(15);
-    final Integer actual = date.getDay();
+    final int actual = date.getDay();
 
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void getAgeInDaysAt() {
-    final Integer expected = 392;
-    final Integer actual = reference.getAgeInDaysAt(date);
+    final int expected = 392;
+    final int actual = reference.getAgeInDaysAt(date);
 
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void getAgeInYearsAt() {
-    final Integer expected = 1;
-    final Integer actual = reference.getAgeInYearsAt(date);
+    final int expected = 1;
+    final int actual = reference.getAgeInYearsAt(date);
 
     Assert.assertEquals(actual, expected);
   }

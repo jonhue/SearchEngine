@@ -67,7 +67,7 @@ public class Document {
     this.author = author;
   }
 
-  public Integer getAgeAt(Date date) {
+  public int getAgeAt(Date date) {
     return releaseDate.getAgeInDaysAt(date);
   }
 }

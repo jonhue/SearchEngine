@@ -2,11 +2,11 @@ import java.lang.IllegalArgumentException;
 import utils.Terminal;
 
 public class Date {
-  private Integer year;
-  private Integer month;
-  private Integer day;
+  private int year;
+  private int month;
+  private int day;
 
-  public Date(Integer year, Integer month, Integer day) throws IllegalArgumentException {
+  public Date(int year, int month, int day) throws IllegalArgumentException {
     setYear(year);
     setMonth(month);
     setDay(day);
@@ -23,27 +23,27 @@ public class Date {
   }
 
   /* Assuming that every month has precisely 30 days */
-  public static Integer daysSince(Date date, Date reference) {
+  public static int daysSince(Date date, Date reference) {
     return Date.monthsSince(date, reference) * 30 + (date.day - reference.day);
   }
 
-  private static Integer monthsSince(Date date, Date reference) {
+  private static int monthsSince(Date date, Date reference) {
     return Date.yearsSince(date, reference) * 12 + (date.month - reference.month);
   }
 
-  public static Integer yearsSince(Date date, Date reference) {
+  public static int yearsSince(Date date, Date reference) {
     return date.year - reference.year;
   }
 
-  public Integer getYear() {
+  public int getYear() {
     return year;
   }
 
-  public void setYear(Integer year) {
+  public void setYear(int year) {
     this.year = year;
   }
 
-  public Integer getMonth() {
+  public int getMonth() {
     return month;
   }
 
@@ -57,7 +57,7 @@ public class Date {
     this.month = month;
   }
 
-  public Integer getDay() {
+  public int getDay() {
     return day;
   }
 
@@ -71,16 +71,16 @@ public class Date {
     this.day = day;
   }
 
-  private Integer daysSince1970() {
+  private int daysSince1970() {
     final Date reference = new Date(1970, 1, 1);
     return Date.daysSince(this, reference);
   }
 
-  public Integer getAgeInDaysAt(Date date) {
+  public int getAgeInDaysAt(Date date) {
     return Date.daysSince(date, this);
   }
 
-  public Integer getAgeInYearsAt(Date date) {
+  public int getAgeInYearsAt(Date date) {
     return Date.yearsSince(date, this);
   }
 }

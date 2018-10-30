@@ -67,7 +67,7 @@ public class Author {
     return getName() + Terminal.NEWLINE + getEmail() + Terminal.NEWLINE + getResidence();
   }
 
-  public Integer getAgeAt(Date date) {
+  public int getAgeAt(Date date) {
     return birthday.getAgeInYearsAt(date);
   }
 }
