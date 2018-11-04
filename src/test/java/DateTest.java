@@ -1,6 +1,8 @@
 import org.testng.annotations.*;
 import org.testng.Assert;
 
+import utils.Terminal;
+
 public class DateTest {
   private Date date;
   private Date reference;
@@ -12,9 +14,33 @@ public class DateTest {
   }
 
   @Test
+  public void constructor_withoutParameters() {
+    final Date expected = new Date(Terminal.TODAYS_YEAR, Terminal.TODAYS_MONTH, Terminal.TODAYS_DAY);
+    final Date actual = new Date();
+
+    Assert.assertTrue(actual.equals(expected));
+  }
+
+  @Test
   public void toString_hasCorrectFormat() {
     final String expected = "<Date year=1971 month=2 day=3>";
     final String actual = date.toString();
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void equals_detectsEquality() {
+    final boolean expected = true;
+    final boolean actual = date.equals(new Date(1971, 2, 3));
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void equals_detectsInequality() {
+    final boolean expected = false;
+    final boolean actual = date.equals(new Date());
 
     Assert.assertEquals(actual, expected);
   }
@@ -35,6 +61,31 @@ public class DateTest {
     Assert.assertEquals(actual, expected);
   }
 
+  @Test
+  public void getYear() {
+    final int expected = 1971;
+    final int actual = date.getYear();
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void setYear() {
+    final int expected = 2018;
+    date.setYear(expected);
+    final int actual = date.getYear();
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void getMonth() {
+    final int expected = 2;
+    final int actual = date.getMonth();
+
+    Assert.assertEquals(actual, expected);
+  }
+
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void setMonth_throwsExceptionWhenLowerThanOne() throws IllegalArgumentException {
     date.setMonth(0);
@@ -50,6 +101,14 @@ public class DateTest {
     final int expected = 6;
     date.setMonth(6);
     final int actual = date.getMonth();
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void getDay() {
+    final int expected = 3;
+    final int actual = date.getDay();
 
     Assert.assertEquals(actual, expected);
   }

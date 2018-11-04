@@ -65,6 +65,7 @@ public class Review {
     return rating;
   }
 
+  /* rating must be one of {0..10} otherwise throws IllegalArgumentException */
   public void setRating(int rating) throws IllegalArgumentException {
     if (rating > 10) {
       throw new IllegalArgumentException("Rating cannot be higher than 10.");
