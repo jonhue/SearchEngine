@@ -1,12 +1,14 @@
 import org.testng.annotations.*;
 import org.testng.Assert;
 
+import java.lang.IllegalArgumentException;
+
 public class WordCountTest {
   private Document document;
   private WordCount wordCount;
 
   @BeforeMethod
-  public void setUp() {
+  public void setUp() throws IllegalArgumentException {
     Date date = new Date(2017, 11, 9);
     Author author = new Author("Jonas", "Hübotter", date, "Munich", "jonas.huebotter@tum.de");
     document = new Document("Title", "en", "Summary", date, author, "Content ...");
@@ -44,8 +46,13 @@ public class WordCountTest {
     Assert.assertEquals(actual, expected);
   }
 
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void setCount_throwsExceptionWhenLowerThanZero() throws IllegalArgumentException {
+    wordCount.setCount(-1);
+  }
+
   @Test
-  public void setCount() {
+  public void setCount_acceptsValuesAboveZero() {
     final int expected = 2;
     wordCount.setCount(expected);
     final int actual = wordCount.getCount();

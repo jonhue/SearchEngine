@@ -54,9 +54,9 @@ public class Date {
   /* month must be one of {1..12} otherwise throws IllegalArgumentException */
   public void setMonth(int month) {
     if (month > 12) {
-      throw new IllegalArgumentException("Month cannot be higher than 12.");
+      throw new IllegalArgumentException("Month must not be higher than 12.");
     } else if (month < 1) {
-      throw new IllegalArgumentException("Month cannot be lower than 1.");
+      throw new IllegalArgumentException("Month must not be lower than 1.");
     }
 
     this.month = month;
@@ -69,9 +69,9 @@ public class Date {
   /* day must be one of {1..31} otherwise throws IllegalArgumentException */
   public void setDay(int day) {
     if (day > 31) {
-      throw new IllegalArgumentException("Day cannot be higher than 31.");
+      throw new IllegalArgumentException("Day must not be higher than 31.");
     } else if (day < 1) {
-    throw new IllegalArgumentException("Day cannot be lower than 1.");
+    throw new IllegalArgumentException("Day must not be lower than 1.");
   }
 
     this.day = day;
