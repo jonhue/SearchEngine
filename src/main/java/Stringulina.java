@@ -71,18 +71,16 @@ class Matches {
   }
 
   public boolean matches() {
-    while (patternPos < pattern.length()) {
+    while (patternPos < pattern.length() && matches) {
       if (pattern.charAt(patternPos) == '.' || str.charAt(strPos) == pattern.charAt(patternPos)) {
         ++patternPos;
         ++strPos;
       } else if (pattern.charAt(patternPos) == '{') {
         if (!matchesMultiplicity()) {
           matches = false;
-          break;
         }
       } else {
         matches = false;
-        break;
       }
     }
 
