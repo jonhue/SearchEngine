@@ -1,5 +1,5 @@
-import org.testng.annotations.*;
-import org.testng.Assert;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class StringulinaTest {
   @Test
@@ -7,7 +7,7 @@ public class StringulinaTest {
     final int expected = -1;
     final int actual = Stringulina.substringPos("abc", "d");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -15,7 +15,7 @@ public class StringulinaTest {
     final int expected = 3;
     final int actual = Stringulina.substringPos("abcd", "d");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -23,7 +23,7 @@ public class StringulinaTest {
     final int expected = 0;
     final int actual = Stringulina.countSubstring("aaaa", "b");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -31,7 +31,7 @@ public class StringulinaTest {
     final int expected = 3;
     final int actual = Stringulina.countSubstring("aaaa", "aa");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -39,7 +39,7 @@ public class StringulinaTest {
     final boolean expected = true;
     final boolean actual = Stringulina.correctlyBracketed("a(xx(]))");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -47,7 +47,7 @@ public class StringulinaTest {
     final boolean expected = false;
     final boolean actual = Stringulina.correctlyBracketed("a(xx))");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -55,7 +55,7 @@ public class StringulinaTest {
     final boolean expected = false;
     final boolean actual = Stringulina.correctlyBracketed("a(xx)(");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -63,6 +63,38 @@ public class StringulinaTest {
     final boolean expected = false;
     final boolean actual = Stringulina.correctlyBracketed("a)xx()(");
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
+  }
+
+  @Test
+  public void matches_exampleOne() {
+    final boolean expected = true;
+    final boolean actual = Stringulina.matches("Pijnguin", "P.{2}nguin");
+
+    assertEquals(actual, expected);
+  }
+
+  @Test
+  public void matches_exampleTwo() {
+    final boolean expected = false;
+    final boolean actual = Stringulina.matches("Pijknguin", "P.{2}nguin");
+
+    assertEquals(actual, expected);
+  }
+
+  @Test
+  public void matches_exampleThree() {
+    final boolean expected = true;
+    final boolean actual = Stringulina.matches("Haaaaaaaaaawko", "Ha{10}..o");
+
+    assertEquals(actual, expected);
+  }
+
+  @Test
+  public void matches_exampleFour() {
+    final boolean expected = false;
+    final boolean actual = Stringulina.matches("Haaawko", "Ha{10}..o");
+
+    assertEquals(actual, expected);
   }
 }

@@ -1,5 +1,7 @@
-import org.testng.annotations.*;
-import org.testng.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 import utils.Terminal;
 
@@ -7,7 +9,7 @@ public class DateTest {
   private Date date;
   private Date reference;
 
-  @BeforeMethod
+  @Before
   public void setUp() {
     date = new Date(1971, 2, 3);
     reference = new Date(1970, 1, 1);
@@ -18,7 +20,7 @@ public class DateTest {
     final Date expected = new Date(Terminal.TODAYS_YEAR, Terminal.TODAYS_MONTH, Terminal.TODAYS_DAY);
     final Date actual = new Date();
 
-    Assert.assertTrue(actual.equals(expected));
+    assertTrue(actual.equals(expected));
   }
 
   @Test
@@ -26,7 +28,7 @@ public class DateTest {
     final String expected = "<Date year=1971 month=2 day=3>";
     final String actual = date.toString();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -34,7 +36,7 @@ public class DateTest {
     final boolean expected = true;
     final boolean actual = date.equals(new Date(1971, 2, 3));
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -42,7 +44,7 @@ public class DateTest {
     final boolean expected = false;
     final boolean actual = date.equals(new Date());
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -50,7 +52,7 @@ public class DateTest {
     final int expected = 392;
     final int actual = Date.daysSince(date, reference);
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -58,7 +60,7 @@ public class DateTest {
     final int expected = 1;
     final int actual = Date.yearsSince(date, reference);
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -66,7 +68,7 @@ public class DateTest {
     final int expected = 1971;
     final int actual = date.getYear();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -75,7 +77,7 @@ public class DateTest {
     date.setYear(expected);
     final int actual = date.getYear();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -83,15 +85,15 @@ public class DateTest {
     final int expected = 2;
     final int actual = date.getMonth();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void setMonth_throwsExceptionWhenLowerThanOne() throws IllegalArgumentException {
     date.setMonth(0);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void setMonth_throwsExceptionWhenHigherThanThirteen() throws IllegalArgumentException {
     date.setMonth(13);
   }
@@ -102,7 +104,7 @@ public class DateTest {
     date.setMonth(6);
     final int actual = date.getMonth();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -110,15 +112,15 @@ public class DateTest {
     final int expected = 3;
     final int actual = date.getDay();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void setDay_throwsExceptionWhenLowerThanOne() throws IllegalArgumentException {
     date.setDay(0);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void setDay_throwsExceptionWhenHigherThanThirtytwo() throws IllegalArgumentException {
     date.setDay(32);
   }
@@ -129,7 +131,7 @@ public class DateTest {
     date.setDay(15);
     final int actual = date.getDay();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -137,7 +139,7 @@ public class DateTest {
     final int expected = 392;
     final int actual = reference.getAgeInDaysAt(date);
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -145,6 +147,6 @@ public class DateTest {
     final int expected = 1;
     final int actual = reference.getAgeInYearsAt(date);
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 }

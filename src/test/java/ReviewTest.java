@@ -1,5 +1,6 @@
-import org.testng.annotations.*;
-import org.testng.Assert;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.lang.IllegalArgumentException;
 
@@ -9,7 +10,7 @@ public class ReviewTest {
   private Document document;
   private Date releaseDate;
 
-  @BeforeMethod
+  @Before
   public void setUp() throws IllegalArgumentException {
     releaseDate = new Date(2017, 11, 9);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
@@ -22,7 +23,7 @@ public class ReviewTest {
     final String expected = "<Review rating=5 document=<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>> author=<Author firstName=Jonas lastName=Hübotter>>";
     final String actual = review.toString();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -30,7 +31,7 @@ public class ReviewTest {
     final String expected = "Content ...";
     final String actual = review.getContent();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -39,14 +40,14 @@ public class ReviewTest {
     review.setContent(expected);
     final String actual = review.getContent();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
   public void getAuthor() {
     final Author actual = review.getAuthor();
 
-    Assert.assertEquals(actual, author);
+    assertEquals(actual, author);
   }
 
   @Test
@@ -55,14 +56,14 @@ public class ReviewTest {
     review.setAuthor(expected);
     final Author actual = review.getAuthor();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
   public void getDocument() {
     final Document actual = review.getDocument();
 
-    Assert.assertEquals(actual, document);
+    assertEquals(actual, document);
   }
 
   @Test
@@ -71,7 +72,7 @@ public class ReviewTest {
     review.setDocument(expected);
     final Document actual = review.getDocument();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -79,7 +80,7 @@ public class ReviewTest {
     final String expected = "en";
     final String actual = review.getLang();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -88,14 +89,14 @@ public class ReviewTest {
     review.setLang(expected);
     final String actual = review.getLang();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
   public void getReleaseDate() {
     final Date actual = review.getReleaseDate();
 
-    Assert.assertEquals(actual, releaseDate);
+    assertEquals(actual, releaseDate);
   }
 
   @Test
@@ -104,7 +105,7 @@ public class ReviewTest {
     review.setReleaseDate(expected);
     final Date actual = review.getReleaseDate();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -112,15 +113,15 @@ public class ReviewTest {
     final int expected = 5;
     final int actual = review.getRating();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void setRating_throwsExceptionWhenLowerThanZero() throws IllegalArgumentException {
     review.setRating(-1);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void setRating_throwsExceptionWhenHigherThanTen() throws IllegalArgumentException {
     review.setRating(11);
   }
@@ -131,7 +132,7 @@ public class ReviewTest {
     review.setRating(6);
     final int actual = review.getRating();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -140,6 +141,6 @@ public class ReviewTest {
     final Date today = new Date(2018, 10, 27);
     final int actual = review.getAgeAt(today);
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 }

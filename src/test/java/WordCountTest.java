@@ -1,5 +1,6 @@
-import org.testng.annotations.*;
-import org.testng.Assert;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.lang.IllegalArgumentException;
 
@@ -7,7 +8,7 @@ public class WordCountTest {
   private Document document;
   private WordCount wordCount;
 
-  @BeforeMethod
+  @Before
   public void setUp() throws IllegalArgumentException {
     Date date = new Date(2017, 11, 9);
     Author author = new Author("Jonas", "Hübotter", date, "Munich", "jonas.huebotter@tum.de");
@@ -20,14 +21,14 @@ public class WordCountTest {
     final String expected = "<WordCount content=Word count=1 document=<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>>>";
     final String actual = wordCount.toString();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
   public void getDocument() {
     final Document actual = wordCount.getDocument();
 
-    Assert.assertEquals(actual, document);
+    assertEquals(actual, document);
   }
 
   @Test
@@ -35,7 +36,7 @@ public class WordCountTest {
     final String expected = "Word";
     final String actual = wordCount.getContent();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -43,10 +44,10 @@ public class WordCountTest {
     final int expected = 1;
     final int actual = wordCount.getCount();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void setCount_throwsExceptionWhenLowerThanZero() throws IllegalArgumentException {
     wordCount.setCount(-1);
   }
@@ -57,7 +58,7 @@ public class WordCountTest {
     wordCount.setCount(expected);
     final int actual = wordCount.getCount();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -65,7 +66,7 @@ public class WordCountTest {
     final int expected = 2;
     final int actual = wordCount.incrementCount();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -73,6 +74,6 @@ public class WordCountTest {
     final int expected = 3;
     final int actual = wordCount.incrementCount(2);
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 }

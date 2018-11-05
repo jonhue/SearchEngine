@@ -1,12 +1,13 @@
-import org.testng.annotations.*;
-import org.testng.Assert;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 public class DocumentTest {
   private Document document;
   private Date releaseDate;
   private Author author;
 
-  @BeforeMethod
+  @Before
   public void setUp() {
     releaseDate = new Date(2017, 11, 9);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
@@ -18,7 +19,7 @@ public class DocumentTest {
     final String expected = "<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>>";
     final String actual = document.toString();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -26,7 +27,7 @@ public class DocumentTest {
     final String expected = "Title";
     final String actual = document.getTitle();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -35,7 +36,7 @@ public class DocumentTest {
     document.setTitle(expected);
     final String actual = document.getTitle();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -43,7 +44,7 @@ public class DocumentTest {
     final String expected = "Content ...";
     final String actual = document.getContent();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -52,7 +53,7 @@ public class DocumentTest {
     document.setContent(expected);
     final String actual = document.getContent();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -60,7 +61,7 @@ public class DocumentTest {
     final String expected = "en";
     final String actual = document.getLang();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -69,7 +70,7 @@ public class DocumentTest {
     document.setLang(expected);
     final String actual = document.getLang();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -77,7 +78,7 @@ public class DocumentTest {
     final String expected = "Summary";
     final String actual = document.getSummary();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -86,14 +87,14 @@ public class DocumentTest {
     document.setSummary(expected);
     final String actual = document.getSummary();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
   public void getReleaseDate() {
     final Date actual = document.getReleaseDate();
 
-    Assert.assertEquals(actual, releaseDate);
+    assertEquals(actual, releaseDate);
   }
 
   @Test
@@ -102,14 +103,14 @@ public class DocumentTest {
     document.setReleaseDate(expected);
     final Date actual = document.getReleaseDate();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
   public void getAuthor() {
     final Author actual = document.getAuthor();
 
-    Assert.assertEquals(actual, author);
+    assertEquals(actual, author);
   }
 
   @Test
@@ -118,7 +119,7 @@ public class DocumentTest {
     document.setAuthor(expected);
     final Author actual = document.getAuthor();
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 
   @Test
@@ -127,6 +128,6 @@ public class DocumentTest {
     final Date today = new Date(2018, 10, 27);
     final int actual = document.getAgeAt(today);
 
-    Assert.assertEquals(actual, expected);
+    assertEquals(actual, expected);
   }
 }
