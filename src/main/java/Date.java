@@ -68,11 +68,25 @@ public class Date {
 
   /* day must be one of {1..31} otherwise throws IllegalArgumentException */
   public void setDay(int day) {
-    if (day > 31) {
-      throw new IllegalArgumentException("Day must not be higher than 31.");
-    } else if (day < 1) {
-    throw new IllegalArgumentException("Day must not be lower than 1.");
-  }
+    if (day < 1) {
+      throw new IllegalArgumentException("Day must not be lower than 1.");
+    }
+    switch (month) {
+      case 4:
+      case 6:
+      case 9:
+      case 11: if (day > 30) {
+        throw new IllegalArgumentException("Day must not be higher than 30.");
+      } break;
+      case 2: if (isInLeapYear() && day > 29) {
+        throw new IllegalArgumentException("Day must not be higher than 29.");
+      } else if (day > 28) {
+        throw new IllegalArgumentException("Day must not be higher than 28.");
+      } break;
+      default: if (day > 31) {
+        throw new IllegalArgumentException("Day must not be higher than 31.");
+      }
+    }
 
     this.day = day;
   }
@@ -88,5 +102,11 @@ public class Date {
 
   public int getAgeInYearsAt(Date date) {
     return Date.yearsSince(date, this);
+  }
+
+  /* Leap years are the years that are divisible by 4, except those that are divisible by 100 and not divisible by 400. */
+  private boolean isInLeapYear() {
+    if (year % 100 == 0 && year % 400 != 0) return false;
+    return year % 4 == 0;
   }
 }

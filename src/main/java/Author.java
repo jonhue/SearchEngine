@@ -1,3 +1,4 @@
+import java.lang.IllegalArgumentException;
 import utils.Terminal;
 
 public class Author {
@@ -7,7 +8,7 @@ public class Author {
   private String residence;
   private String email;
 
-  public Author(String firstName, String lastName, Date birthday, String residence, String email) {
+  public Author(String firstName, String lastName, Date birthday, String residence, String email) throws IllegalArgumentException {
     setFirstName(firstName);
     setLastName(lastName);
     setBirthday(birthday);
@@ -55,7 +56,15 @@ public class Author {
     return email;
   }
 
-  public void setEmail(String email) {
+  public void setEmail(String email) throws IllegalArgumentException {
+    if (email.indexOf('@') == -1) {
+      throw new IllegalArgumentException("Invalid email address. Must contain @.");
+    } else if (email.indexOf('@') == 0) {
+      throw new IllegalArgumentException("Invalid email address. @ must not be the first character.");
+    } else if (email.length() < 6) {
+      throw new IllegalArgumentException("Invalid email address. Length must not be shorter than 6."); // Shortest email: a@b.ce
+    }
+
     this.email = email;
   }
 

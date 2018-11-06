@@ -122,11 +122,32 @@ public class DateTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void setDay_throwsExceptionWhenHigherThanThirtytwo() throws IllegalArgumentException {
+    date.setMonth(1);
     date.setDay(32);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void setDay_throwsExceptionWhenHigherThanThirtyone() throws IllegalArgumentException {
+    date.setMonth(4);
+    date.setDay(32);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void setDay_throwsExceptionWhenHigherThanTwentynineInFebruaryOfLeapYears() throws IllegalArgumentException {
+    date.setYear(2000);
+    date.setMonth(2);
+    date.setDay(30);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void setDay_throwsExceptionWhenHigherThanTwentyeightInFebruary() throws IllegalArgumentException {
+    date.setYear(1900);
+    date.setMonth(2);
+    date.setDay(29);
+  }
+
   @Test
-  public void setDay_acceptsValuesBetweenOneAndThirtyone() throws IllegalArgumentException {
+  public void setDay_acceptsCorrectValuesBetweenOneAndThirtyone() throws IllegalArgumentException {
     final int expected = 15;
     date.setDay(15);
     final int actual = date.getDay();

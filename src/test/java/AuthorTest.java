@@ -95,8 +95,23 @@ public class AuthorTest {
     assertEquals(actual, expected);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void setEmail_throwsExceptionWhenNotIncludingAt() throws IllegalArgumentException {
+    author.setEmail("abc");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void setEmail_throwsExceptionWhenAtInFirstPlace() throws IllegalArgumentException {
+    author.setEmail("@abc");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void setEmail_throwsExceptionWhenShorterThanSix() throws IllegalArgumentException {
+    author.setEmail("a@b.c");
+  }
+
   @Test
-  public void setEmail() {
+  public void setEmail_acceptsValuesContainingAtNotInFirstPlaceAndLongerThanFive() {
     final String expected = "me@jonhue.me";
     author.setEmail(expected);
     final String actual = author.getEmail();
