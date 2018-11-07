@@ -5,30 +5,21 @@ import org.junit.Test;
 import java.lang.IllegalArgumentException;
 
 public class WordCountTest {
-  private Document document;
   private WordCount wordCount;
 
   @Before
   public void setUp() throws IllegalArgumentException {
     Date date = new Date(2017, 11, 9);
     Author author = new Author("Jonas", "Hübotter", date, "Munich", "jonas.huebotter@tum.de");
-    document = new Document("Title", "en", "Summary", date, author, "Content ...");
-    wordCount = new WordCount(document, "Word", 1);
+    wordCount = new WordCount("Word", 1);
   }
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<WordCount content=Word count=1 document=<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>>>";
+    final String expected = "<WordCount content=Word count=1>";
     final String actual = wordCount.toString();
 
     assertEquals(actual, expected);
-  }
-
-  @Test
-  public void getDocument() {
-    final Document actual = wordCount.getDocument();
-
-    assertEquals(actual, document);
   }
 
   @Test

@@ -1,26 +1,16 @@
 import java.lang.IllegalArgumentException;
 
 public class WordCount {
-  private Document document;
   private String content;
   private int count;
 
-  public WordCount(Document document, String content, int count) {
-    setDocument(document);
+  public WordCount(String content, int count) {
     setContent(content);
     setCount(count);
   }
 
   public String toString() {
-    return "<WordCount content=" + content + " count=" + count + " document=" + document.toString() + ">";
-  }
-
-  public Document getDocument() {
-    return document;
-  }
-
-  private void setDocument(Document document) {
-    this.document = document;
+    return "<WordCount content=" + content + " count=" + count + ">";
   }
 
   public String getContent() {
