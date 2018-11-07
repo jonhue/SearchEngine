@@ -10,11 +10,9 @@ public class Primverquerung {
     if (n < 0) return 0;
 
     int sum = 0;
-    for (int i = 1; i < n; ++i) {
-      if (isPrime(i) && isDigitSumEven(i)) {
+    for (int i = 1; i < n; ++i)
+      if (isPrime(i) && isDigitSumEven(i))
         sum = sum + i;
-      }
-    }
 
     return sum;
   }
@@ -22,12 +20,9 @@ public class Primverquerung {
   private static boolean isPrime(int n) {
     boolean isPrime = true;
 
-    for (int i = 2; i < n; ++i) {
-      if (n % i == 0) {
+    for (int i = 2; i < n && isPrime; ++i)
+      if (n % i == 0)
         isPrime = false;
-        break;
-      }
-    }
 
     return isPrime;
   }

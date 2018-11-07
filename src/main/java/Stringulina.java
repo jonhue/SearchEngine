@@ -1,35 +1,26 @@
 public class Stringulina {
   public static int substringPos(String haystack, String needle) {
     int pos = -1;
-    for (int i = 0; i < haystack.length(); ++i) {
-      if (isSubstringAtPos(haystack, needle, i)) {
+    for (int i = 0; i < haystack.length() && pos == -1; ++i)
+      if (isSubstringAtPos(haystack, needle, i))
         pos = i;
-        break;
-      }
-    }
 
     return pos;
   }
 
   public static int countSubstring(String haystack, String needle) {
     int count = 0;
-    for (int i = 0; i < haystack.length(); ++i) {
-      if (isSubstringAtPos(haystack, needle, i)) {
-        count = count + 1;
-      }
-    }
+    for (int i = 0; i < haystack.length(); ++i)
+      if (isSubstringAtPos(haystack, needle, i)) count = count + 1;
 
     return count;
   }
 
   private static boolean isSubstringAtPos(String haystack, String needle, int pos) {
     boolean isSubstringAtPos = true;
-    for (int i = 0; i < needle.length(); ++i) {
-      if (haystack.length() - 1 < pos + i || haystack.charAt(pos + i) != needle.charAt(i)) {
+    for (int i = 0; i < needle.length() && isSubstringAtPos; ++i)
+      if (haystack.length() - 1 < pos + i || haystack.charAt(pos + i) != needle.charAt(i))
         isSubstringAtPos = false;
-        break;
-      }
-    }
 
     return isSubstringAtPos;
   }
@@ -38,11 +29,10 @@ public class Stringulina {
     int bracketsCount = 0;
 
     for (int i = 0; i < str.length(); ++i) {
-      if (str.charAt(i) == '(') {
+      if (str.charAt(i) == '(')
         bracketsCount = bracketsCount + 1;
-      } else if (str.charAt(i) == ')') {
+      else if (str.charAt(i) == ')')
         bracketsCount = bracketsCount - 1;
-      }
 
       if (bracketsCount < 0) break;
     }
@@ -76,9 +66,7 @@ class Matches {
         ++patternPos;
         ++strPos;
       } else if (pattern.charAt(patternPos) == '{') {
-        if (!matchesMultiplicity()) {
-          matches = false;
-        }
+        if (!matchesMultiplicity()) matches = false;
       } else {
         matches = false;
       }
@@ -90,14 +78,10 @@ class Matches {
   private boolean matchesMultiplicity() {
     boolean matches = true;
     int multiplicity = parseMultiplicity();
-    if (pattern.charAt(patternPos - 1) != '.') {
-      for (int i = strPos; i < strPos + multiplicity - 1; ++i) { // -1 as the first letter of multiplicity has already been checked
-        if (str.charAt(i) != pattern.charAt(patternPos - 1)) {
+    if (pattern.charAt(patternPos - 1) != '.') // Validates multiplicity if a specific character is defined
+      for (int i = strPos; i < strPos + multiplicity - 1 && matches; ++i) // -1 as the first letter of multiplicity has already been checked
+        if (str.charAt(i) != pattern.charAt(patternPos - 1))
           matches = false;
-          break;
-        }
-      }
-    }
 
     strPos = strPos + multiplicity - 1; // points to next char after multiplicity
     patternPos = patternPos + 2 + String.valueOf(multiplicity).length(); // skips declaration of multiplicity (e.g.: {1})
@@ -106,9 +90,7 @@ class Matches {
 
   private int parseMultiplicity() {
     int endPos = patternPos + 2; // minimum endPos (one digit multiplicity)
-    while (pattern.charAt(endPos) != '}') {
-      ++endPos;
-    }
+    while (pattern.charAt(endPos) != '}') ++endPos;
 
     return Integer.parseInt(pattern.substring(patternPos + 1, endPos));
   }

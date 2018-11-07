@@ -27,9 +27,8 @@ public class WordCount {
 
   /* count must be 1 or higher; otherwise throws IllegalArgumentException */
   public void setCount(int count) throws IllegalArgumentException {
-    if (count < 1) {
+    if (count < 1)
       throw new IllegalArgumentException("Count must not be smaller than 1.");
-    }
 
     this.count = count;
   }
