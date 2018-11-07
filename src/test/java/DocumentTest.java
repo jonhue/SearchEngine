@@ -9,7 +9,7 @@ public class DocumentTest {
 
   @Before
   public void setUp() {
-    releaseDate = new Date(2017, 11, 9);
+    releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
     document = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
   }
@@ -99,7 +99,7 @@ public class DocumentTest {
 
   @Test
   public void setReleaseDate() {
-    final Date expected = new Date(1970, 1, 1);
+    final Date expected = new Date(1, 1, 1970);
     document.setReleaseDate(expected);
     final Date actual = document.getReleaseDate();
 
@@ -125,7 +125,7 @@ public class DocumentTest {
   @Test
   public void getAgeAt() {
     final int expected = 348;
-    final Date today = new Date(2018, 10, 27);
+    final Date today = new Date(27, 10, 2018);
     final int actual = document.getAgeAt(today);
 
     assertEquals(actual, expected);

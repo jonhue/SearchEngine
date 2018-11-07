@@ -8,7 +8,7 @@ public class AuthorTest {
 
   @Before
   public void setUp() {
-    birthday = new Date(2000, 2, 4);
+    birthday = new Date(4, 2, 2000);
     author = new Author("Jonas", "Hübotter", birthday, "Munich", "jonas.huebotter@tum.de");
   }
 
@@ -63,7 +63,7 @@ public class AuthorTest {
 
   @Test
   public void setBirthday() {
-    final Date expected = new Date(1970, 1, 1);
+    final Date expected = new Date(1, 1, 1970);
     author.setBirthday(expected);
     final Date actual = author.getBirthday();
 
@@ -138,7 +138,7 @@ public class AuthorTest {
   @Test
   public void getAgeAt() {
     final int expected = 18;
-    final Date today = new Date(2018, 10, 27);
+    final Date today = new Date(27, 10, 2018);
     final int actual = author.getAgeAt(today);
 
     assertEquals(actual, expected);

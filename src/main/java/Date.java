@@ -6,7 +6,7 @@ public class Date {
   private int month;
   private int day;
 
-  public Date(int year, int month, int day) throws IllegalArgumentException {
+  public Date(int day, int month, int year) throws IllegalArgumentException {
     setYear(year);
     setMonth(month);
     setDay(day);

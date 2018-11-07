@@ -11,13 +11,13 @@ public class DateTest {
 
   @Before
   public void setUp() {
-    date = new Date(1971, 2, 3);
-    reference = new Date(1970, 1, 1);
+    date = new Date(3, 2, 1971);
+    reference = new Date(1, 1, 1970);
   }
 
   @Test
   public void constructor_withoutParameters() {
-    final Date expected = new Date(Terminal.TODAYS_YEAR, Terminal.TODAYS_MONTH, Terminal.TODAYS_DAY);
+    final Date expected = new Date(Terminal.TODAYS_DAY, Terminal.TODAYS_MONTH, Terminal.TODAYS_YEAR);
     final Date actual = new Date();
 
     assertTrue(actual.equals(expected));
@@ -34,7 +34,7 @@ public class DateTest {
   @Test
   public void equals_detectsEquality() {
     final boolean expected = true;
-    final boolean actual = date.equals(new Date(1971, 2, 3));
+    final boolean actual = date.equals(new Date(3, 2, 1971));
 
     assertEquals(actual, expected);
   }

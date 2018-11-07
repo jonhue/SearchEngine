@@ -9,8 +9,6 @@ public class WordCountTest {
 
   @Before
   public void setUp() throws IllegalArgumentException {
-    Date date = new Date(2017, 11, 9);
-    Author author = new Author("Jonas", "Hübotter", date, "Munich", "jonas.huebotter@tum.de");
     wordCount = new WordCount("Word", 1);
   }
 
