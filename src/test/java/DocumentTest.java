@@ -12,11 +12,11 @@ public class DocumentTest {
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
     document = new Document("Title", "en", "Summary", releaseDate, author,
-                            "am strand von santa monica stoppen bullige polizisten die revolution eine riesige blinkende " +
-                            "anzeigetafel warnt auf dem Weg am strand sind elektronische tretroller verboten hier fangen " +
-                            "polizisten viele ab die vom wenige kilometer entfernten venice beach angerast kommen einhundertneunzig " +
-                            "dollar müssen die fahrer zahlen noch einmal einhundertneunzig dollar wenn sie keinen helm tragen harte " +
-                            "strafen um die plage in den griff zu bekommen");
+            "am strand von santa monica stoppen bullige polizisten die revolution eine riesige blinkende " +
+            "anzeigetafel warnt auf dem Weg am strand sind elektronische tretroller verboten hier fangen " +
+            "polizisten viele ab die vom wenige kilometer entfernten venice beach angerast kommen einhundertneunzig " +
+            "dollar müssen die fahrer zahlen noch einmal einhundertneunzig dollar wenn sie keinen helm tragen harte " +
+            "strafen um die plage in den griff zu bekommen");
   }
 
   @Test
@@ -111,7 +111,7 @@ public class DocumentTest {
   }
 
   @Test
-  public void getWordCounts() {
+  public void getWordCountsAtPosOne() {
     final String expected = "am";
     final String actual = document.getWordCounts().getWord(0);
 
@@ -119,7 +119,7 @@ public class DocumentTest {
   }
 
   @Test
-  public void getWordCounts2() {
+  public void getWordCountsAtPosTwo() {
     final String expected = "strand";
     final String actual = document.getWordCounts().getWord(1);
 
@@ -127,7 +127,7 @@ public class DocumentTest {
   }
 
   @Test
-  public void getWordCounts6() {
+  public void getWordCountsAtPosSix() {
     final String expected = "stopp";
     final String actual = document.getWordCounts().getWord(5);
 
