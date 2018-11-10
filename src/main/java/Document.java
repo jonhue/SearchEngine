@@ -14,7 +14,7 @@ public class Document {
           "legen", "lein", "lich", "ling", "logie", "los", "mal", "meter", "mut", "nis", "or", "sam", "schaft", "tum",
           "ung", "voll", "wert", "würdig"};
 
-  public Document(String title, String lang, String summary, Date releaseDate, Author author, String content) {
+  public Document(String title, String lang, String summary, Date releaseDate, Author author, String content) throws IllegalArgumentException {
     wordCounts = new WordCountsArray(0);
 
     setTitle(title);
@@ -99,7 +99,7 @@ public class Document {
     return sub1.equals(sub2);
   }
 
-  private static String findSuffix(String word) {
+  private static String findSuffix(String word) throws IllegalArgumentException {
     for (int i = 0; i < SUFFICES.length; ++i) {
       int sufficeLength = SUFFICES[i].length();
       if (word.length() >= sufficeLength && sufficesEqual(word, SUFFICES[i], sufficeLength)) return SUFFICES[i];
@@ -108,14 +108,14 @@ public class Document {
     return "";
   }
 
-  private static String cutSuffix(String word, String suffix) {
+  private static String cutSuffix(String word, String suffix) throws IllegalArgumentException {
     if (sufficesEqual(word, suffix, suffix.length()))
       return substring(word, 0, word.length() - suffix.length());
 
     return word;
   }
 
-  private void addContent(String content) {
+  private void addContent(String content) throws IllegalArgumentException {
     String[] words = tokenize(content);
 
     for (int i = 0; i < words.length; ++i) {
