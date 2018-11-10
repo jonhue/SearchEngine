@@ -11,7 +11,12 @@ public class DocumentTest {
   public void setUp() {
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
-    document = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
+    document = new Document("Title", "en", "Summary", releaseDate, author,
+                            "am strand von santa monica stoppen bullige polizisten die revolution eine riesige blinkende " +
+                            "anzeigetafel warnt auf dem Weg am strand sind elektronische tretroller verboten hier fangen " +
+                            "polizisten viele ab die vom wenige kilometer entfernten venice beach angerast kommen einhundertneunzig " +
+                            "dollar müssen die fahrer zahlen noch einmal einhundertneunzig dollar wenn sie keinen helm tragen harte " +
+                            "strafen um die plage in den griff zu bekommen");
   }
 
   @Test
@@ -19,7 +24,7 @@ public class DocumentTest {
     final String expected = "<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>>";
     final String actual = document.toString();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -27,7 +32,7 @@ public class DocumentTest {
     final String expected = "Title";
     final String actual = document.getTitle();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -36,24 +41,7 @@ public class DocumentTest {
     document.setTitle(expected);
     final String actual = document.getTitle();
 
-    assertEquals(actual, expected);
-  }
-
-  @Test
-  public void getContent() {
-    final String expected = "Content ...";
-    final String actual = document.getContent();
-
-    assertEquals(actual, expected);
-  }
-
-  @Test
-  public void setContent() {
-    final String expected = "More ...";
-    document.setContent(expected);
-    final String actual = document.getContent();
-
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -61,7 +49,7 @@ public class DocumentTest {
     final String expected = "en";
     final String actual = document.getLang();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -70,7 +58,7 @@ public class DocumentTest {
     document.setLang(expected);
     final String actual = document.getLang();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -78,7 +66,7 @@ public class DocumentTest {
     final String expected = "Summary";
     final String actual = document.getSummary();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -87,14 +75,14 @@ public class DocumentTest {
     document.setSummary(expected);
     final String actual = document.getSummary();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
   public void getReleaseDate() {
     final Date actual = document.getReleaseDate();
 
-    assertEquals(actual, releaseDate);
+    assertEquals(releaseDate, actual);
   }
 
   @Test
@@ -103,14 +91,14 @@ public class DocumentTest {
     document.setReleaseDate(expected);
     final Date actual = document.getReleaseDate();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
   public void getAuthor() {
     final Author actual = document.getAuthor();
 
-    assertEquals(actual, author);
+    assertEquals(author, actual);
   }
 
   @Test
@@ -119,7 +107,31 @@ public class DocumentTest {
     document.setAuthor(expected);
     final Author actual = document.getAuthor();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getWordCounts() {
+    final String expected = "am";
+    final String actual = document.getWordCounts().getWord(0);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getWordCounts2() {
+    final String expected = "strand";
+    final String actual = document.getWordCounts().getWord(1);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getWordCounts6() {
+    final String expected = "stopp";
+    final String actual = document.getWordCounts().getWord(5);
+
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -128,6 +140,6 @@ public class DocumentTest {
     final Date today = new Date(27, 10, 2018);
     final int actual = document.getAgeAt(today);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 }

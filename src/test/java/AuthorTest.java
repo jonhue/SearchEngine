@@ -17,7 +17,7 @@ public class AuthorTest {
     final String expected = "<Author firstName=Jonas lastName=Hübotter>";
     final String actual = author.toString();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -25,7 +25,7 @@ public class AuthorTest {
     final String expected = "Jonas";
     final String actual = author.getFirstName();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -34,7 +34,7 @@ public class AuthorTest {
     author.setFirstName(expected);
     final String actual = author.getFirstName();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -42,7 +42,7 @@ public class AuthorTest {
     final String expected = "Hübotter";
     final String actual = author.getLastName();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -51,14 +51,14 @@ public class AuthorTest {
     author.setLastName(expected);
     final String actual = author.getLastName();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
   public void getBirthday() {
     final Date actual = author.getBirthday();
 
-    assertEquals(actual, birthday);
+    assertEquals(birthday, actual);
   }
 
   @Test
@@ -67,7 +67,7 @@ public class AuthorTest {
     author.setBirthday(expected);
     final Date actual = author.getBirthday();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -75,7 +75,7 @@ public class AuthorTest {
     final String expected = "Munich";
     final String actual = author.getResidence();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -84,7 +84,7 @@ public class AuthorTest {
     author.setResidence(expected);
     final String actual = author.getResidence();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -92,7 +92,7 @@ public class AuthorTest {
     final String expected = "jonas.huebotter@tum.de";
     final String actual = author.getEmail();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -116,7 +116,7 @@ public class AuthorTest {
     author.setEmail(expected);
     final String actual = author.getEmail();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -124,7 +124,7 @@ public class AuthorTest {
     final String expected = "Jonas Hübotter";
     final String actual = author.getName();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -132,7 +132,7 @@ public class AuthorTest {
     final String expected = "Jonas Hübotter\r\njonas.huebotter@tum.de\r\nMunich";
     final String actual = author.getContactInformation();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -141,6 +141,6 @@ public class AuthorTest {
     final Date today = new Date(27, 10, 2018);
     final int actual = author.getAgeAt(today);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 }

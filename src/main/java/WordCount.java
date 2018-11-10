@@ -1,24 +1,24 @@
 import java.lang.IllegalArgumentException;
 
 public class WordCount {
-  private String content;
+  private String word;
   private int count;
 
-  public WordCount(String content, int count) {
-    setContent(content);
+  public WordCount(String word, int count) {
+    setWord(word);
     setCount(count);
   }
 
   public String toString() {
-    return "<WordCount content=" + content + " count=" + count + ">";
+    return "<WordCount word=" + word + " count=" + count + ">";
   }
 
-  public String getContent() {
-    return content;
+  public String getWord() {
+    return word;
   }
 
-  private void setContent(String content) {
-    this.content = content;
+  private void setWord(String word) {
+    this.word = word;
   }
 
   public int getCount() {
@@ -27,8 +27,8 @@ public class WordCount {
 
   /* count must be 1 or higher; otherwise throws IllegalArgumentException */
   public void setCount(int count) throws IllegalArgumentException {
-    if (count < 1)
-      throw new IllegalArgumentException("Count must not be smaller than 1.");
+    if (count < 0)
+      throw new IllegalArgumentException("Count must not be smaller than 0.");
 
     this.count = count;
   }

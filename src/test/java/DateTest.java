@@ -28,7 +28,7 @@ public class DateTest {
     final String expected = "<Date year=1971 month=2 day=3>";
     final String actual = date.toString();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -36,7 +36,7 @@ public class DateTest {
     final boolean expected = true;
     final boolean actual = date.equals(new Date(3, 2, 1971));
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -44,7 +44,7 @@ public class DateTest {
     final boolean expected = false;
     final boolean actual = date.equals(new Date());
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -52,7 +52,7 @@ public class DateTest {
     final int expected = 392;
     final int actual = Date.daysSince(date, reference);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -60,7 +60,7 @@ public class DateTest {
     final int expected = 1;
     final int actual = Date.yearsSince(date, reference);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -68,7 +68,7 @@ public class DateTest {
     final int expected = 1971;
     final int actual = date.getYear();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -77,7 +77,7 @@ public class DateTest {
     date.setYear(expected);
     final int actual = date.getYear();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -85,7 +85,7 @@ public class DateTest {
     final int expected = 2;
     final int actual = date.getMonth();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -104,7 +104,7 @@ public class DateTest {
     date.setMonth(6);
     final int actual = date.getMonth();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -112,7 +112,7 @@ public class DateTest {
     final int expected = 3;
     final int actual = date.getDay();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -152,7 +152,7 @@ public class DateTest {
     date.setDay(15);
     final int actual = date.getDay();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -160,7 +160,7 @@ public class DateTest {
     final int expected = 392;
     final int actual = reference.getAgeInDaysAt(date);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -168,6 +168,6 @@ public class DateTest {
     final int expected = 1;
     final int actual = reference.getAgeInYearsAt(date);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 }

@@ -14,18 +14,18 @@ public class WordCountTest {
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<WordCount content=Word count=1>";
+    final String expected = "<WordCount word=Word count=1>";
     final String actual = wordCount.toString();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
-  public void getContent() {
+  public void getWord() {
     final String expected = "Word";
-    final String actual = wordCount.getContent();
+    final String actual = wordCount.getWord();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -33,7 +33,7 @@ public class WordCountTest {
     final int expected = 1;
     final int actual = wordCount.getCount();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -42,12 +42,12 @@ public class WordCountTest {
   }
 
   @Test
-  public void setCount_acceptsValuesAboveZero() {
+  public void setCount_acceptsPositiveValues() {
     final int expected = 2;
     wordCount.setCount(expected);
     final int actual = wordCount.getCount();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -55,7 +55,7 @@ public class WordCountTest {
     final int expected = 2;
     final int actual = wordCount.incrementCount();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -63,7 +63,7 @@ public class WordCountTest {
     final int expected = 3;
     final int actual = wordCount.incrementCount(2);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -72,27 +72,6 @@ public class WordCountTest {
     wordCount.setCount(2);
     final int actual = wordCount.incrementCount(-1);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 }
-
-/*
-* Kommentar:
-*
-* Ziel dieser Klasse ist es das Public Interface der Klasse WordCount zu testen.
-*
-* setUp() liefert die nötigen Instanzen, die für die übrigen Unit Tests notwendig sind und testet den Konstruktor.
-* toString_hasCorrectFormat() überprüft den Rückgabewert der Methode toString().
-* getDocument(), getContent(), und getCount() überprüfen jeweils die Getter für die Attribute document, content, und count.
-* setCount() ist der einzige Setter, der Teil des Public Interfaces ist. Da nicht alle Integers, sondern nur Werte größer als 1,
-*   für das Attribut count zulässig sind, muss zwischen zwei Fällen unterschieden werden:
-*
-*   1. setCount_throwsExceptionWhenLowerThanZero() überprüft die Exception, falls der Aktualparameter für count 0 oder kleiner ist.
-*   2. setCount_acceptsValuesAboveZero() stellt sicher, dass Werte größer 0, als Attributwert gesetzt werden.
-*
-* Auch bei der Methode incrementCount() muss zwischen zwei Fällen unterschieden werden. Diesmal jedoch, da die Methode sowohl mit als auch ohne Parameter definiert ist:
-*
-*   1. incrementCount_withoutParameter() testet die Methode one Übergabe eines Parameters.
- *   2. incrementCount_withParameter() testet die Methode mit Übergabe eines Parameters.
- *   2. incrementCount_withNegativeParameter() testet die Methode mit Übergabe eines negativen Parameters.
-* */

@@ -23,7 +23,7 @@ public class ReviewTest {
     final String expected = "<Review rating=5 document=<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>> author=<Author firstName=Jonas lastName=Hübotter>>";
     final String actual = review.toString();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -31,7 +31,7 @@ public class ReviewTest {
     final String expected = "Content ...";
     final String actual = review.getContent();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -40,14 +40,14 @@ public class ReviewTest {
     review.setContent(expected);
     final String actual = review.getContent();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
   public void getAuthor() {
     final Author actual = review.getAuthor();
 
-    assertEquals(actual, author);
+    assertEquals(author, actual);
   }
 
   @Test
@@ -56,14 +56,14 @@ public class ReviewTest {
     review.setAuthor(expected);
     final Author actual = review.getAuthor();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
   public void getDocument() {
     final Document actual = review.getDocument();
 
-    assertEquals(actual, document);
+    assertEquals(document, actual);
   }
 
   @Test
@@ -72,7 +72,7 @@ public class ReviewTest {
     review.setDocument(expected);
     final Document actual = review.getDocument();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -80,7 +80,7 @@ public class ReviewTest {
     final String expected = "en";
     final String actual = review.getLang();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -89,14 +89,14 @@ public class ReviewTest {
     review.setLang(expected);
     final String actual = review.getLang();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
   public void getReleaseDate() {
     final Date actual = review.getReleaseDate();
 
-    assertEquals(actual, releaseDate);
+    assertEquals(releaseDate, actual);
   }
 
   @Test
@@ -105,7 +105,7 @@ public class ReviewTest {
     review.setReleaseDate(expected);
     final Date actual = review.getReleaseDate();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -113,7 +113,7 @@ public class ReviewTest {
     final int expected = 5;
     final int actual = review.getRating();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -132,7 +132,7 @@ public class ReviewTest {
     review.setRating(6);
     final int actual = review.getRating();
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -141,6 +141,6 @@ public class ReviewTest {
     final Date today = new Date(27, 10, 2018);
     final int actual = review.getAgeAt(today);
 
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 }

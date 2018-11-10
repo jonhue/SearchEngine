@@ -43,6 +43,14 @@ public class Stringulina {
   public static boolean matches(String str, String pattern) {
     return new Matches(str, pattern).matches();
   }
+
+  public static String substring(String str, int startPos, int endPos) {
+    String newStr = "";
+    for (int i = startPos; i < endPos; ++i)
+      newStr = newStr + str.charAt(i);
+
+    return newStr;
+  }
 }
 
 class Matches {
@@ -92,6 +100,6 @@ class Matches {
     int endPos = patternPos + 2; // minimum endPos (one digit multiplicity)
     while (pattern.charAt(endPos) != '}') ++endPos;
 
-    return Integer.parseInt(pattern.substring(patternPos + 1, endPos));
+    return Integer.parseInt(Stringulina.substring(pattern, patternPos + 1, endPos));
   }
 }
