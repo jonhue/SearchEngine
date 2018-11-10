@@ -11,11 +11,11 @@ public class CRC {
   }
 
   public int crcASCIIString(String str) {
-    return Integer.parseInt(polynomialDivision(toBinary(strBinary(str)), toBinary(poly)), 2);
+    return Integer.parseInt(polynomialDivision(Integer.toBinaryString(strBinary(str)), Integer.toBinaryString(poly)), 2);
   }
 
   public int getDegree() {
-    return toBinary(poly).length() - 1;
+    return Integer.toBinaryString(poly).length() - 1;
   }
 
   private String polynomialDivision(String dividend, String divisor) {
@@ -23,7 +23,7 @@ public class CRC {
       return dividend;
     }
     else {
-      String xor = toBinary(Integer.parseInt(substring(dividend, 0, divisor.length()), 2) ^ Integer.parseInt(divisor, 2));
+      String xor = Integer.toBinaryString(Integer.parseInt(substring(dividend, 0, divisor.length()), 2) ^ Integer.parseInt(divisor, 2));
       dividend = xor + substring(dividend, divisor.length(), dividend.length());
       return polynomialDivision(dividend, divisor);
     }
@@ -32,7 +32,7 @@ public class CRC {
   private int strBinary(String str) {
     String binary = "";
     for (int i = 0; i < str.length(); ++i) {
-      binary = binary + toBinary((int) str.charAt(i));
+      binary = binary + Integer.toBinaryString((int) str.charAt(i));
     }
     return Integer.parseInt(binary + strNTimes("0", getDegree()), 2);
   }
@@ -42,15 +42,6 @@ public class CRC {
       return 1;
     else
       return num * powerOf(num, n - 1);
-  }
-
-  private static String toBinary(int n) {
-    if (n == 1)
-      return "1";
-    else if (n == 0)
-      return "0";
-    else
-      return toBinary(n / 2) + n % 2;
   }
 
   private static String strNTimes(String str, int n) {
