@@ -65,4 +65,20 @@ public class CRCTest {
 
     assertEquals(expected, actual);
   }
+
+  @Test
+  public void crcASCIIString_exampleSeven() {
+    final int expected = 34;
+    final int actual = new CRC(Integer.parseInt("1001101", 2)).crcASCIIString("Hell");
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void crcASCIIString_exampleEight() {
+    final int expected = 160;
+    final int actual = new CRC(Integer.parseInt("1001111110", 2)).crcASCIIString("yes!");
+
+    assertEquals(expected, actual);
+  }
 }
