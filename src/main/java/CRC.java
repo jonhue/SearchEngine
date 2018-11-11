@@ -11,45 +11,51 @@ public class CRC {
   }
 
   public int crcASCIIString(String str) {
-    return Integer.parseInt(polynomialDivision(Integer.toBinaryString(strBinary(str)), Integer.toBinaryString(poly)), 2);
+    String dividend = strToBinaryString(str) + repeat("0", getDegree());
+    String divisor = Integer.toBinaryString(poly);
+
+    return Integer.parseInt(polynomialDivision(dividend, divisor), 2);
   }
 
   public int getDegree() {
     return Integer.toBinaryString(poly).length() - 1;
   }
 
+  /* Recursive implementation of polynomial division */
   private String polynomialDivision(String dividend, String divisor) {
-    if (divisor.length() > dividend.length()) {
+    if (divisor.length() > dividend.length())
       return dividend;
-    }
-    else {
-      String xor = Integer.toBinaryString(Integer.parseInt(substring(dividend, 0, divisor.length()), 2) ^ Integer.parseInt(divisor, 2));
-      dividend = xor + substring(dividend, divisor.length(), dividend.length());
-      return polynomialDivision(dividend, divisor);
-    }
+    else
+      return polynomialDivision(calculateNewDividend(dividend, divisor), divisor);
   }
 
-  private int strBinary(String str) {
+  /* Calculates dividend for next iteration of polynomialDivision */
+  private String calculateNewDividend(String dividend, String divisor) {
+    return xorBinary(dividend, divisor) + substring(dividend, divisor.length(), dividend.length());
+  }
+
+  /* Takes two binary strings and returns the result of an XOR operation */
+  private String xorBinary(String dividend, String divisor) {
+    return Integer.toBinaryString(Integer.parseInt(substring(dividend, 0, divisor.length()), 2) ^ Integer.parseInt(divisor, 2));
+  }
+
+  /* Takes an ASCII string and returns a string representing its binary encoding */
+  private static String strToBinaryString(String str) {
     String binary = "";
     for (int i = 0; i < str.length(); ++i) {
       binary = binary + Integer.toBinaryString((int) str.charAt(i));
     }
-    return Integer.parseInt(binary + strNTimes("0", getDegree()), 2);
+    return binary;
   }
 
-  private static int powerOf(int num, int n) {
-    if (n == 0)
-      return 1;
-    else
-      return num * powerOf(num, n - 1);
-  }
-
-  private static String strNTimes(String str, int n) {
+  private static String repeat(String str, int n) {
     if (n == 1)
       return str;
     else
-      return str + strNTimes(str, n - 1);
+      return str + repeat(str, n - 1);
   }
+
+  /* method borrowed from Stringulina (remove after assignment 4!) */
 
   private static String substring(String str, int startPos, int endPos) {
     String newStr = "";
