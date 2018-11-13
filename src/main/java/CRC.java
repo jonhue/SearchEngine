@@ -31,12 +31,12 @@ public class CRC {
 
   /* Calculates dividend for next iteration of polynomialDivision */
   private String calculateNewDividend(String dividend, String divisor) {
-    return xorBinary(dividend, divisor) + substring(dividend, divisor.length(), dividend.length());
+    return xorBinary(dividend, divisor) + Stringulina.substring(dividend, divisor.length(), dividend.length());
   }
 
   /* Takes two binary strings and returns the result of an XOR operation */
   private String xorBinary(String dividend, String divisor) {
-    return Integer.toBinaryString(Integer.parseInt(substring(dividend, 0, divisor.length()), 2) ^ Integer.parseInt(divisor, 2));
+    return Integer.toBinaryString(Integer.parseInt(Stringulina.substring(dividend, 0, divisor.length()), 2) ^ Integer.parseInt(divisor, 2));
   }
 
   /* Takes an ASCII string and returns a string representing its binary encoding */
@@ -53,15 +53,5 @@ public class CRC {
       return str;
     else
       return str + repeat(str, n - 1);
-  }
-
-  /* method borrowed from Stringulina (remove after assignment 4!) */
-
-  private static String substring(String str, int startPos, int endPos) {
-    String newStr = "";
-    for (int i = startPos; i < endPos; ++i)
-      newStr = newStr + str.charAt(i);
-
-    return newStr;
   }
 }
