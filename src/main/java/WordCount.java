@@ -13,6 +13,12 @@ public class WordCount {
     return "<WordCount word=" + word + " count=" + count + ">";
   }
 
+  public boolean equals(WordCount wordCount) {
+    if (wordCount ==  null) return false;
+
+    return wordCount.word.equals(word) && wordCount.count == count;
+  }
+
   public String getWord() {
     return word;
   }

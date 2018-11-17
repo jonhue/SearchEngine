@@ -28,6 +28,37 @@ public class DocumentTest {
   }
 
   @Test
+  public void equals_detectsEquality() {
+    final boolean expected = true;
+    releaseDate = new Date(9, 11, 2017);
+    author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
+    final boolean actual = document.equals(new Document("Title", "en", "Summary", releaseDate, author,
+            "am strand von santa monica stoppen bullige polizisten die revolution eine riesige blinkende " +
+            "anzeigetafel warnt auf dem Weg am strand sind elektronische tretroller verboten hier fangen " +
+            "polizisten viele ab die vom wenige kilometer entfernten venice beach angerast kommen einhundertneunzig " +
+            "dollar müssen die fahrer zahlen noch einmal einhundertneunzig dollar wenn sie keinen helm tragen harte " +
+            "strafen um die plage in den griff zu bekommen"));
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void equals_detectsInequality() {
+    final boolean expected = false;
+    final boolean actual = document.equals(new Document("Another Title", "de", "Another summary", releaseDate, author, "Content ..."));
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void equals_detectsInequalityWhenNull() {
+    final boolean expected = false;
+    final boolean actual = document.equals(null);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
   public void getTitle() {
     final String expected = "Title";
     final String actual = document.getTitle();

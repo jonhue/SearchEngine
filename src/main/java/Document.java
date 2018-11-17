@@ -29,6 +29,12 @@ public class Document {
     return "<Document title=" + title + " lang=" + lang + " author=" + author.toString() + ">";
   }
 
+  public boolean equals(Document document) {
+    if (document == null) return false;
+
+    return document.title.equals(title) && document.lang.equals(lang) && document.summary.equals(summary) && document.releaseDate.equals(releaseDate) && document.author.equals(author) && document.wordCounts.equals(wordCounts);
+  }
+
   public String getTitle() {
     return title;
   }

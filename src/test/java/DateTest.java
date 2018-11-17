@@ -48,6 +48,14 @@ public class DateTest {
   }
 
   @Test
+  public void equals_detectsInequalityWhenNull() {
+    final boolean expected = false;
+    final boolean actual = date.equals(null);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
   public void daysSince() {
     final int expected = 392;
     final int actual = Date.daysSince(date, reference);

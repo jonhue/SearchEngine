@@ -11,6 +11,21 @@ public class WordCountsArray {
     return "<WordCountsArray size=" + size() + ">";
   }
 
+  public boolean equals(WordCountsArray wordCountsArray) {
+    if (wordCountsArray == null) return false;
+    if (wordCountsArray.wordCounts == null && wordCounts == null) return true;
+    if (wordCountsArray.wordCounts == null || wordCounts == null || wordCountsArray.wordCounts.length != wordCounts.length) return false;
+
+    boolean isEqual = true;
+    for (int i = 0; i < wordCounts.length; ++i) {
+      if (wordCountsArray.wordCounts[i] == null && wordCounts[i] == null) continue;
+      if (wordCountsArray.wordCounts[i] == null || !wordCountsArray.wordCounts[i].equals(wordCounts[i]))
+        isEqual = false;
+    }
+
+    return isEqual;
+  }
+
   public String getWord(int i) {
     if (i >= size()) return "";
 

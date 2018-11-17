@@ -23,6 +23,8 @@ public class Date {
   }
 
   public boolean equals(Date date) {
+    if (date == null) return false;
+
     return date.getYear() == getYear() && date.getMonth() == getMonth() && date.getDay() == getDay();
   }
 

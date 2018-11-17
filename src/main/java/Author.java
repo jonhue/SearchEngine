@@ -20,6 +20,12 @@ public class Author {
     return "<Author firstName=" + firstName + " lastName=" + lastName + ">";
   }
 
+  public boolean equals(Author author) {
+    if (author == null) return false;
+
+    return author.firstName.equals(firstName) && author.lastName.equals(lastName) && author.birthday.equals(birthday) && author.residence.equals(residence) && author.email.equals(email);
+  }
+
   public String getFirstName() {
     return firstName;
   }

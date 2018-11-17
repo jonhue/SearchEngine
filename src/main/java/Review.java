@@ -21,6 +21,12 @@ public class Review {
     return "<Review rating=" + rating + " document=" + document.toString() + " author=" + author.toString() + ">";
   }
 
+  public boolean equals(Review review) {
+    if (review == null) return false;
+
+    return review.author.equals(author) && review.document.equals(document) && review.lang.equals(lang) && review.releaseDate.equals(releaseDate) && review.rating == rating && review.content.equals(content);
+  }
+
   public String getContent() {
     return content;
   }
