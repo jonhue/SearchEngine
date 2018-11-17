@@ -31,7 +31,7 @@ public class WordCountsArray {
   }
 
   public void add(String word, int count) {
-    if (word == "" || word == null) return;
+    if (word == null || word.equals("")) return;
 
     if (size() == wordCounts.length) extend(1);
     wordCounts[size()] = new WordCount(word, count);

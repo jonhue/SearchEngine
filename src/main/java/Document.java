@@ -120,7 +120,7 @@ public class Document {
 
     for (int i = 0; i < words.length; ++i) {
       String suffix = findSuffix(words[i]);
-      if (suffix != "")
+      if (!suffix.equals(""))
         words[i] = cutSuffix(words[i], suffix);
       wordCounts.add(words[i], 1);
     }
