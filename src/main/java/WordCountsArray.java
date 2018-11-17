@@ -14,20 +14,18 @@ public class WordCountsArray {
   public boolean equals(WordCountsArray wordCountsArray) {
     if (wordCountsArray == null) return false;
     if (wordCountsArray.wordCounts == null && wordCounts == null) return true;
-    if (wordCountsArray.wordCounts == null || wordCounts == null || wordCountsArray.wordCounts.length != wordCounts.length) return false;
+    if (wordCountsArray.wordCounts == null || wordCounts == null || wordCountsArray.size() != size()) return false;
 
     boolean isEqual = true;
-    for (int i = 0; i < wordCounts.length; ++i) {
-      if (wordCountsArray.wordCounts[i] == null && wordCounts[i] == null) continue;
-      if (wordCountsArray.wordCounts[i] == null || !wordCountsArray.wordCounts[i].equals(wordCounts[i]))
+    for (int i = 0; i < size() && isEqual; ++i)
+      if (!wordCountsArray.wordCounts[i].equals(wordCounts[i]))
         isEqual = false;
-    }
 
     return isEqual;
   }
 
   public String getWord(int i) {
-    if (i >= size()) return "";
+    if (i >= size()) return null;
 
     return wordCounts[i].getWord();
   }
@@ -38,6 +36,16 @@ public class WordCountsArray {
     return wordCounts[i].getCount();
   }
 
+  public int getIndexOfWord(String word) {
+    int result = -1;
+
+    for (int i = 0; i < size() && result == -1; ++i)
+      if (wordCounts[i].getWord().equals(word))
+        result = i;
+
+    return result;
+  }
+
   public void setCount(int i, int count) throws IllegalArgumentException {
     if (i >= size())
       throw new IllegalArgumentException("Invalid index.");
@@ -46,10 +54,15 @@ public class WordCountsArray {
   }
 
   public void add(String word, int count) {
-    if (word == null || word.equals("")) return;
+    if (word == null || word.equals("") || count < 0) return;
 
-    if (size() == wordCounts.length) extend(1);
-    wordCounts[size()] = new WordCount(word, count);
+    int i = getIndexOfWord(word.toLowerCase());
+    if (i == -1) {
+      if (size() == wordCounts.length) extend(10);
+      wordCounts[size()] = new WordCount(word.toLowerCase(), count);
+    } else {
+      wordCounts[i].incrementCount(count);
+    }
   }
 
   public int size() {
@@ -57,6 +70,48 @@ public class WordCountsArray {
       if (wordCounts[i] == null) return i;
 
     return wordCounts.length;
+  }
+
+  public void sort() {
+    for (int i = 0; i < size() - 1; i++) {
+      int min = i;
+      for (int j = i + 1; j < size(); j++)
+        if (getWord(j).compareTo(getWord(min)) < 0)
+          min = j;
+
+      if (i != min) {
+        WordCount tmp = wordCounts[i];
+        wordCounts[i] = wordCounts[min];
+        wordCounts[min] = tmp;
+      }
+    }
+  }
+
+  public double computeSimilarity(WordCountsArray wordCountsArray) {
+    return scalarProduct(wordCountsArray) / Math.sqrt(scalarProduct(this) * wordCountsArray.scalarProduct(wordCountsArray));
+  }
+
+  private boolean wordsEqual(WordCountsArray wordCountsArray) {
+    if (wordCountsArray == null) return false;
+    if (wordCountsArray.wordCounts == null && wordCounts == null) return true;
+    if (wordCountsArray.wordCounts == null || wordCounts == null || wordCountsArray.size() != size()) return false;
+
+    boolean isEqual = true;
+    for (int i = 0; i < size() && isEqual; ++i)
+      if (!wordCountsArray.getWord(i).equals(getWord(i)))
+        isEqual = false;
+
+    return isEqual;
+  }
+
+  private double scalarProduct(WordCountsArray wordCountsArray) {
+    double result = 0;
+    if (!wordsEqual(wordCountsArray)) return result;
+
+    for (int i = 0; i < size(); ++i)
+      result += getCount(i) * wordCountsArray.getCount(i);
+
+    return result;
   }
 
   private void extend(int n) {

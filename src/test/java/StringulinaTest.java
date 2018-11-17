@@ -35,7 +35,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void correctlyBracketed_exampleOne() {
+  public void correctlyBracketed_example1() {
     final boolean expected = true;
     final boolean actual = Stringulina.correctlyBracketed("a(xx(]))");
 
@@ -43,7 +43,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void correctlyBracketed_exampleTwo() {
+  public void correctlyBracketed_example2() {
     final boolean expected = false;
     final boolean actual = Stringulina.correctlyBracketed("a(xx))");
 
@@ -51,7 +51,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void correctlyBracketed_exampleThree() {
+  public void correctlyBracketed_example3() {
     final boolean expected = false;
     final boolean actual = Stringulina.correctlyBracketed("a(xx)(");
 
@@ -59,7 +59,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void correctlyBracketed_exampleFour() {
+  public void correctlyBracketed_example4() {
     final boolean expected = false;
     final boolean actual = Stringulina.correctlyBracketed("a)xx()(");
 
@@ -67,7 +67,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void matches_exampleOne() {
+  public void matches_example1() {
     final boolean expected = true;
     final boolean actual = Stringulina.matches("Pijnguin", "P.{2}nguin");
 
@@ -75,7 +75,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void matches_exampleTwo() {
+  public void matches_example2() {
     final boolean expected = false;
     final boolean actual = Stringulina.matches("Pijknguin", "P.{2}nguin");
 
@@ -83,7 +83,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void matches_exampleThree() {
+  public void matches_example3() {
     final boolean expected = true;
     final boolean actual = Stringulina.matches("Haaaaaaaaaawko", "Ha{10}..o");
 
@@ -91,7 +91,7 @@ public class StringulinaTest {
   }
 
   @Test
-  public void matches_exampleFour() {
+  public void matches_example4() {
     final boolean expected = false;
     final boolean actual = Stringulina.matches("Haaawko", "Ha{10}..o");
 

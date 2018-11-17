@@ -50,7 +50,7 @@ public class WordCountsArrayTest {
 
   @Test
   public void getWord_invalidIndex() {
-    final String expected = "";
+    final String expected = null;
     final String actual = wordCountsArray.getWord(1);
 
     assertEquals(expected, actual);
@@ -58,7 +58,7 @@ public class WordCountsArrayTest {
 
   @Test
   public void getWord_validIndex() {
-    final String expected = "Hello";
+    final String expected = "hello";
     final String actual = wordCountsArray.getWord(0);
 
     assertEquals(expected, actual);
@@ -76,6 +76,23 @@ public class WordCountsArrayTest {
   public void getCount_validIndex() {
     final int expected = 1;
     final int actual = wordCountsArray.getCount(0);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getIndexOfWord_doesntContainWord() {
+    final int expected = -1;
+    final int actual = wordCountsArray.getIndexOfWord("world");
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getIndexOfWord_containsWord() {
+    final int expected = 1;
+    wordCountsArray.add("World", 1);
+    final int actual = wordCountsArray.getIndexOfWord("world");
 
     assertEquals(expected, actual);
   }
@@ -142,5 +159,28 @@ public class WordCountsArrayTest {
     final int actual = wordCountsArray.size();
 
     assertEquals(expected, actual);
+  }
+
+  @Test
+  public void sort() {
+    final int expected = 2;
+    wordCountsArray.add("World", 1);
+    wordCountsArray.add("Another word", 1);
+    wordCountsArray.sort();
+    final int actual = wordCountsArray.getIndexOfWord("world");
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void computeSimilarity() {
+    final double expected = 0.894427191;
+    wordCountsArray.add("World", 0);
+    WordCountsArray anotherWordCountsArray = new WordCountsArray(2);
+    anotherWordCountsArray.add("Hello", 2);
+    anotherWordCountsArray.add("World", 1);
+    final double actual = wordCountsArray.computeSimilarity(anotherWordCountsArray);
+
+    assertEquals(expected, actual, 0.00000000001);
   }
 }

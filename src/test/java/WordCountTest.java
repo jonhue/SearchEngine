@@ -61,7 +61,7 @@ public class WordCountTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void setCount_throwsExceptionWhenLowerThanZero() throws IllegalArgumentException {
+  public void setCount_throwsExceptionWhenLowerThan0() throws IllegalArgumentException {
     wordCount.setCount(-1);
   }
 

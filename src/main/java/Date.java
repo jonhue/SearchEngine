@@ -28,19 +28,6 @@ public class Date {
     return date.getYear() == getYear() && date.getMonth() == getMonth() && date.getDay() == getDay();
   }
 
-  /* Assuming that every month has precisely 30 days */
-  public static int daysSince(Date date, Date reference) {
-    return Date.monthsSince(date, reference) * 30 + (date.day - reference.day);
-  }
-
-  private static int monthsSince(Date date, Date reference) {
-    return Date.yearsSince(date, reference) * 12 + (date.month - reference.month);
-  }
-
-  public static int yearsSince(Date date, Date reference) {
-    return date.year - reference.year;
-  }
-
   public int getYear() {
     return year;
   }
@@ -67,27 +54,14 @@ public class Date {
     return day;
   }
 
-  /* day must be one of {1..31} otherwise throws IllegalArgumentException */
+  /* day must be one of {1..(28/29/30/31)} depending on month and year; otherwise throws IllegalArgumentException */
   public void setDay(int day) {
     if (day < 1)
       throw new IllegalArgumentException("Day must not be lower than 1.");
 
-    switch (month) {
-      case 4:
-      case 6:
-      case 9:
-      case 11: if (day > 30) {
-        throw new IllegalArgumentException("Day must not be higher than 30.");
-      } break;
-      case 2: if (isInLeapYear() && day > 29) {
-        throw new IllegalArgumentException("Day must not be higher than 29.");
-      } else if (day > 28) {
-        throw new IllegalArgumentException("Day must not be higher than 28.");
-      } break;
-      default: if (day > 31) {
-        throw new IllegalArgumentException("Day must not be higher than 31.");
-      }
-    }
+    int maxDays = daysOfMonth(month, year);
+    if (day > maxDays)
+      throw new IllegalArgumentException("Day must not be higher than " + maxDays + ".");
 
     this.day = day;
   }
@@ -106,8 +80,62 @@ public class Date {
   }
 
   /* Leap years are the years that are divisible by 4, except those that are divisible by 100 and not divisible by 400. */
-  private boolean isInLeapYear() {
+  private static boolean isLeapYear(int year) {
     if (year % 100 == 0 && year % 400 != 0) return false;
     return year % 4 == 0;
+  }
+
+  private static int daysSince(Date date, Date reference) {
+    int result = 0;
+
+    for (int year = reference.year + 1; year < date.year; ++year)
+      result += daysInYear(year);
+
+    return result + reference.daysFromDayInYear() + date.daysToDayInYear();
+  }
+
+  private static int yearsSince(Date date, Date reference) {
+    return date.year - reference.year;
+  }
+
+  private static int daysInYear(int year) {
+    if (isLeapYear(year)) return 366;
+    return 365;
+  }
+
+  private int daysToDayInYear() {
+    int result = 0;
+
+    for (int month = 1; month < this.month; ++month)
+      result += daysOfMonth(month, year);
+
+    return result + day;
+  }
+
+  private int daysFromDayInYear() {
+    int result = 0;
+
+    for (int month = this.month; month < 13; ++month)
+      result += daysOfMonth(month, year);
+
+    return result - day;
+  }
+
+  private static int daysOfMonth(int month, int year) {
+    switch (month) {
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        return 30;
+      case 2:
+        if (isLeapYear(year)) {
+          return 29;
+        } else {
+          return 28;
+        }
+      default:
+        return 31;
+    }
   }
 }

@@ -167,7 +167,7 @@ public class DocumentTest {
 
   @Test
   public void getAgeAt() {
-    final int expected = 348;
+    final int expected = 352;
     final Date today = new Date(27, 10, 2018);
     final int actual = document.getAgeAt(today);
 

@@ -144,17 +144,17 @@ public class ReviewTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void setRating_throwsExceptionWhenLowerThanZero() throws IllegalArgumentException {
+  public void setRating_throwsExceptionWhenLowerThan0() throws IllegalArgumentException {
     review.setRating(-1);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void setRating_throwsExceptionWhenHigherThanTen() throws IllegalArgumentException {
+  public void setRating_throwsExceptionWhenHigherThan10() throws IllegalArgumentException {
     review.setRating(11);
   }
 
   @Test
-  public void setRating_acceptsValuesBetweenZeroAndTen() throws IllegalArgumentException {
+  public void setRating_acceptsValuesBetween0And10() throws IllegalArgumentException {
     final int expected = 6;
     review.setRating(6);
     final int actual = review.getRating();
@@ -164,7 +164,7 @@ public class ReviewTest {
 
   @Test
   public void getAgeAt() {
-    final int expected = 348;
+    final int expected = 352;
     final Date today = new Date(27, 10, 2018);
     final int actual = review.getAgeAt(today);
 

@@ -131,12 +131,12 @@ public class AuthorTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void setEmail_throwsExceptionWhenShorterThanSix() throws IllegalArgumentException {
+  public void setEmail_throwsExceptionWhenShorterThan6() throws IllegalArgumentException {
     author.setEmail("a@b.c");
   }
 
   @Test
-  public void setEmail_acceptsValuesContainingAtNotInFirstPlaceAndLongerThanFive() {
+  public void setEmail_acceptsValuesContainingAtNotInFirstPlaceAndLongerThan5() {
     final String expected = "me@jonhue.me";
     author.setEmail(expected);
     final String actual = author.getEmail();
