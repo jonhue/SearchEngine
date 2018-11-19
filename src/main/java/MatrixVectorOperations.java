@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class MatrixVectorOperations {
   public static double[] multiply(double[][] m, double[] v) {
     double[] result = new double[v.length];
@@ -89,8 +87,8 @@ public class MatrixVectorOperations {
     int result = 0;
     final int[][] permutations = permutations(m[0].length);
 
-    for (int i = 0; i < permutations.length; ++i)
-      result += sgn(permutations[i]) * something(m, permutations[i]);
+    for (int[] permutation : permutations)
+      result += sgn(permutation) * something(m, permutation);
 
     return result;
   }

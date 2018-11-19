@@ -106,9 +106,9 @@ public class Document {
   }
 
   private static String findSuffix(String word) throws IllegalArgumentException {
-    for (int i = 0; i < SUFFICES.length; ++i) {
-      int sufficeLength = SUFFICES[i].length();
-      if (word.length() >= sufficeLength && sufficesEqual(word, SUFFICES[i], sufficeLength)) return SUFFICES[i];
+    for (String SUFFICE : SUFFICES) {
+      int sufficeLength = SUFFICE.length();
+      if (word.length() >= sufficeLength && sufficesEqual(word, SUFFICE, sufficeLength)) return SUFFICE;
     }
 
     return "";
