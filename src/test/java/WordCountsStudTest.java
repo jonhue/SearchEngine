@@ -3,7 +3,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class WordCountsArrayTest {
+public class WordCountsStudTest {
   private WordCountsArray wordCountsArray;
 
   @Before
