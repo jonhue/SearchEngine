@@ -132,9 +132,7 @@ public class Document {
     }
   }
 
-  /* private methods borrowed from Stringulina */
-
-  public static int substringPos(String haystack, String needle) {
+  private static int substringPos(String haystack, String needle) {
     int pos = -1;
     for (int i = 0; i < haystack.length() && pos == -1; ++i)
       if (isSubstringAtPos(haystack, needle, i))
@@ -143,7 +141,7 @@ public class Document {
     return pos;
   }
 
-  public static int countSubstring(String haystack, String needle) {
+  private static int countSubstring(String haystack, String needle) {
     int count = 0;
     for (int i = 0; i < haystack.length(); ++i)
       if (isSubstringAtPos(haystack, needle, i)) count = count + 1;
@@ -160,7 +158,7 @@ public class Document {
     return isSubstringAtPos;
   }
 
-  public static String substring(String str, int startPos, int endPos) {
+  private static String substring(String str, int startPos, int endPos) {
     String newStr = "";
     for (int i = startPos; i < endPos; ++i)
       newStr = newStr + str.charAt(i);
