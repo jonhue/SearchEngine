@@ -90,12 +90,8 @@ public class WordCountTest {
     assertEquals(expected, actual);
   }
 
-  @Test
-  public void incrementCount_withNegativeParameter() {
-    final int expected = 1;
-    wordCount.setCount(2);
-    final int actual = wordCount.incrementCount(-1);
-
-    assertEquals(expected, actual);
+  @Test(expected = IllegalArgumentException.class)
+  public void incrementCount_throwsExceptionWhenParameterNegative() throws IllegalArgumentException {
+    wordCount.incrementCount(-1);
   }
 }
