@@ -88,7 +88,7 @@ public class MatrixVectorOperations {
     final int[][] permutations = permutations(m[0].length);
 
     for (int[] permutation : permutations)
-      result += sgn(permutation) * something(m, permutation);
+      result += sgn(permutation) * combineMatrixAndPermutation(m, permutation);
 
     return result;
   }
@@ -119,7 +119,7 @@ public class MatrixVectorOperations {
     return result;
   }
 
-  private static int something(int[][] m, int[] permutation) {
+  private static int combineMatrixAndPermutation(int[][] m, int[] permutation) {
     int result = 1;
 
     for (int i = 0; i < m[0].length; ++i)
