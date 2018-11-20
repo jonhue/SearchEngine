@@ -31,7 +31,7 @@ public class WordCount {
     return count;
   }
 
-  /* count must be 1 or higher; otherwise throws IllegalArgumentException */
+  /* count must be 0 or higher; otherwise throws IllegalArgumentException */
   public void setCount(int count) throws IllegalArgumentException {
     if (count < 0)
       throw new IllegalArgumentException("Count must not be smaller than 0.");
@@ -46,7 +46,11 @@ public class WordCount {
     return newCount;
   }
 
-  public int incrementCount(int n) {
+  /* n must be 0 or higher; otherwise throws IllegalArgumentException */
+  public int incrementCount(int n) throws IllegalArgumentException {
+    if (n < 0)
+      throw new IllegalArgumentException("n must not be smaller than 0.");
+
     int newCount = getCount() + n;
     setCount(newCount);
 
