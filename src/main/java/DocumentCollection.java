@@ -40,7 +40,7 @@ public class DocumentCollection {
   }
 
   public boolean isEmpty() {
-    return head == null || tail == null;
+    return head == null && tail == null;
   }
 
   public int numDocuments() {
@@ -99,6 +99,20 @@ public class DocumentCollection {
     }
 
     return true;
+  }
+
+  public int indexOf(Document document) {
+    if (document == null) return -1;
+    if (isEmpty()) return -1;
+
+    int index = 0;
+    for (DocumentCollectionCell documentCollectionCell = head; documentCollectionCell != null && !documentCollectionCell.getDocument().equals(document); documentCollectionCell = documentCollectionCell.getNext())
+      ++index;
+
+    if (index == numDocuments())
+      return -1;
+    else
+      return index;
   }
 
   private DocumentCollectionCell getCell(int index) {

@@ -276,4 +276,50 @@ public class DocumentCollectionTest {
 
     assertTrue(actual);
   }
+
+  @Test
+  public void indexOf_whenNullGiven() {
+    final int expected = -1;
+    final int actual = documentCollection.indexOf(null);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void indexOf_whenEmpty() {
+    final int expected = -1;
+    final int actual = documentCollection.indexOf(document);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void indexOf_whenNotInList() {
+    final int expected = -1;
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    final int actual = documentCollection.indexOf(document);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void indexOf_whenInList() {
+    final int expected = 1;
+    documentCollection.prependDocument(document);
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    final int actual = documentCollection.indexOf(document);
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void indexOf_whenInListTwice() {
+    final int expected = 0;
+    documentCollection.prependDocument(document);
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(document);
+    final int actual = documentCollection.indexOf(document);
+
+    assertEquals(expected, actual);
+  }
 }
