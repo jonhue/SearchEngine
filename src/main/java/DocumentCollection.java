@@ -115,6 +115,29 @@ public class DocumentCollection {
       return index;
   }
 
+  public boolean contains(Document document) {
+    return indexOf(document) != -1;
+  }
+
+  public void match(String query) {
+    prependDocument(new Document(null, null, null, null, null, query));
+
+    addZeroWordsToDocuments();
+    for (DocumentCollectionCell documentCollectionCell = head; documentCollectionCell != null; documentCollectionCell = documentCollectionCell.getNext()) {
+      documentCollectionCell.getDocument().getWordCounts().sort();
+      documentCollectionCell.setSimilarity(documentCollectionCell.getDocument().getWordCounts().computeSimilarity(getFirstDocument().getWordCounts()));
+    }
+
+    head = head.getNext();
+  }
+
+  public double getQuerySimilarity(int index) {
+    DocumentCollectionCell documentCollectionCell = getCell(index);
+    if (documentCollectionCell == null) return -1.0;
+
+    return documentCollectionCell.getSimilarity();
+  }
+
   private DocumentCollectionCell getCell(int index) {
     if (index < 0 || index >= numDocuments()) return null;
 
@@ -123,5 +146,21 @@ public class DocumentCollection {
       documentCollectionCell = documentCollectionCell.getNext();
 
     return documentCollectionCell;
+  }
+
+  private WordCountsArray allWords() {
+    WordCountsArray wordCountsArray = new WordCountsArray(100);
+
+    for (DocumentCollectionCell documentCollectionCell = head; documentCollectionCell != null; documentCollectionCell = documentCollectionCell.getNext())
+      for (int i = 0; i < documentCollectionCell.getDocument().getWordCounts().size(); ++i)
+        wordCountsArray.add(documentCollectionCell.getDocument().getWordCounts().getWord(i), 0);
+
+    return wordCountsArray;
+  }
+
+  private void addZeroWordsToDocuments() {
+    for (DocumentCollectionCell documentCollectionCell = head; documentCollectionCell != null; documentCollectionCell = documentCollectionCell.getNext())
+      for (int i = 0; i < allWords().size(); ++i)
+        documentCollectionCell.getDocument().getWordCounts().add(allWords().getWord(i), 0);
   }
 }

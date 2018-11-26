@@ -8,11 +8,11 @@ public class Document {
   private Author author;
   private WordCountsArray wordCounts;
 
-  public static final String[] SUFFICES = {"ab", "al", "ant", "artig", "bar", "chen", "ei", "eln", "en", "end", "ent",
-          "er", "fach", "fikation", "fizieren", "fähig", "gemäß", "gerecht", "haft", "haltig", "heit", "ie", "ieren",
-          "ig", "in", "ion", "iren", "isch", "isieren", "isierung", "ismus", "ist", "ität", "iv", "keit", "kunde",
-          "legen", "lein", "lich", "ling", "logie", "los", "mal", "meter", "mut", "nis", "or", "sam", "schaft", "tum",
-          "ung", "voll", "wert", "würdig"};
+  public static final String[] SUFFICES = {"fikation", "fizieren", "isierung", "gerecht", "isieren", "haltig", "schaft",
+          "würdig", "artig", "fähig", "gemäß", "ieren", "ismus", "kunde", "logie", "legen", "meter", "chen", "fach",
+          "haft", "heit", "iren", "isch", "ität", "keit", "lein", "lich", "ling", "voll", "wert", "ant", "bar", "eln",
+          "end", "ent", "ion", "ist", "los", "mal", "mut", "nis", "sam", "tum", "ung", "ab", "al", "ei", "en", "er",
+          "ie", "ig", "in", "iv", "or"};
 
   public Document(String title, String lang, String summary, Date releaseDate, Author author, String content) throws IllegalArgumentException {
     wordCounts = new WordCountsArray(0);

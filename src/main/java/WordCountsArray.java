@@ -58,7 +58,7 @@ public class WordCountsArray {
 
     int i = getIndexOfWord(word.toLowerCase());
     if (i == -1) {
-      if (size() == wordCounts.length) extend(10);
+      if (size() == wordCounts.length) extend(wordCounts.length + 1);
       wordCounts[size()] = new WordCount(word.toLowerCase(), count);
     } else {
       wordCounts[i].incrementCount(count);

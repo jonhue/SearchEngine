@@ -40,11 +40,10 @@ public class MergeSort {
         java.lang.System.arraycopy(arr, i, b, k, dividePos - i);
         k = endPos;
       } else {
-        if (arr[i] < arr[j]) {
+        if (arr[i] < arr[j])
           b[k++] = arr[i++];
-        } else {
+        else
           b[k++] = arr[j++];
-        }
       }
     }
 

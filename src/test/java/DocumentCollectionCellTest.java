@@ -95,4 +95,21 @@ public class DocumentCollectionCellTest {
 
     assertEquals(expected, actual);
   }
+
+  @Test
+  public void getSimilarity() {
+    final double expected = 0.0;
+    final double actual = documentCollectionCell.getSimilarity();
+
+    assertEquals(expected, actual, 0);
+  }
+
+  @Test
+  public void setSimilarity() {
+    final double expected = 0.5;
+    documentCollectionCell.setSimilarity(expected);
+    final double actual = documentCollectionCell.getSimilarity();
+
+    assertEquals(expected, actual, 0);
+  }
 }

@@ -322,4 +322,55 @@ public class DocumentCollectionTest {
 
     assertEquals(expected, actual);
   }
+
+  @Test
+  public void contains_whenNotInList() {
+    final boolean actual = documentCollection.contains(document);
+
+    assertFalse(actual);
+  }
+
+  @Test
+  public void contains_whenInList() {
+    documentCollection.prependDocument(document);
+    final boolean actual = documentCollection.contains(document);
+
+    assertTrue(actual);
+  }
+
+  @Test
+  public void match() {
+    final double expected = 0.707106781;
+    documentCollection.prependDocument(document);
+    documentCollection.match("content");
+    final double actual = documentCollection.getQuerySimilarity(0);
+
+    assertEquals(expected, actual, 0.000000001);
+  }
+
+  @Test
+  public void getQuerySimilarity_whenIndexSmallerThan0() {
+    final double expected = -1.0;
+    final double actual = documentCollection.getQuerySimilarity(-1);
+
+    assertEquals(expected, actual, 0);
+  }
+
+  @Test
+  public void getQuerySimilarity_whenIndexHigherOrEqualToLength() {
+    final double expected = -1.0;
+    final double actual = documentCollection.getQuerySimilarity(0);
+
+    assertEquals(expected, actual, 0);
+  }
+
+  @Test
+  public void getQuerySimilarity_whenIndexHigherThan0AndSmallerThanLength() {
+    final double expected = 0.0;
+    documentCollection.prependDocument(document);
+    documentCollection.match("abc");
+    final double actual = documentCollection.getQuerySimilarity(0);
+
+    assertEquals(expected, actual, 0);
+  }
 }
