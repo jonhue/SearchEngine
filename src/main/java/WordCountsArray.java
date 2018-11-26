@@ -73,18 +73,7 @@ public class WordCountsArray {
   }
 
   public void sort() {
-    for (int i = 0; i < size() - 1; i++) {
-      int min = i;
-      for (int j = i + 1; j < size(); j++)
-        if (getWord(j).compareTo(getWord(min)) < 0)
-          min = j;
-
-      if (i != min) {
-        WordCount tmp = wordCounts[i];
-        wordCounts[i] = wordCounts[min];
-        wordCounts[min] = tmp;
-      }
-    }
+    doBubbleSort();
   }
 
   public double computeSimilarity(WordCountsArray wordCountsArray) {
@@ -118,5 +107,24 @@ public class WordCountsArray {
     WordCount[] newWordCounts = new WordCount[wordCounts.length + n];
     java.lang.System.arraycopy(wordCounts, 0, newWordCounts, 0, wordCounts.length);
     wordCounts = newWordCounts;
+  }
+
+  private void doBubbleSort() {
+    for (int i = 0; i < size() - 1; i++) {
+      int min = i;
+      for (int j = i + 1; j < size(); j++)
+        if (getWord(j).compareTo(getWord(min)) < 0)
+          min = j;
+
+      if (i != min) {
+        WordCount tmp = wordCounts[i];
+        wordCounts[i] = wordCounts[min];
+        wordCounts[min] = tmp;
+      }
+    }
+  }
+
+  private void doBucketSort() {
+    // ...
   }
 }

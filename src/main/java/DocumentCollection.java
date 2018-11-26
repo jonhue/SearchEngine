@@ -127,6 +127,7 @@ public class DocumentCollection {
       documentCollectionCell.getDocument().getWordCounts().sort();
       documentCollectionCell.setSimilarity(documentCollectionCell.getDocument().getWordCounts().computeSimilarity(getFirstDocument().getWordCounts()));
     }
+    // sortBySimilarityDesc();
 
     head = head.getNext();
   }

@@ -1,6 +1,7 @@
 public class DocumentCollectionCell {
   private Document document;
   private DocumentCollectionCell next;
+  private DocumentCollectionCell previous;
   private double similarity;
 
   public DocumentCollectionCell(Document document) {
@@ -17,9 +18,14 @@ public class DocumentCollectionCell {
   }
 
   public boolean equals(DocumentCollectionCell documentCollectionCell) {
-    if (documentCollectionCell == null || documentCollectionCell.next == null && next != null || documentCollectionCell.next != null && next == null) return false;
+    if (documentCollectionCell == null) return false;
+    if (documentCollectionCell.next == null && next != null || documentCollectionCell.next != null && next == null) return false;
+    if (documentCollectionCell.previous == null && previous != null || documentCollectionCell.previous != null && previous == null) return false;
 
-    return (documentCollectionCell.document == null && document == null || documentCollectionCell.document.equals(document)) && (documentCollectionCell.next == null && next == null || documentCollectionCell.next.equals(next));
+    boolean documentEqual = documentCollectionCell.document == null && document == null || documentCollectionCell.document.equals(document);
+    boolean nextEqual = documentCollectionCell.next == null && next == null || documentCollectionCell.next.equals(next);
+
+    return documentEqual && nextEqual && documentCollectionCell.similarity == similarity;
   }
 
   public Document getDocument() {
@@ -36,6 +42,18 @@ public class DocumentCollectionCell {
 
   public void setNext(DocumentCollectionCell next) {
     this.next = next;
+
+    if (next != null) next.previous = this;
+  }
+
+  public DocumentCollectionCell getPrevious() {
+    return previous;
+  }
+
+  public void setPrevious(DocumentCollectionCell previous) {
+    this.previous = previous;
+
+    if (previous != null) previous.next = this;
   }
 
   public double getSimilarity() {

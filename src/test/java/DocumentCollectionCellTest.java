@@ -97,6 +97,58 @@ public class DocumentCollectionCellTest {
   }
 
   @Test
+  public void setNext_doesNotSetPreviousWhenNull() {
+    documentCollectionCell.setNext(null);
+    final DocumentCollectionCell actual = documentCollectionCell.getPrevious();
+
+    assertNull(actual);
+  }
+
+  @Test
+  public void setNext_setsPreviousWhenNotNull() {
+    final DocumentCollectionCell expected = documentCollectionCell;
+    DocumentCollectionCell anotherDocumentCollectionCell = new DocumentCollectionCell(document);
+    documentCollectionCell.setNext(anotherDocumentCollectionCell);
+    final DocumentCollectionCell actual = anotherDocumentCollectionCell.getPrevious();
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getPrevious() {
+    final DocumentCollectionCell actual = documentCollectionCell.getPrevious();
+
+    assertNull(actual);
+  }
+
+  @Test
+  public void setPrevious() {
+    final DocumentCollectionCell expected = new DocumentCollectionCell(document);
+    documentCollectionCell.setPrevious(expected);
+    final DocumentCollectionCell actual = documentCollectionCell.getPrevious();
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void setPrevious_doesNotSetNextWhenNull() {
+    documentCollectionCell.setPrevious(null);
+    final DocumentCollectionCell actual = documentCollectionCell.getNext();
+
+    assertNull(actual);
+  }
+
+  @Test
+  public void setPrevious_setsNextWhenNotNull() {
+    final DocumentCollectionCell expected = documentCollectionCell;
+    DocumentCollectionCell anotherDocumentCollectionCell = new DocumentCollectionCell(document);
+    documentCollectionCell.setPrevious(anotherDocumentCollectionCell);
+    final DocumentCollectionCell actual = anotherDocumentCollectionCell.getNext();
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
   public void getSimilarity() {
     final double expected = 0.0;
     final double actual = documentCollectionCell.getSimilarity();

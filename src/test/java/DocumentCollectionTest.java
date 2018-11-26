@@ -339,9 +339,10 @@ public class DocumentCollectionTest {
   }
 
   @Test
-  public void match() {
+  public void match_computesSimilarityAndOrdersDesc() {
     final double expected = 0.707106781;
     documentCollection.prependDocument(document);
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
     documentCollection.match("content");
     final double actual = documentCollection.getQuerySimilarity(0);
 
