@@ -2,8 +2,6 @@ public class DocumentCollection {
   private DocumentCollectionCell head;
   private DocumentCollectionCell tail;
 
-  // public DocumentCollection(): instantiates an empty list
-
   public String toString() {
     return "<DocumentCollection size=" + numDocuments() + ">";
   }
