@@ -1,4 +1,5 @@
 import java.lang.IllegalArgumentException;
+import java.util.Arrays;
 
 public class WordCountsArray {
   private WordCount[] wordCounts;
@@ -73,7 +74,7 @@ public class WordCountsArray {
   }
 
   public void sort() {
-    doSelectionSort();
+    doBucketSort();
   }
 
   public double computeSimilarity(WordCountsArray wordCountsArray) {
@@ -125,6 +126,49 @@ public class WordCountsArray {
   }
 
   private void doBucketSort() {
-    // ...
+    // First sort by the last character & Last sort by the first
+    for (int index = bucketSortGetMaxWordLength(wordCounts) - 1; index >= 0; --index) {
+      // One bucket per lowercase letter in the ASCII table + 1 for strings shorter than the current character index
+      WordCountsArray[] buckets = new WordCountsArray[27];
+
+      for (int wordCountIndex = 0; wordCountIndex < size(); ++wordCountIndex)
+        bucketSortAddToBucket(buckets, bucketSortBucketIndex(wordCounts[wordCountIndex].getWord(), index), wordCounts[wordCountIndex]);
+
+      bucketSortConcatenateBuckets(buckets);
+    }
+  }
+
+  private static int bucketSortGetMaxWordLength(WordCount[] wordCounts) {
+    int maxWordLength = 0;
+    for (int i = 0; i < wordCounts.length && wordCounts[i] != null; ++i)
+      if (maxWordLength < wordCounts[i].getWord().length())
+        maxWordLength = wordCounts[i].getWord().length();
+
+    return maxWordLength;
+  }
+
+  private void bucketSortConcatenateBuckets(WordCountsArray[] buckets) {
+    int i = 0;
+    for (WordCountsArray bucket : buckets)
+      if (bucket != null)
+        for (int wordCountIndex = 0; wordCountIndex < bucket.size(); ++wordCountIndex)
+          wordCounts[i++] = bucket.wordCounts[wordCountIndex];
+  }
+
+  private static int bucketSortBucketIndex(String word, int index) {
+    if (word.length() > index)
+      return word.charAt(index) - 96;
+    else
+      return 0;
+  }
+
+  private static void bucketSortAddToBucket(WordCountsArray[] buckets, int bucketIndex, WordCount wordCount) {
+    if (buckets[bucketIndex] == null) {
+      buckets[bucketIndex] = new WordCountsArray(1);
+      buckets[bucketIndex].wordCounts[0] = wordCount;
+    } else {
+      if (buckets[bucketIndex].size() == buckets[bucketIndex].wordCounts.length) buckets[bucketIndex].extend(buckets[bucketIndex].wordCounts.length);
+      buckets[bucketIndex].wordCounts[buckets[bucketIndex].size()] = wordCount;
+    }
   }
 }

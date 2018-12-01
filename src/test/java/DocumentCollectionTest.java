@@ -13,7 +13,7 @@ public class DocumentCollectionTest {
   public void setUp() {
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
-    document = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
+    document = new Document("Title", "en", "Summary", releaseDate, author, "content and");
     documentCollection = new DocumentCollection();
   }
 
@@ -41,7 +41,7 @@ public class DocumentCollectionTest {
     final boolean expected = false;
     documentCollection.prependDocument(document);
     final DocumentCollection anotherDocumentCollection = new DocumentCollection();
-    anotherDocumentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    anotherDocumentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final boolean actual = documentCollection.equals(anotherDocumentCollection);
 
     assertEquals(expected, actual);
@@ -83,7 +83,7 @@ public class DocumentCollectionTest {
   @Test
   public void prependDocument_prepends() {
     final Document expected = document;
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     final Document actual = documentCollection.getFirstDocument();
 
@@ -119,7 +119,7 @@ public class DocumentCollectionTest {
   @Test
   public void appendDocument_appends() {
     final Document expected = document;
-    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.appendDocument(document);
     final Document actual = documentCollection.getLastDocument();
 
@@ -168,7 +168,7 @@ public class DocumentCollectionTest {
   @Test
   public void getFirstDocument_whenNotEmpty() {
     final Document expected = document;
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     final Document actual = documentCollection.getFirstDocument();
 
@@ -186,7 +186,7 @@ public class DocumentCollectionTest {
   public void getLastDocument_whenNotEmpty() {
     final Document expected = document;
     documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final Document actual = documentCollection.getLastDocument();
 
     assertTrue(expected.equals(actual));
@@ -210,7 +210,7 @@ public class DocumentCollectionTest {
   public void get_whenIndexHigherThan0AndSmallerThanLength() {
     final Document expected = document;
     documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final Document actual = documentCollection.get(1);
 
     assertTrue(expected.equals(actual));
@@ -228,7 +228,7 @@ public class DocumentCollectionTest {
   public void removeFirstDocument_whenNotEmpty() {
     final Document expected = document;
     documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.removeFirstDocument();
     final Document actual = documentCollection.getFirstDocument();
 
@@ -246,7 +246,7 @@ public class DocumentCollectionTest {
   @Test
   public void removeLastDocument_whenNotEmpty() {
     final Document expected = document;
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     documentCollection.removeLastDocument();
     final Document actual = documentCollection.getLastDocument();
@@ -271,7 +271,7 @@ public class DocumentCollectionTest {
   @Test
   public void remove_whenIndexHigherThan0AndSmallerThanLength() {
     documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final boolean actual = documentCollection.remove(1);
 
     assertTrue(actual);
@@ -296,7 +296,7 @@ public class DocumentCollectionTest {
   @Test
   public void indexOf_whenNotInList() {
     final int expected = -1;
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final int actual = documentCollection.indexOf(document);
 
     assertEquals(expected, actual);
@@ -306,7 +306,7 @@ public class DocumentCollectionTest {
   public void indexOf_whenInList() {
     final int expected = 1;
     documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final int actual = documentCollection.indexOf(document);
 
     assertEquals(expected, actual);
@@ -316,7 +316,7 @@ public class DocumentCollectionTest {
   public void indexOf_whenInListTwice() {
     final int expected = 0;
     documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     final int actual = documentCollection.indexOf(document);
 
@@ -342,7 +342,7 @@ public class DocumentCollectionTest {
   public void match_computesSimilarityAndOrdersDesc() {
     final double expected = 0.707106781;
     documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "More ..."));
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.match("content");
     final double actual = documentCollection.getQuerySimilarity(0);
 

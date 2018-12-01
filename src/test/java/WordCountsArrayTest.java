@@ -138,7 +138,7 @@ public class WordCountsArrayTest {
   public void add_addsElement() {
     final int expected = 3;
     wordCountsArray.add("World", 1);
-    wordCountsArray.add("Another word", 1);
+    wordCountsArray.add("More", 1);
     final int actual = wordCountsArray.size();
 
     assertEquals(expected, actual);
@@ -165,7 +165,7 @@ public class WordCountsArrayTest {
   public void sort() {
     final int expected = 2;
     wordCountsArray.add("World", 1);
-    wordCountsArray.add("Another word", 1);
+    wordCountsArray.add("More", 1);
     wordCountsArray.sort();
     final int actual = wordCountsArray.getIndexOfWord("world");
 
