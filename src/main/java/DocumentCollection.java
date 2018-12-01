@@ -87,6 +87,8 @@ public class DocumentCollection {
       head = head.getNext();
       if (head == null)
         tail = null;
+      else
+        head.setPrevious(null);
     } else {
       DocumentCollectionCell documentCollectionCellTail = getCell(index - 1);
       DocumentCollectionCell documentCollectionCellHead = getCell(index + 1);
@@ -127,9 +129,9 @@ public class DocumentCollection {
       documentCollectionCell.getDocument().getWordCounts().sort();
       documentCollectionCell.setSimilarity(documentCollectionCell.getDocument().getWordCounts().computeSimilarity(getFirstDocument().getWordCounts()));
     }
-    // sortBySimilarityDesc();
 
     head = head.getNext();
+    sortBySimilarityDesc();
   }
 
   public double getQuerySimilarity(int index) {
@@ -163,5 +165,80 @@ public class DocumentCollection {
     for (DocumentCollectionCell documentCollectionCell = head; documentCollectionCell != null; documentCollectionCell = documentCollectionCell.getNext())
       for (int i = 0; i < allWords().size(); ++i)
         documentCollectionCell.getDocument().getWordCounts().add(allWords().getWord(i), 0);
+  }
+
+  private void sortBySimilarityDesc() {
+    // Build array from list
+    DocumentCollectionCell[] arr = new DocumentCollectionCell[numDocuments()];
+    for (int i = 0; i < arr.length; ++i)
+      arr[i] = getCell(i);
+
+    // Reset list elements
+    for (DocumentCollectionCell cell : arr) {
+      cell.setNext(null);
+      cell.setPrevious(null);
+    }
+
+    // Sort array
+    arr = mergeSortIt(arr);
+
+    // Build new list
+    for (int i = 1; i < arr.length; ++i)
+      arr[i].setPrevious(arr[i - 1]);
+    head = arr[0];
+    tail = arr[arr.length - 1];
+  }
+
+  private static DocumentCollectionCell[] mergeSortIt(DocumentCollectionCell[] arr) {
+    for (int maxSortedPartLength = 1; maxSortedPartLength < arr.length; maxSortedPartLength *= 2) {
+      int startPos = 0;
+      while (startPos < arr.length) {
+        int endPos = endPos(startPos, maxSortedPartLength, arr.length);
+        java.lang.System.arraycopy(merge(arr, startPos, dividePos(startPos, maxSortedPartLength, arr.length), endPos), 0, arr, startPos, endPos - startPos);
+        startPos = endPos;
+      }
+    }
+
+    return arr;
+  }
+
+  private static DocumentCollectionCell[] merge(DocumentCollectionCell[] arr, int startPos, int dividePos, int endPos) {
+    DocumentCollectionCell[] b = new DocumentCollectionCell[endPos - startPos];
+    int k = 0;
+
+    int i = startPos;
+    int j = dividePos;
+    while (k < endPos) {
+      if (i == dividePos) {
+        java.lang.System.arraycopy(arr, j, b, k, endPos - j);
+        k = endPos;
+      } else if (j == endPos) {
+        java.lang.System.arraycopy(arr, i, b, k, dividePos - i);
+        k = endPos;
+      } else {
+        if (arr[i].getSimilarity() > arr[j].getSimilarity())
+          b[k++] = arr[i++];
+        else
+          b[k++] = arr[j++];
+      }
+    }
+
+    return b;
+  }
+
+  private static int dividePos(int startPos, int maxSortedPartLength, int arrLength) {
+    if (startPos + maxSortedPartLength >= arrLength)
+      return arrLength;
+    else if (startPos + 2 * maxSortedPartLength >= arrLength)
+      return startPos + maxSortedPartLength;
+    else
+      return startPos + maxSortedPartLength;
+  }
+
+  private static int endPos(int startPos, int maxSortedPartLength, int arrLength) {
+    if (startPos + 2 * maxSortedPartLength >= arrLength)
+      return arrLength;
+    else
+      return startPos + 2 * maxSortedPartLength;
   }
 }

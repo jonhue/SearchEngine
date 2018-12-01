@@ -73,7 +73,7 @@ public class WordCountsArray {
   }
 
   public void sort() {
-    doBubbleSort();
+    doSelectionSort();
   }
 
   public double computeSimilarity(WordCountsArray wordCountsArray) {
@@ -109,7 +109,7 @@ public class WordCountsArray {
     wordCounts = newWordCounts;
   }
 
-  private void doBubbleSort() {
+  private void doSelectionSort() {
     for (int i = 0; i < size() - 1; i++) {
       int min = i;
       for (int j = i + 1; j < size(); j++)
