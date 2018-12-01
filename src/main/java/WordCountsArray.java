@@ -1,5 +1,4 @@
 import java.lang.IllegalArgumentException;
-import java.util.Arrays;
 
 public class WordCountsArray {
   private WordCount[] wordCounts;
@@ -157,7 +156,7 @@ public class WordCountsArray {
 
   private static int bucketSortBucketIndex(String word, int index) {
     if (word.length() > index)
-      return word.charAt(index) - 96;
+      return word.charAt(index) - 96; // 'a' -> 1, 'z' -> 26
     else
       return 0;
   }

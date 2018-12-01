@@ -1,16 +1,16 @@
-import java.util.Arrays;
+import utils.Terminal;
 
 public class MergeSort {
   public static void main(String[] args) {
     int[] arr1 = {3, 4, 2, 7, 1, 0, 5};
-    System.out.println("Unsorted: " + Arrays.toString(arr1));
-    System.out.println("Sorted: " + Arrays.toString(mergeSortIt(arr1)));
+    System.out.println("Unsorted: " + arrayToString(arr1));
+    System.out.println("Sorted: " + arrayToString(mergeSortIt(arr1)) + Terminal.NEWLINE);
     int[] arr2 = {250, 345, 34, 123, 2};
-    System.out.println("Unsorted: " + Arrays.toString(arr2));
-    System.out.println("Sorted: " + Arrays.toString(mergeSortIt(arr2)));
+    System.out.println("Unsorted: " + arrayToString(arr2));
+    System.out.println("Sorted: " + arrayToString(mergeSortIt(arr2)) + Terminal.NEWLINE);
     int[] arr3 = {16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-    System.out.println("Unsorted: " + Arrays.toString(arr3));
-    System.out.println("Sorted: " + Arrays.toString(mergeSortIt(arr3)));
+    System.out.println("Unsorted: " + arrayToString(arr3));
+    System.out.println("Sorted: " + arrayToString(mergeSortIt(arr3)) + Terminal.NEWLINE);
   }
 
   public static int[] mergeSortIt(int[] arr) {
@@ -64,5 +64,17 @@ public class MergeSort {
       return arrLength;
     else
       return startPos + 2 * maxSortedPartLength;
+  }
+
+  private static String arrayToString(int[] arr) {
+    String string = "[";
+
+    for (int i = 0; i < arr.length; ++i)
+      if (i == arr.length - 1)
+        string += arr[i];
+      else
+        string += arr[i] + ", ";
+
+    return string + "]";
   }
 }
