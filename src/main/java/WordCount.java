@@ -1,6 +1,8 @@
 public class WordCount {
   private String word;
   private int count;
+  private double weight;
+  private double normalizedWeight;
 
   public WordCount(String word, int count) {
     setWord(word);
@@ -12,7 +14,7 @@ public class WordCount {
   }
 
   public boolean equals(WordCount wordCount) {
-    if (wordCount ==  null) return false;
+    if (wordCount == null) return false;
 
     return wordCount.word.equals(word) && wordCount.count == count;
   }
@@ -35,6 +37,22 @@ public class WordCount {
       throw new IllegalArgumentException("Count must not be smaller than 0.");
 
     this.count = count;
+  }
+
+  public double getWeight() {
+    return weight;
+  }
+
+  public void setWeight(double weight) {
+    this.weight = weight;
+  }
+
+  public double getNormalizedWeight() {
+    return normalizedWeight;
+  }
+
+  public void setNormalizedWeight(double normalizedWeight) {
+    this.normalizedWeight = normalizedWeight;
   }
 
   public int incrementCount() {

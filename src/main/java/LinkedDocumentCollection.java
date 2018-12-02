@@ -15,6 +15,12 @@ public class LinkedDocumentCollection extends DocumentCollection {
     super.appendDocument(document);
   }
 
+  public void match(String query) {
+    prependDocument(new LinkedDocument(null, null, null, null, null, null, query));
+
+    super.match();
+  }
+
   public void calculateIncomingLinks() {
     for (int i = 0; i < numDocuments(); ++i) {
       LinkedDocumentCollection outgoingLinks = ((LinkedDocument) get(i)).getOutgoingLinks();

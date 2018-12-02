@@ -122,6 +122,10 @@ public class DocumentCollection {
   public void match(String query) {
     prependDocument(new Document(null, null, null, null, null, query));
 
+    match();
+  }
+
+  protected void match() {
     addZeroWordsToDocuments();
     for (DocumentCollectionCell documentCollectionCell = head; documentCollectionCell != null; documentCollectionCell = documentCollectionCell.getNext()) {
       documentCollectionCell.getDocument().getWordCounts().sort();
@@ -137,6 +141,17 @@ public class DocumentCollection {
     if (documentCollectionCell == null) return -1.0;
 
     return documentCollectionCell.getSimilarity();
+  }
+
+  public int noOfDocumentsContainingWord(String word) {
+    if (isEmpty()) return 0;
+
+    int num = 0;
+    for (int i = 0; i < numDocuments(); ++i)
+      if (get(i).getWordCounts().getCount(get(i).getWordCounts().getIndexOfWord(word)) > 0)
+        ++num;
+
+    return num;
   }
 
   private DocumentCollectionCell getCell(int index) {

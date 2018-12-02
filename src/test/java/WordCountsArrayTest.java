@@ -173,7 +173,7 @@ public class WordCountsArrayTest {
   }
 
   @Test
-  public void computeSimilarity() {
+  public void computeSimilarity_whenDocumentCollectionIsNotGiven() {
     final double expected = 0.894427191;
     wordCountsArray.add("World", 0);
     WordCountsArray anotherWordCountsArray = new WordCountsArray(2);
@@ -181,6 +181,25 @@ public class WordCountsArrayTest {
     anotherWordCountsArray.add("World", 1);
     final double actual = wordCountsArray.computeSimilarity(anotherWordCountsArray);
 
-    assertEquals(expected, actual, 0.00000000001);
+    assertEquals(expected, actual, 0.000000001);
+  }
+
+  @Test
+  public void computeSimilarity_whenDocumentCollectionIsGiven() {
+    DocumentCollection documentCollection = new DocumentCollection();
+    Date date = new Date();
+    Author author = new Author("Foo", "Bar", date, "Springfield", "me@jonhue.me");
+    Document document1 = new Document("Title", "en", "Summary", date, author, "hello world");
+    documentCollection.appendDocument(document1);
+    Document document2 = new Document("Another Title", "de", "Another summary", date, author, "some more content about this world");
+    documentCollection.appendDocument(document2);
+    Document document3 = new Document("Hello Title", "en", "hello", date, author, "hello hello hello");
+    documentCollection.appendDocument(document3);
+    Document query = new Document(null, null, null, null, null, "hello world");
+
+    final double expected = 0.624012790;
+    final double actual = query.getWordCounts().computeSimilarity(document2.getWordCounts(), documentCollection);
+
+    assertEquals(expected, actual, 0.000000001);
   }
 }

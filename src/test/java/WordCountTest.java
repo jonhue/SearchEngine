@@ -74,6 +74,40 @@ public class WordCountTest {
   }
 
   @Test
+  public void getWeight() {
+    final double expected = 0.0;
+    final double actual = wordCount.getWeight();
+
+    assertEquals(expected, actual, 0.0);
+  }
+
+  @Test
+  public void setWeight() {
+    final double expected = 0.5;
+    wordCount.setWeight(expected);
+    final double actual = wordCount.getWeight();
+
+    assertEquals(expected, actual, 0.0);
+  }
+
+  @Test
+  public void getNormalizedWeight() {
+    final double expected = 0.0;
+    final double actual = wordCount.getNormalizedWeight();
+
+    assertEquals(expected, actual, 0.0);
+  }
+
+  @Test
+  public void setNormalizedWeight() {
+    final double expected = 0.5;
+    wordCount.setNormalizedWeight(expected);
+    final double actual = wordCount.getNormalizedWeight();
+
+    assertEquals(expected, actual, 0.0);
+  }
+
+  @Test
   public void incrementCount_withoutParameter() {
     final int expected = 2;
     final int actual = wordCount.incrementCount();

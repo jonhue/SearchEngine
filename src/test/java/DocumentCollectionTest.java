@@ -374,4 +374,22 @@ public class DocumentCollectionTest {
 
     assertEquals(expected, actual, 0);
   }
+
+  @Test
+  public void noOfDocumentsContainingWord_whenEmpty() {
+    final int expected = 0;
+    final int actual = documentCollection.noOfDocumentsContainingWord("more");
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void noOfDocumentsContainingWord_whenNotEmpty() {
+    final int expected = 1;
+    documentCollection.prependDocument(document);
+    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    final int actual = documentCollection.noOfDocumentsContainingWord("more");
+
+    assertEquals(expected, actual);
+  }
 }

@@ -124,7 +124,7 @@ public class LinkedDocumentTest {
     final LinkedDocument actual = LinkedDocument.createLinkedDocumentFromFile("src/test/support/ID");
 
     assertEquals("ID", actual.getID());
-    assertEquals("Title", actual.getTitle());
+    assertEquals("ID", actual.getTitle());
     assertEquals("cont", actual.getWordCounts().getWord(1));
   }
 
