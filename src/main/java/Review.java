@@ -1,5 +1,3 @@
-import java.lang.IllegalArgumentException;
-
 public class Review {
   private String content;
   private Author author;

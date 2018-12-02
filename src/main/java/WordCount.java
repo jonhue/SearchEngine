@@ -1,5 +1,3 @@
-import java.lang.IllegalArgumentException;
-
 public class WordCount {
   private String word;
   private int count;

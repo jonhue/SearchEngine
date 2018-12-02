@@ -1,5 +1,3 @@
-import java.lang.IllegalArgumentException;
-
 public class Document {
   private String title;
   private String lang;

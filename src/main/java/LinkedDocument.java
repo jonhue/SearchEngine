@@ -1,7 +1,5 @@
 import utils.Terminal;
 
-import java.lang.IllegalArgumentException;
-
 public class LinkedDocument extends Document {
   private String ID;
   private String[] outgoingIDs;

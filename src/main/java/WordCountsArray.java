@@ -1,5 +1,3 @@
-import java.lang.IllegalArgumentException;
-
 public class WordCountsArray {
   private WordCount[] wordCounts;
 
