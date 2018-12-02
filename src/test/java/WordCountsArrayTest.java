@@ -9,89 +9,65 @@ public class WordCountsArrayTest {
   @Before
   public void setUp() {
     wordCountsArray = new WordCountsArray(2);
-    wordCountsArray.add("Hello", 1);
+    wordCountsArray.add("hello", 1);
   }
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<WordCountsArray size=1>";
-    final String actual = wordCountsArray.toString();
-
-    assertEquals(expected, actual);
+    assertEquals("<WordCountsArray size=1>", wordCountsArray.toString());
   }
 
   @Test
   public void equals_detectsEquality() {
-    WordCountsArray newWordCountsArray = new WordCountsArray(2);
-    newWordCountsArray.add("Hello", 1);
-    final boolean actual = wordCountsArray.equals(newWordCountsArray);
+    WordCountsArray anotherWordCountsArray = new WordCountsArray(2);
+    anotherWordCountsArray.add("hello", 1);
 
-    assertTrue(actual);
+    assertTrue(wordCountsArray.equals(anotherWordCountsArray));
   }
 
   @Test
   public void equals_detectsInequality() {
-    WordCountsArray newWordCountsArray = new WordCountsArray(1);
-    newWordCountsArray.add("World", 1);
-    final boolean actual = wordCountsArray.equals(newWordCountsArray);
+    WordCountsArray anotherWordCountsArray = new WordCountsArray(1);
+    anotherWordCountsArray.add("world", 1);
 
-    assertFalse(actual);
+    assertFalse(wordCountsArray.equals(anotherWordCountsArray));
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean actual = wordCountsArray.equals(null);
-
-    assertFalse(actual);
+    assertFalse(wordCountsArray.equals(null));
   }
 
   @Test
   public void getWord_invalidIndex() {
-    final String expected = "";
-    final String actual = wordCountsArray.getWord(1);
-
-    assertEquals(expected, actual);
+    assertEquals("", wordCountsArray.getWord(1));
   }
 
   @Test
   public void getWord_validIndex() {
-    final String expected = "hello";
-    final String actual = wordCountsArray.getWord(0);
-
-    assertEquals(expected, actual);
+    assertEquals("hello", wordCountsArray.getWord(0));
   }
 
   @Test
   public void getCount_invalidIndex() {
-    final int expected = -1;
-    final int actual = wordCountsArray.getCount(1);
-
-    assertEquals(expected, actual);
+    assertEquals(-1, wordCountsArray.getCount(1));
   }
 
   @Test
   public void getCount_validIndex() {
-    final int expected = 1;
-    final int actual = wordCountsArray.getCount(0);
-
-    assertEquals(expected, actual);
+    assertEquals(1, wordCountsArray.getCount(0));
   }
 
   @Test
   public void getIndexOfWord_doesntContainWord() {
-    final int expected = -1;
-    final int actual = wordCountsArray.getIndexOfWord("world");
-
-    assertEquals(expected, actual);
+    assertEquals(-1, wordCountsArray.getIndexOfWord("world"));
   }
 
   @Test
   public void getIndexOfWord_containsWord() {
-    final int expected = 1;
-    wordCountsArray.add("World", 1);
-    final int actual = wordCountsArray.getIndexOfWord("world");
+    wordCountsArray.add("world", 1);
 
-    assertEquals(expected, actual);
+    assertEquals(1, wordCountsArray.getIndexOfWord("world"));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -106,79 +82,63 @@ public class WordCountsArrayTest {
 
   @Test
   public void setCount_validIndex() {
-    final int expected = 2;
-    wordCountsArray.setCount(0, 2);
-    final int actual = wordCountsArray.getCount(0);
+    final int count = 2;
+    wordCountsArray.setCount(0, count);
 
-    assertEquals(expected, actual);
+    assertEquals(count, wordCountsArray.getCount(0));
   }
 
   @Test
   public void add_doesNotAddElementIfWordIsEmpty() {
-    final int expected = 1;
     wordCountsArray.add("", 1);
-    final int actual = wordCountsArray.size();
 
-    assertEquals(expected, actual);
+    assertEquals(1, wordCountsArray.size());
   }
 
   @Test
   public void add_doesNotAddElementIfWordIsNull() {
-    final int expected = 1;
     wordCountsArray.add(null, 1);
-    final int actual = wordCountsArray.size();
 
-    assertEquals(expected, actual);
+    assertEquals(1, wordCountsArray.size());
   }
 
   @Test
   public void add_addsElement() {
-    final int expected = 3;
-    wordCountsArray.add("World", 1);
-    wordCountsArray.add("More", 1);
-    final int actual = wordCountsArray.size();
+    wordCountsArray.add("world", 1);
+    wordCountsArray.add("more", 1);
 
-    assertEquals(expected, actual);
+    assertEquals(3, wordCountsArray.size());
   }
 
   @Test
   public void size_whenArrayNotFull() {
-    final int expected = 1;
-    final int actual = wordCountsArray.size();
-
-    assertEquals(expected, actual);
+    assertEquals(1, wordCountsArray.size());
   }
 
   @Test
   public void size_whenArrayIsFull() {
-    final int expected = 2;
-    wordCountsArray.add("World", 1);
-    final int actual = wordCountsArray.size();
+    wordCountsArray.add("world", 1);
 
-    assertEquals(expected, actual);
+    assertEquals(2, wordCountsArray.size());
   }
 
   @Test
   public void sort() {
-    final int expected = 2;
-    wordCountsArray.add("World", 1);
-    wordCountsArray.add("More", 1);
+    wordCountsArray.add("world", 1);
+    wordCountsArray.add("more", 1);
     wordCountsArray.sort();
-    final int actual = wordCountsArray.getIndexOfWord("world");
 
-    assertEquals(expected, actual);
+    assertEquals(2, wordCountsArray.getIndexOfWord("world"));
   }
 
   @Test
   public void computeSimilarity_whenDocumentCollectionIsNotGiven() {
-    final double expected = 0.894427191;
-    wordCountsArray.add("World", 0);
+    wordCountsArray.add("world", 0);
     WordCountsArray anotherWordCountsArray = new WordCountsArray(2);
-    anotherWordCountsArray.add("Hello", 2);
-    anotherWordCountsArray.add("World", 1);
-    final double actual = wordCountsArray.computeSimilarity(anotherWordCountsArray);
+    anotherWordCountsArray.add("hello", 2);
+    anotherWordCountsArray.add("world", 1);
 
-    assertEquals(expected, actual, 0.000000001);
+    assertEquals(0.894427191, wordCountsArray.computeSimilarity(anotherWordCountsArray), 0.000000001);
   }
 
   @Test
@@ -187,16 +147,14 @@ public class WordCountsArrayTest {
     Date date = new Date();
     Author author = new Author("Foo", "Bar", date, "Springfield", "me@jonhue.me");
     Document document1 = new Document("Title", "en", "Summary", date, author, "hello world");
-    documentCollection.appendDocument(document1);
     Document document2 = new Document("Another Title", "de", "Another summary", date, author, "some more content about this world");
-    documentCollection.appendDocument(document2);
     Document document3 = new Document("Hello Title", "en", "hello", date, author, "hello hello hello");
-    documentCollection.appendDocument(document3);
     Document query = new Document(null, null, null, null, null, "hello world");
 
-    final double expected = 0.624012790;
-    final double actual = query.getWordCounts().computeSimilarity(document2.getWordCounts(), documentCollection);
+    documentCollection.appendDocument(document1);
+    documentCollection.appendDocument(document2);
+    documentCollection.appendDocument(document3);
 
-    assertEquals(expected, actual, 0.000000001);
+    assertEquals(0.624012790, query.getWordCounts().computeSimilarity(document2.getWordCounts(), documentCollection), 0.000000001);
   }
 }

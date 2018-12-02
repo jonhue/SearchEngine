@@ -17,64 +17,50 @@ public class DateTest {
 
   @Test
   public void constructor_withoutParameters() {
-    final Date expected = new Date(Terminal.TODAYS_DAY, Terminal.TODAYS_MONTH, Terminal.TODAYS_YEAR);
-    final Date actual = new Date();
+    final Date todayWithParameters = new Date(Terminal.TODAYS_DAY, Terminal.TODAYS_MONTH, Terminal.TODAYS_YEAR);
+    final Date todayWithoutParameters = new Date();
 
-    assertTrue(actual.equals(expected));
+    assertTrue(todayWithoutParameters.equals(todayWithParameters));
   }
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<Date year=1971 month=2 day=3>";
-    final String actual = date.toString();
-
-    assertEquals(expected, actual);
+    assertEquals("<Date year=1971 month=2 day=3>", date.toString());
   }
 
   @Test
   public void equals_detectsEquality() {
-    final boolean actual = date.equals(new Date(3, 2, 1971));
+    final Date anotherDate = new Date(3, 2, 1971);
 
-    assertTrue(actual);
+    assertTrue(date.equals(anotherDate));
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean actual = date.equals(new Date());
-
-    assertFalse(actual);
+    assertFalse(date.equals(new Date()));
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean actual = date.equals(null);
-
-    assertFalse(actual);
+    assertFalse(date.equals(null));
   }
 
   @Test
   public void getYear() {
-    final int expected = 1971;
-    final int actual = date.getYear();
-
-    assertEquals(expected, actual);
+    assertEquals(1971, date.getYear());
   }
 
   @Test
   public void setYear() {
-    final int expected = 2018;
-    date.setYear(expected);
-    final int actual = date.getYear();
+    final int year = 2018;
+    date.setYear(year);
 
-    assertEquals(expected, actual);
+    assertEquals(year, date.getYear());
   }
 
   @Test
   public void getMonth() {
-    final int expected = 2;
-    final int actual = date.getMonth();
-
-    assertEquals(expected, actual);
+    assertEquals(2, date.getMonth());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -89,19 +75,15 @@ public class DateTest {
 
   @Test
   public void setMonth_acceptsValuesBetween1And12() throws IllegalArgumentException {
-    final int expected = 6;
-    date.setMonth(6);
-    final int actual = date.getMonth();
+    final int month = 6;
+    date.setMonth(month);
 
-    assertEquals(expected, actual);
+    assertEquals(month, date.getMonth());
   }
 
   @Test
   public void getDay() {
-    final int expected = 3;
-    final int actual = date.getDay();
-
-    assertEquals(expected, actual);
+    assertEquals(3, date.getDay());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -137,26 +119,19 @@ public class DateTest {
 
   @Test
   public void setDay_acceptsCorrectValuesBetween1And31() throws IllegalArgumentException {
-    final int expected = 15;
-    date.setDay(15);
-    final int actual = date.getDay();
+    final int day = 15;
+    date.setDay(day);
 
-    assertEquals(expected, actual);
+    assertEquals(day, date.getDay());
   }
 
   @Test
   public void getAgeInDaysAt() {
-    final int expected = 398;
-    final int actual = reference.getAgeInDaysAt(date);
-
-    assertEquals(expected, actual);
+    assertEquals(398, reference.getAgeInDaysAt(date));
   }
 
   @Test
   public void getAgeInYearsAt() {
-    final int expected = 1;
-    final int actual = reference.getAgeInYearsAt(date);
-
-    assertEquals(expected, actual);
+    assertEquals(1, reference.getAgeInYearsAt(date));
   }
 }

@@ -22,143 +22,117 @@ public class LinkedDocumentTest {
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<LinkedDocument id=ID>";
-    final String actual = linkedDocument.toString();
-
-    assertEquals(expected, actual);
+    assertEquals("<LinkedDocument id=ID>", linkedDocument.toString());
   }
 
   @Test
   public void equals_detectsEqualityWhenLinkedDocument() {
     releaseDate = new Date(9, 11, 2018);
     author = new Author("Foo", "Bar", releaseDate, "Springfield", "me@jonhue.me");
-    final boolean actual = linkedDocument.equals(new LinkedDocument("ID", "Another Title", "de", "Another summary", releaseDate, author,
+    LinkedDocument anotherLinkedDocument = new LinkedDocument("ID", "Another Title", "de", "Another summary", releaseDate, author,
             "am strand von santa monica stoppen bullige polizisten die revolution eine riesige blinkende " +
                     "anzeigetafel warnt auf dem Weg am strand sind elektronische tretroller verboten hier fangen " +
                     "polizisten viele ab die vom wenige kilometer entfernten venice beach angerast kommen einhundertneunzig " +
                     "dollar müssen die fahrer zahlen noch einmal einhundertneunzig dollar wenn sie keinen helm tragen harte " +
-                    "strafen um die plage in den griff zu bekommen"));
+                    "strafen um die plage in den griff zu bekommen");
 
-    assertTrue(actual);
+    assertTrue(linkedDocument.equals(anotherLinkedDocument));
   }
 
   @Test
   public void equals_detectsEqualityWhenDocument() {
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
-    final boolean actual = linkedDocument.equals(new Document("Title", "en", "Summary", releaseDate, author,
+    Document document = new Document("Title", "en", "Summary", releaseDate, author,
             "am strand von santa monica stoppen bullige polizisten die revolution eine riesige blinkende " +
                     "anzeigetafel warnt auf dem Weg am strand sind elektronische tretroller verboten hier fangen " +
                     "polizisten viele ab die vom wenige kilometer entfernten venice beach angerast kommen einhundertneunzig " +
                     "dollar müssen die fahrer zahlen noch einmal einhundertneunzig dollar wenn sie keinen helm tragen harte " +
-                    "strafen um die plage in den griff zu bekommen"));
+                    "strafen um die plage in den griff zu bekommen");
 
-    assertTrue(actual);
+    assertTrue(linkedDocument.equals(document));
   }
 
   @Test
   public void equals_detectsInequalityWhenLinkedDocument() {
-    final boolean actual = linkedDocument.equals(new LinkedDocument("ID2", "Another Title", "de", "Another summary", releaseDate, author, "content"));
+    LinkedDocument anotherLinkedDocument = new LinkedDocument("ID2", "Another Title", "de", "Another summary", releaseDate, author, "content");
 
-    assertFalse(actual);
+    assertFalse(linkedDocument.equals(anotherLinkedDocument));
   }
 
   @Test
   public void equals_detectsInequalityWhenDocument() {
-    final boolean actual = linkedDocument.equals(new Document("Another Title", "de", "Another summary", releaseDate, author, "content"));
+    Document document = new Document("Another Title", "de", "Another summary", releaseDate, author, "content");
 
-    assertFalse(actual);
+    assertFalse(linkedDocument.equals(document));
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean actual = linkedDocument.equals(null);
-
-    assertFalse(actual);
+    assertFalse(linkedDocument.equals(null));
   }
 
   @Test
   public void getID() {
-    final String expected = "ID";
-    final String actual = linkedDocument.getID();
-
-    assertEquals(expected, actual);
+    assertEquals("ID", linkedDocument.getID());
   }
 
   @Test
   public void addIncomingLink_whenNullGiven() {
-    final int expected = 0;
     linkedDocument.addIncomingLink(null);
-    final int actual = linkedDocument.getIncomingLinks().numDocuments();
 
-    assertEquals(expected, actual);
+    assertTrue(linkedDocument.getIncomingLinks().isEmpty());
   }
 
   @Test
   public void addIncomingLink_whenReferenceToSelf() {
-    final int expected = 0;
     linkedDocument.addIncomingLink(linkedDocument);
-    final int actual = linkedDocument.getIncomingLinks().numDocuments();
 
-    assertEquals(expected, actual);
+    assertTrue(linkedDocument.getIncomingLinks().isEmpty());
   }
 
   @Test
   public void addIncomingLink() {
-    final int expected = 1;
     linkedDocument.addIncomingLink(new LinkedDocument("ID2", "Another Title", "de", "Another summary", releaseDate, author, "content"));
-    final int actual = linkedDocument.getIncomingLinks().numDocuments();
 
-    assertEquals(expected, actual);
+    assertEquals(1, linkedDocument.getIncomingLinks().numDocuments());
   }
 
   @Test
   public void createLinkedDocumentFromFile_whenGivenFileHasLessThan2Lines() {
-    final LinkedDocument actual = LinkedDocument.createLinkedDocumentFromFile("src/test/support/empty");
-
-    assertNull(actual);
+    assertNull(LinkedDocument.createLinkedDocumentFromFile("src/test/support/empty"));
   }
 
   @Test
   public void createLinkedDocumentFromFile() {
-    final LinkedDocument actual = LinkedDocument.createLinkedDocumentFromFile("src/test/support/ID");
+    final LinkedDocument linkedDocument = LinkedDocument.createLinkedDocumentFromFile("src/test/support/ID");
 
-    assertEquals("ID", actual.getID());
-    assertEquals("ID", actual.getTitle());
-    assertEquals("cont", actual.getWordCounts().getWord(1));
+    assertEquals("ID", linkedDocument.getID());
+    assertEquals("ID", linkedDocument.getTitle());
+    assertEquals("cont", linkedDocument.getWordCounts().getWord(1));
   }
 
   @Test
   public void getOutgoingLinks_whenEmpty() {
-    final int expected = 0;
-    final int actual = linkedDocument.getOutgoingLinks().numDocuments();
-
-    assertEquals(expected, actual);
+    assertTrue(linkedDocument.getOutgoingLinks().isEmpty());
   }
 
   @Test
   public void getOutgoingLinks_whenNotEmpty() {
-    final int expected = 1;
     linkedDocument = new LinkedDocument("ID2", "Another Title", "de", "Another summary", releaseDate, author, "content link:src/test/support/ID");
-    final int actual = linkedDocument.getOutgoingLinks().numDocuments();
 
-    assertEquals(expected, actual);
+    assertEquals(1, linkedDocument.getOutgoingLinks().numDocuments());
   }
 
   @Test
   public void getIncomingLinks_whenEmpty() {
-    final int expected = 0;
-    final int actual = linkedDocument.getIncomingLinks().numDocuments();
-
-    assertEquals(expected, actual);
+    assertTrue(linkedDocument.getIncomingLinks().isEmpty());
   }
 
   @Test
   public void getIncomingLinks_whenNotEmpty() {
-    final int expected = 1;
     linkedDocument.addIncomingLink(new LinkedDocument("ID2", "Another Title", "de", "Another summary", releaseDate, author, "content"));
-    final int actual = linkedDocument.getIncomingLinks().numDocuments();
 
-    assertEquals(expected, actual);
+    assertEquals(1, linkedDocument.getIncomingLinks().numDocuments());
   }
 }

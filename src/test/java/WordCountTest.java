@@ -13,47 +13,36 @@ public class WordCountTest {
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<WordCount word=Word count=1>";
-    final String actual = wordCount.toString();
-
-    assertEquals(expected, actual);
+    assertEquals("<WordCount word=Word count=1>", wordCount.toString());
   }
 
   @Test
   public void equals_detectsEquality() {
-    final boolean actual = wordCount.equals(new WordCount("Word", 1));
+    WordCount anotherWordCount = new WordCount("Word", 1);
 
-    assertTrue(actual);
+    assertTrue(wordCount.equals(anotherWordCount));
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean actual = wordCount.equals(new WordCount("Another word", 2));
+    WordCount anotherWordCount = new WordCount("Another word", 2);
 
-    assertFalse(actual);
+    assertFalse(wordCount.equals(anotherWordCount));
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean actual = wordCount.equals(null);
-
-    assertFalse(actual);
+    assertFalse(wordCount.equals(null));
   }
 
   @Test
   public void getWord() {
-    final String expected = "Word";
-    final String actual = wordCount.getWord();
-
-    assertEquals(expected, actual);
+    assertEquals("Word", wordCount.getWord());
   }
 
   @Test
   public void getCount() {
-    final int expected = 1;
-    final int actual = wordCount.getCount();
-
-    assertEquals(expected, actual);
+    assertEquals(1, wordCount.getCount());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -63,61 +52,46 @@ public class WordCountTest {
 
   @Test
   public void setCount_acceptsPositiveValues() {
-    final int expected = 2;
-    wordCount.setCount(expected);
-    final int actual = wordCount.getCount();
+    final int count = 2;
+    wordCount.setCount(count);
 
-    assertEquals(expected, actual);
+    assertEquals(count, wordCount.getCount());
   }
 
   @Test
   public void getWeight() {
-    final double expected = 0.0;
-    final double actual = wordCount.getWeight();
-
-    assertEquals(expected, actual, 0.0);
+    assertEquals(0.0, wordCount.getWeight(), 0.0);
   }
 
   @Test
   public void setWeight() {
-    final double expected = 0.5;
-    wordCount.setWeight(expected);
-    final double actual = wordCount.getWeight();
+    final double weight = 0.5;
+    wordCount.setWeight(weight);
 
-    assertEquals(expected, actual, 0.0);
+    assertEquals(weight, wordCount.getWeight(), 0.0);
   }
 
   @Test
   public void getNormalizedWeight() {
-    final double expected = 0.0;
-    final double actual = wordCount.getNormalizedWeight();
-
-    assertEquals(expected, actual, 0.0);
+    assertEquals(0.0, wordCount.getNormalizedWeight(), 0.0);
   }
 
   @Test
   public void setNormalizedWeight() {
-    final double expected = 0.5;
-    wordCount.setNormalizedWeight(expected);
-    final double actual = wordCount.getNormalizedWeight();
+    final double normalizedWeight = 0.5;
+    wordCount.setNormalizedWeight(normalizedWeight);
 
-    assertEquals(expected, actual, 0.0);
+    assertEquals(normalizedWeight, wordCount.getNormalizedWeight(), 0.0);
   }
 
   @Test
   public void incrementCount_withoutParameter() {
-    final int expected = 2;
-    final int actual = wordCount.incrementCount();
-
-    assertEquals(expected, actual);
+    assertEquals(2, wordCount.incrementCount());
   }
 
   @Test
   public void incrementCount_withParameter() {
-    final int expected = 3;
-    final int actual = wordCount.incrementCount(2);
-
-    assertEquals(expected, actual);
+    assertEquals(3, wordCount.incrementCount(2));
   }
 
   @Test(expected = IllegalArgumentException.class)

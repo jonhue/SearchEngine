@@ -19,220 +19,183 @@ public class DocumentCollectionTest {
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<DocumentCollection size=0>";
-    final String actual = documentCollection.toString();
-
-    assertEquals(expected, actual);
+    assertEquals("<DocumentCollection size=0>", documentCollection.toString());
   }
 
   @Test
   public void equals_detectsEquality() {
-    documentCollection.prependDocument(document);
     final DocumentCollection anotherDocumentCollection = new DocumentCollection();
-    anotherDocumentCollection.prependDocument(document);
-    final boolean actual = documentCollection.equals(anotherDocumentCollection);
 
-    assertTrue(actual);
+    documentCollection.prependDocument(document);
+    anotherDocumentCollection.prependDocument(document);
+
+    assertTrue(documentCollection.equals(anotherDocumentCollection));
   }
 
   @Test
   public void equals_detectsInequality() {
-    documentCollection.prependDocument(document);
     final DocumentCollection anotherDocumentCollection = new DocumentCollection();
-    anotherDocumentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    final boolean actual = documentCollection.equals(anotherDocumentCollection);
 
-    assertFalse(actual);
+    documentCollection.prependDocument(document);
+    anotherDocumentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+
+    assertFalse(documentCollection.equals(anotherDocumentCollection));
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean actual = documentCollection.equals(null);
-
-    assertFalse(actual);
+    assertFalse(documentCollection.equals(null));
   }
 
   @Test
   public void prependDocument_returnsWhenNullGiven() {
     documentCollection.prependDocument(null);
-    final boolean actual = documentCollection.isEmpty();
 
-    assertTrue(actual);
+    assertTrue(documentCollection.isEmpty());
   }
 
   @Test
   public void prependDocument_whenListIsEmpty() {
     documentCollection.prependDocument(document);
-    final boolean actual = documentCollection.isEmpty();
 
-    assertFalse(actual);
+    assertFalse(documentCollection.isEmpty());
   }
 
   @Test
   public void prependDocument_whenListIsNotEmpty() {
     documentCollection.prependDocument(document);
-    final int expected = 2;
     documentCollection.prependDocument(document);
-    final int actual = documentCollection.numDocuments();
 
-    assertEquals(expected, actual);
+    assertEquals(2, documentCollection.numDocuments());
   }
 
   @Test
   public void prependDocument_prepends() {
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
-    final Document actual = documentCollection.getFirstDocument();
 
-    assertEquals(document, actual);
+    assertEquals(document, documentCollection.getFirstDocument());
   }
 
   @Test
   public void appendDocument_returnsWhenNullGiven() {
     documentCollection.appendDocument(null);
-    final boolean actual = documentCollection.isEmpty();
 
-    assertTrue(actual);
+    assertTrue(documentCollection.isEmpty());
   }
 
   @Test
   public void appendDocument_whenListIsEmpty() {
     documentCollection.appendDocument(document);
-    final boolean actual = documentCollection.isEmpty();
 
-    assertFalse(actual);
+    assertFalse(documentCollection.isEmpty());
   }
 
   @Test
   public void appendDocument_whenListIsNotEmpty() {
     documentCollection.appendDocument(document);
-    final int expected = 2;
     documentCollection.appendDocument(document);
-    final int actual = documentCollection.numDocuments();
 
-    assertEquals(expected, actual);
+    assertEquals(2, documentCollection.numDocuments());
   }
 
   @Test
   public void appendDocument_appends() {
     documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.appendDocument(document);
-    final Document actual = documentCollection.getLastDocument();
 
-    assertEquals(document, actual);
+    assertEquals(document, documentCollection.getLastDocument());
   }
 
   @Test
   public void isEmpty_whenEmpty() {
-    final boolean actual = documentCollection.isEmpty();
-
-    assertTrue(actual);
+    assertTrue(documentCollection.isEmpty());
   }
 
   @Test
   public void isEmpty_whenNotEmpty() {
     documentCollection.prependDocument(document);
-    final boolean actual = documentCollection.isEmpty();
 
-    assertFalse(actual);
+    assertFalse(documentCollection.isEmpty());
   }
 
   @Test
   public void numDocuments_whenEmpty() {
-    final int expected = 0;
-    final int actual = documentCollection.numDocuments();
-
-    assertEquals(expected, actual);
+    assertEquals(0, documentCollection.numDocuments());
   }
 
   @Test
   public void numDocuments_whenNotEmpty() {
-    final int expected = 1;
     documentCollection.prependDocument(document);
-    final int actual = documentCollection.numDocuments();
 
-    assertEquals(expected, actual);
+    assertEquals(1, documentCollection.numDocuments());
   }
 
   @Test
   public void getFirstDocument_whenEmpty() {
-    final Document actual = documentCollection.getFirstDocument();
-
-    assertNull(actual);
+    assertNull(documentCollection.getFirstDocument());
   }
 
   @Test
   public void getFirstDocument_whenNotEmpty() {
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
-    final Document actual = documentCollection.getFirstDocument();
 
-    assertEquals(document, actual);
+    assertEquals(document, documentCollection.getFirstDocument());
   }
 
   @Test
   public void getLastDocument_whenEmpty() {
-    final Document actual = documentCollection.getLastDocument();
-
-    assertNull(actual);
+    assertNull(documentCollection.getLastDocument());
   }
 
   @Test
   public void getLastDocument_whenNotEmpty() {
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    final Document actual = documentCollection.getLastDocument();
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
 
-    assertEquals(document, actual);
+    assertEquals(document, documentCollection.getLastDocument());
   }
 
   @Test
   public void get_whenIndexSmallerThan0() {
-    final Document actual = documentCollection.get(-1);
-
-    assertNull(actual);
+    assertNull(documentCollection.get(-1));
   }
 
   @Test
   public void get_whenIndexHigherOrEqualToLength() {
-    final Document actual = documentCollection.get(0);
-
-    assertNull(actual);
+    assertNull(documentCollection.get(0));
   }
 
   @Test
   public void get_whenIndexHigherThan0AndSmallerThanLength() {
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    final Document actual = documentCollection.get(1);
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
 
-    assertEquals(document, actual);
+    assertEquals(document, documentCollection.get(1));
   }
 
   @Test
   public void removeFirstDocument_whenEmpty() {
     documentCollection.removeFirstDocument();
-    final boolean actual = documentCollection.isEmpty();
 
-    assertTrue(actual);
+    assertTrue(documentCollection.isEmpty());
   }
 
   @Test
   public void removeFirstDocument_whenNotEmpty() {
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
     documentCollection.removeFirstDocument();
-    final Document actual = documentCollection.getFirstDocument();
 
-    assertEquals(document, actual);
+    assertEquals(document, documentCollection.getFirstDocument());
   }
 
   @Test
   public void removeLastDocument_whenEmpty() {
     documentCollection.removeLastDocument();
-    final boolean actual = documentCollection.isEmpty();
 
-    assertTrue(actual);
+    assertTrue(documentCollection.isEmpty());
   }
 
   @Test
@@ -240,147 +203,111 @@ public class DocumentCollectionTest {
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     documentCollection.removeLastDocument();
-    final Document actual = documentCollection.getLastDocument();
 
-    assertEquals(document, actual);
+    assertEquals(document, documentCollection.getLastDocument());
   }
 
   @Test
   public void remove_whenIndexSmallerThan0() {
-    final boolean actual = documentCollection.remove(-1);
-
-    assertFalse(actual);
+    assertFalse(documentCollection.remove(-1));
   }
 
   @Test
   public void remove_whenIndexHigherOrEqualToLength() {
-    final boolean actual = documentCollection.remove(0);
-
-    assertFalse(actual);
+    assertFalse(documentCollection.remove(0));
   }
 
   @Test
   public void remove_whenIndexHigherThan0AndSmallerThanLength() {
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    final boolean actual = documentCollection.remove(1);
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
 
-    assertTrue(actual);
+    assertTrue(documentCollection.remove(1));
   }
 
   @Test
   public void indexOf_whenNullGiven() {
-    final int expected = -1;
-    final int actual = documentCollection.indexOf(null);
-
-    assertEquals(expected, actual);
+    assertEquals(-1, documentCollection.indexOf(null));
   }
 
   @Test
   public void indexOf_whenEmpty() {
-    final int expected = -1;
-    final int actual = documentCollection.indexOf(document);
-
-    assertEquals(expected, actual);
+    assertEquals(-1, documentCollection.indexOf(document));
   }
 
   @Test
   public void indexOf_whenNotInList() {
-    final int expected = -1;
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    final int actual = documentCollection.indexOf(document);
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
 
-    assertEquals(expected, actual);
+    assertEquals(-1, documentCollection.indexOf(document));
   }
 
   @Test
   public void indexOf_whenInList() {
-    final int expected = 1;
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    final int actual = documentCollection.indexOf(document);
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
 
-    assertEquals(expected, actual);
+    assertEquals(1, documentCollection.indexOf(document));
   }
 
   @Test
   public void indexOf_whenInListTwice() {
-    final int expected = 0;
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    documentCollection.prependDocument(document);
-    final int actual = documentCollection.indexOf(document);
+    documentCollection.appendDocument(document);
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
 
-    assertEquals(expected, actual);
+    assertEquals(0, documentCollection.indexOf(document));
   }
 
   @Test
   public void contains_whenNotInList() {
-    final boolean actual = documentCollection.contains(document);
-
-    assertFalse(actual);
+    assertFalse(documentCollection.contains(document));
   }
 
   @Test
   public void contains_whenInList() {
-    documentCollection.prependDocument(document);
-    final boolean actual = documentCollection.contains(document);
+    documentCollection.appendDocument(document);
 
-    assertTrue(actual);
+    assertTrue(documentCollection.contains(document));
   }
 
   @Test
   public void match_computesSimilarityAndOrdersDesc() {
-    final double expected = 0.707106781;
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
     documentCollection.match("content");
-    final double actual = documentCollection.getQuerySimilarity(0);
 
-    assertEquals(expected, actual, 0.000000001);
+    assertEquals(0.707106781, documentCollection.getQuerySimilarity(0), 0.000000001);
   }
 
   @Test
   public void getQuerySimilarity_whenIndexSmallerThan0() {
-    final double expected = -1.0;
-    final double actual = documentCollection.getQuerySimilarity(-1);
-
-    assertEquals(expected, actual, 0);
+    assertEquals(-1.0, documentCollection.getQuerySimilarity(-1), 0);
   }
 
   @Test
   public void getQuerySimilarity_whenIndexHigherOrEqualToLength() {
-    final double expected = -1.0;
-    final double actual = documentCollection.getQuerySimilarity(0);
-
-    assertEquals(expected, actual, 0);
+    assertEquals(-1.0, documentCollection.getQuerySimilarity(0), 0);
   }
 
   @Test
   public void getQuerySimilarity_whenIndexHigherThan0AndSmallerThanLength() {
-    final double expected = 0.0;
-    documentCollection.prependDocument(document);
+    documentCollection.appendDocument(document);
     documentCollection.match("abc");
-    final double actual = documentCollection.getQuerySimilarity(0);
 
-    assertEquals(expected, actual, 0);
+    assertEquals(0.0, documentCollection.getQuerySimilarity(0), 0);
   }
 
   @Test
   public void noOfDocumentsContainingWord_whenEmpty() {
-    final int expected = 0;
-    final int actual = documentCollection.noOfDocumentsContainingWord("more");
-
-    assertEquals(expected, actual);
+    assertEquals(0, documentCollection.noOfDocumentsContainingWord("more"));
   }
 
   @Test
   public void noOfDocumentsContainingWord_whenNotEmpty() {
-    final int expected = 1;
-    documentCollection.prependDocument(document);
-    documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
-    final int actual = documentCollection.noOfDocumentsContainingWord("more");
+    documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
+    documentCollection.appendDocument(document);
 
-    assertEquals(expected, actual);
+    assertEquals(1, documentCollection.noOfDocumentsContainingWord("more"));
   }
 }

@@ -15,107 +15,83 @@ public class AuthorTest {
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<Author firstName=Jonas lastName=Hübotter>";
-    final String actual = author.toString();
-
-    assertEquals(expected, actual);
+    assertEquals("<Author firstName=Jonas lastName=Hübotter>", author.toString());
   }
 
   @Test
   public void equals_detectsEquality() {
-    birthday = new Date(4, 2, 2000);
-    final boolean actual = author.equals(new Author("Jonas", "Hübotter", birthday, "Munich", "jonas.huebotter@tum.de"));
+    Author anotherAuthor = new Author("Jonas", "Hübotter", birthday, "Munich", "jonas.huebotter@tum.de");
 
-    assertTrue(actual);
+    assertTrue(author.equals(anotherAuthor));
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean actual = author.equals(new Author("Foo", "Bar", birthday, "Springfield", "me@jonhue.me"));
+    Author anotherAuthor = new Author("Foo", "Bar", birthday, "Springfield", "me@jonhue.me");
 
-    assertFalse(actual);
+    assertFalse(author.equals(anotherAuthor));
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean actual = author.equals(null);
-
-    assertFalse(actual);
+    assertFalse(author.equals(null));
   }
 
   @Test
   public void getFirstName() {
-    final String expected = "Jonas";
-    final String actual = author.getFirstName();
-
-    assertEquals(expected, actual);
+    assertEquals("Jonas", author.getFirstName());
   }
 
   @Test
   public void setFirstName() {
-    final String expected = "Foo";
-    author.setFirstName(expected);
-    final String actual = author.getFirstName();
+    final String firstName = "Bar";
+    author.setFirstName(firstName);
 
-    assertEquals(expected, actual);
+    assertEquals(firstName, author.getFirstName());
   }
 
   @Test
   public void getLastName() {
-    final String expected = "Hübotter";
-    final String actual = author.getLastName();
-
-    assertEquals(expected, actual);
+    assertEquals("Hübotter", author.getLastName());
   }
 
   @Test
   public void setLastName() {
-    final String expected = "Bar";
-    author.setLastName(expected);
-    final String actual = author.getLastName();
+    final String lastName = "Bar";
+    author.setLastName(lastName);
 
-    assertEquals(expected, actual);
+    assertEquals(lastName, author.getLastName());
   }
 
   @Test
   public void getBirthday() {
-    final Date actual = author.getBirthday();
-
-    assertEquals(birthday, actual);
+    assertEquals(birthday, author.getBirthday());
   }
 
   @Test
   public void setBirthday() {
-    final Date expected = new Date(1, 1, 1970);
-    author.setBirthday(expected);
-    final Date actual = author.getBirthday();
+    final Date birthday = new Date(1, 1, 1970);
+    author.setBirthday(birthday);
 
-    assertEquals(expected, actual);
+    assertEquals(birthday, author.getBirthday());
   }
 
   @Test
   public void getResidence() {
-    final String expected = "Munich";
-    final String actual = author.getResidence();
-
-    assertEquals(expected, actual);
+    assertEquals("Munich", author.getResidence());
   }
 
   @Test
   public void setResidence() {
-    final String expected = "Springfield";
-    author.setResidence(expected);
-    final String actual = author.getResidence();
+    final String residence = "Springfield";
+    author.setResidence(residence);
 
-    assertEquals(expected, actual);
+    assertEquals(residence, author.getResidence());
   }
 
   @Test
   public void getEmail() {
-    final String expected = "jonas.huebotter@tum.de";
-    final String actual = author.getEmail();
-
-    assertEquals(expected, actual);
+    assertEquals("jonas.huebotter@tum.de", author.getEmail());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -135,35 +111,26 @@ public class AuthorTest {
 
   @Test
   public void setEmail_acceptsValuesContainingAtNotInFirstPlaceAndLongerThan5() {
-    final String expected = "me@jonhue.me";
-    author.setEmail(expected);
-    final String actual = author.getEmail();
+    final String email = "me@jonhue.me";
+    author.setEmail(email);
 
-    assertEquals(expected, actual);
+    assertEquals(email, author.getEmail());
   }
 
   @Test
   public void getName() {
-    final String expected = "Jonas Hübotter";
-    final String actual = author.getName();
-
-    assertEquals(expected, actual);
+    assertEquals("Jonas Hübotter", author.getName());
   }
 
   @Test
   public void getContactInformation() {
-    final String expected = "Jonas Hübotter\r\njonas.huebotter@tum.de\r\nMunich";
-    final String actual = author.getContactInformation();
-
-    assertEquals(expected, actual);
+    assertEquals("Jonas Hübotter\r\njonas.huebotter@tum.de\r\nMunich", author.getContactInformation());
   }
 
   @Test
   public void getAgeAt() {
-    final int expected = 18;
     final Date today = new Date(27, 10, 2018);
-    final int actual = author.getAgeAt(today);
 
-    assertEquals(expected, actual);
+    assertEquals(18, author.getAgeAt(today));
   }
 }

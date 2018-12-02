@@ -15,130 +15,105 @@ public class ReviewTest {
   public void setUp() throws IllegalArgumentException {
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
-    document = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
-    review = new Review(author, document, "en", releaseDate, 5, "Content ...");
+    document = new Document("Title", "en", "Summary", releaseDate, author, "content");
+    review = new Review(author, document, "en", releaseDate, 5, "content");
   }
 
   @Test
   public void toString_hasCorrectFormat() {
-    final String expected = "<Review rating=5 document=<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>> author=<Author firstName=Jonas lastName=Hübotter>>";
-    final String actual = review.toString();
-
-    assertEquals(expected, actual);
+    assertEquals("<Review rating=5 document=<Document title=Title lang=en author=<Author firstName=Jonas lastName=Hübotter>> author=<Author firstName=Jonas lastName=Hübotter>>", review.toString());
   }
 
   @Test
   public void equals_detectsEquality() {
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
-    document = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
-    final boolean actual = review.equals(new Review(author, document, "en", releaseDate, 5, "Content ..."));
+    document = new Document("Title", "en", "Summary", releaseDate, author, "content");
+    Review anotherReview = new Review(author, document, "en", releaseDate, 5, "content");
 
-    assertTrue(actual);
+    assertTrue(review.equals(anotherReview));
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean actual = review.equals(new Review(author, document, "de", releaseDate, 10, "More ..."));
+    Review anotherReview = new Review(author, document, "de", releaseDate, 10, "more");
 
-    assertFalse(actual);
+    assertFalse(review.equals(anotherReview));
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean actual = review.equals(null);
-
-    assertFalse(actual);
+    assertFalse(review.equals(null));
   }
 
   @Test
   public void getContent() {
-    final String expected = "Content ...";
-    final String actual = review.getContent();
-
-    assertEquals(expected, actual);
+    assertEquals("content", review.getContent());
   }
 
   @Test
   public void setContent() {
-    final String expected = "More ...";
-    review.setContent(expected);
-    final String actual = review.getContent();
+    final String content = "more";
+    review.setContent(content);
 
-    assertEquals(expected, actual);
+    assertEquals(content, review.getContent());
   }
 
   @Test
   public void getAuthor() {
-    final Author actual = review.getAuthor();
-
-    assertEquals(author, actual);
+    assertEquals(author, review.getAuthor());
   }
 
   @Test
   public void setAuthor() {
-    final Author expected = new Author("Foo", "Bar", releaseDate, "Springfield", "me@jonhue.me");
-    review.setAuthor(expected);
-    final Author actual = review.getAuthor();
+    final Author author = new Author("Foo", "Bar", releaseDate, "Springfield", "me@jonhue.me");
+    review.setAuthor(author);
 
-    assertEquals(expected, actual);
+    assertEquals(author, review.getAuthor());
   }
 
   @Test
   public void getDocument() {
-    final Document actual = review.getDocument();
-
-    assertEquals(document, actual);
+    assertEquals(document, review.getDocument());
   }
 
   @Test
   public void setDocument() {
-    final Document expected = new Document("Another Title", "de", "Another summary", releaseDate, author, "More ...");
-    review.setDocument(expected);
-    final Document actual = review.getDocument();
+    final Document document = new Document("Another Title", "de", "Another summary", releaseDate, author, "more");
+    review.setDocument(document);
 
-    assertEquals(expected, actual);
+    assertEquals(document, review.getDocument());
   }
 
   @Test
   public void getLang() {
-    final String expected = "en";
-    final String actual = review.getLang();
-
-    assertEquals(expected, actual);
+    assertEquals("en", review.getLang());
   }
 
   @Test
   public void setLang() {
-    final String expected = "de";
-    review.setLang(expected);
-    final String actual = review.getLang();
+    final String lang = "de";
+    review.setLang(lang);
 
-    assertEquals(expected, actual);
+    assertEquals(lang, review.getLang());
   }
 
   @Test
   public void getReleaseDate() {
-    final Date actual = review.getReleaseDate();
-
-    assertEquals(releaseDate, actual);
+    assertEquals(releaseDate, review.getReleaseDate());
   }
 
   @Test
   public void setReleaseDate() {
-    final Date expected = new Date(1, 1, 1970);
-    review.setReleaseDate(expected);
-    final Date actual = review.getReleaseDate();
+    final Date releaseDate = new Date(1, 1, 1970);
+    review.setReleaseDate(releaseDate);
 
-    assertEquals(expected, actual);
+    assertEquals(releaseDate, review.getReleaseDate());
   }
 
   @Test
   public void getRating() {
-    final int expected = 5;
-    final int actual = review.getRating();
-
-    assertEquals(expected, actual);
+    assertEquals(5, review.getRating());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -153,19 +128,16 @@ public class ReviewTest {
 
   @Test
   public void setRating_acceptsValuesBetween0And10() throws IllegalArgumentException {
-    final int expected = 6;
-    review.setRating(6);
-    final int actual = review.getRating();
+    final int rating = 6;
+    review.setRating(rating);
 
-    assertEquals(expected, actual);
+    assertEquals(rating, review.getRating());
   }
 
   @Test
   public void getAgeAt() {
-    final int expected = 352;
     final Date today = new Date(27, 10, 2018);
-    final int actual = review.getAgeAt(today);
 
-    assertEquals(expected, actual);
+    assertEquals(352, review.getAgeAt(today));
   }
 }
