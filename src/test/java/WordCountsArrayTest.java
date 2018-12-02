@@ -22,30 +22,27 @@ public class WordCountsArrayTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     WordCountsArray newWordCountsArray = new WordCountsArray(2);
     newWordCountsArray.add("Hello", 1);
     final boolean actual = wordCountsArray.equals(newWordCountsArray);
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     WordCountsArray newWordCountsArray = new WordCountsArray(1);
     newWordCountsArray.add("World", 1);
     final boolean actual = wordCountsArray.equals(newWordCountsArray);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean expected = false;
     final boolean actual = wordCountsArray.equals(null);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test

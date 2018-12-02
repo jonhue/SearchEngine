@@ -27,24 +27,22 @@ public class DocumentCollectionTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     documentCollection.prependDocument(document);
     final DocumentCollection anotherDocumentCollection = new DocumentCollection();
     anotherDocumentCollection.prependDocument(document);
     final boolean actual = documentCollection.equals(anotherDocumentCollection);
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     documentCollection.prependDocument(document);
     final DocumentCollection anotherDocumentCollection = new DocumentCollection();
     anotherDocumentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final boolean actual = documentCollection.equals(anotherDocumentCollection);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
@@ -82,12 +80,11 @@ public class DocumentCollectionTest {
 
   @Test
   public void prependDocument_prepends() {
-    final Document expected = document;
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     final Document actual = documentCollection.getFirstDocument();
 
-    assertTrue(expected.equals(actual));
+    assertEquals(document, actual);
   }
 
   @Test
@@ -118,12 +115,11 @@ public class DocumentCollectionTest {
 
   @Test
   public void appendDocument_appends() {
-    final Document expected = document;
     documentCollection.appendDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.appendDocument(document);
     final Document actual = documentCollection.getLastDocument();
 
-    assertTrue(expected.equals(actual));
+    assertEquals(document, actual);
   }
 
   @Test
@@ -167,12 +163,11 @@ public class DocumentCollectionTest {
 
   @Test
   public void getFirstDocument_whenNotEmpty() {
-    final Document expected = document;
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     final Document actual = documentCollection.getFirstDocument();
 
-    assertTrue(expected.equals(actual));
+    assertEquals(document, actual);
   }
 
   @Test
@@ -184,12 +179,11 @@ public class DocumentCollectionTest {
 
   @Test
   public void getLastDocument_whenNotEmpty() {
-    final Document expected = document;
     documentCollection.prependDocument(document);
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final Document actual = documentCollection.getLastDocument();
 
-    assertTrue(expected.equals(actual));
+    assertEquals(document, actual);
   }
 
   @Test
@@ -208,12 +202,11 @@ public class DocumentCollectionTest {
 
   @Test
   public void get_whenIndexHigherThan0AndSmallerThanLength() {
-    final Document expected = document;
     documentCollection.prependDocument(document);
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     final Document actual = documentCollection.get(1);
 
-    assertTrue(expected.equals(actual));
+    assertEquals(document, actual);
   }
 
   @Test
@@ -226,13 +219,12 @@ public class DocumentCollectionTest {
 
   @Test
   public void removeFirstDocument_whenNotEmpty() {
-    final Document expected = document;
     documentCollection.prependDocument(document);
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.removeFirstDocument();
     final Document actual = documentCollection.getFirstDocument();
 
-    assertTrue(expected.equals(actual));
+    assertEquals(document, actual);
   }
 
   @Test
@@ -245,13 +237,12 @@ public class DocumentCollectionTest {
 
   @Test
   public void removeLastDocument_whenNotEmpty() {
-    final Document expected = document;
     documentCollection.prependDocument(new Document("Another Title", "de", "Another summary", releaseDate, author, "more"));
     documentCollection.prependDocument(document);
     documentCollection.removeLastDocument();
     final Document actual = documentCollection.getLastDocument();
 
-    assertTrue(expected.equals(actual));
+    assertEquals(document, actual);
   }
 
   @Test

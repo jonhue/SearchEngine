@@ -27,25 +27,22 @@ public class DocumentCollectionCellTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     final Document document = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
     final boolean actual = documentCollectionCell.equals(new DocumentCollectionCell(document));
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     final Document document = new Document("Another Title", "de", "Another summary", releaseDate, author, "More ...");
     final boolean actual = documentCollectionCell.equals(new DocumentCollectionCell(document));
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsNestedInequality() {
-    final boolean expected = false;
     final Document document1 = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
     final Document document2 = new Document("Another Title", "de", "Another summary", releaseDate, author, "More ...");
     final DocumentCollectionCell documentCollectionCell1 = new DocumentCollectionCell(document1);
@@ -53,15 +50,14 @@ public class DocumentCollectionCellTest {
     documentCollectionCell.setNext(documentCollectionCell1);
     final boolean actual = documentCollectionCell.equals(new DocumentCollectionCell(document, documentCollectionCell2));
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean expected = false;
     final boolean actual = documentCollectionCell.equals(null);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
@@ -106,12 +102,11 @@ public class DocumentCollectionCellTest {
 
   @Test
   public void setNext_setsPreviousWhenNotNull() {
-    final DocumentCollectionCell expected = documentCollectionCell;
     DocumentCollectionCell anotherDocumentCollectionCell = new DocumentCollectionCell(document);
     documentCollectionCell.setNext(anotherDocumentCollectionCell);
     final DocumentCollectionCell actual = anotherDocumentCollectionCell.getPrevious();
 
-    assertEquals(expected, actual);
+    assertEquals(documentCollectionCell, actual);
   }
 
   @Test

@@ -33,26 +33,23 @@ public class DateTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     final boolean actual = date.equals(new Date(3, 2, 1971));
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     final boolean actual = date.equals(new Date());
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean expected = false;
     final boolean actual = date.equals(null);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test

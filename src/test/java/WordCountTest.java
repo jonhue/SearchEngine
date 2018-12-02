@@ -21,26 +21,23 @@ public class WordCountTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     final boolean actual = wordCount.equals(new WordCount("Word", 1));
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     final boolean actual = wordCount.equals(new WordCount("Another word", 2));
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean expected = false;
     final boolean actual = wordCount.equals(null);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test

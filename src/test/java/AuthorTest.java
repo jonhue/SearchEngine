@@ -23,27 +23,24 @@ public class AuthorTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     birthday = new Date(4, 2, 2000);
     final boolean actual = author.equals(new Author("Jonas", "Hübotter", birthday, "Munich", "jonas.huebotter@tum.de"));
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     final boolean actual = author.equals(new Author("Foo", "Bar", birthday, "Springfield", "me@jonhue.me"));
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean expected = false;
     final boolean actual = author.equals(null);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test

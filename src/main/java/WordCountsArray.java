@@ -5,6 +5,61 @@ public class WordCountsArray {
     wordCounts = new WordCount[wordCountsLength];
   }
 
+  private static int bucketSortGetMaxWordLength(WordCount[] wordCounts) {
+    int maxWordLength = 0;
+    for (int i = 0; i < wordCounts.length && wordCounts[i] != null; ++i)
+      if (maxWordLength < wordCounts[i].getWord().length())
+        maxWordLength = wordCounts[i].getWord().length();
+
+    return maxWordLength;
+  }
+
+  private static int bucketSortBucketIndex(String word, int index) {
+    if (word.length() > index)
+      return word.charAt(index) - 96; // 'a' -> 1, 'z' -> 26
+    else
+      return 0;
+  }
+
+  private static void bucketSortAddToBucket(WordCountsArray[] buckets, int bucketIndex, WordCount wordCount) {
+    if (buckets[bucketIndex] == null) {
+      buckets[bucketIndex] = new WordCountsArray(1);
+      buckets[bucketIndex].wordCounts[0] = wordCount;
+    } else {
+      if (buckets[bucketIndex].size() == buckets[bucketIndex].wordCounts.length)
+        buckets[bucketIndex].extend(buckets[bucketIndex].wordCounts.length);
+      buckets[bucketIndex].wordCounts[buckets[bucketIndex].size()] = wordCount;
+    }
+  }
+
+  private static double weight(int index, WordCountsArray wordCountsArray, DocumentCollection documentCollection) {
+    if (wordCountsArray.getWord(index).equals("") || documentCollection == null) return -1.0;
+
+    return wordCountsArray.getCount(index) * invertedFrequency(wordCountsArray.getWord(index), documentCollection);
+  }
+
+  private static double invertedFrequency(String word, DocumentCollection documentCollection) {
+    if (word == null || documentCollection == null) return -1.0;
+
+    return Math.log((double) documentCollection.numDocuments() / documentCollection.noOfDocumentsContainingWord(word));
+  }
+
+  private static double normalizedWeight(int index, WordCountsArray wordCountsArray, DocumentCollection documentCollection) {
+    if (wordCountsArray.getWord(index).equals("") || documentCollection == null) return -1.0;
+
+    return weight(index, wordCountsArray, documentCollection) / rootedSumOfWeightsSquared(wordCountsArray, documentCollection);
+  }
+
+  private static double rootedSumOfWeightsSquared(WordCountsArray wordCountsArray, DocumentCollection documentCollection) {
+    if (documentCollection == null) return -1.0;
+
+    double sumOfWeightsSquared = 0.0;
+    for (int i = 0; i < wordCountsArray.size(); ++i)
+      sumOfWeightsSquared += +Math.pow(weight(i, wordCountsArray, documentCollection), 2);
+
+    return Math.sqrt(sumOfWeightsSquared);
+  }
+
   public String toString() {
     return "<WordCountsArray size=" + size() + ">";
   }
@@ -147,38 +202,12 @@ public class WordCountsArray {
     }
   }
 
-  private static int bucketSortGetMaxWordLength(WordCount[] wordCounts) {
-    int maxWordLength = 0;
-    for (int i = 0; i < wordCounts.length && wordCounts[i] != null; ++i)
-      if (maxWordLength < wordCounts[i].getWord().length())
-        maxWordLength = wordCounts[i].getWord().length();
-
-    return maxWordLength;
-  }
-
   private void bucketSortConcatenateBuckets(WordCountsArray[] buckets) {
     int i = 0;
     for (WordCountsArray bucket : buckets)
       if (bucket != null)
         for (int wordCountIndex = 0; wordCountIndex < bucket.size(); ++wordCountIndex)
           wordCounts[i++] = bucket.wordCounts[wordCountIndex];
-  }
-
-  private static int bucketSortBucketIndex(String word, int index) {
-    if (word.length() > index)
-      return word.charAt(index) - 96; // 'a' -> 1, 'z' -> 26
-    else
-      return 0;
-  }
-
-  private static void bucketSortAddToBucket(WordCountsArray[] buckets, int bucketIndex, WordCount wordCount) {
-    if (buckets[bucketIndex] == null) {
-      buckets[bucketIndex] = new WordCountsArray(1);
-      buckets[bucketIndex].wordCounts[0] = wordCount;
-    } else {
-      if (buckets[bucketIndex].size() == buckets[bucketIndex].wordCounts.length) buckets[bucketIndex].extend(buckets[bucketIndex].wordCounts.length);
-      buckets[bucketIndex].wordCounts[buckets[bucketIndex].size()] = wordCount;
-    }
   }
 
   private void calculateWeights(DocumentCollection documentCollection) {
@@ -188,38 +217,10 @@ public class WordCountsArray {
       wordCounts[i].setWeight(weight(i, this, documentCollection));
   }
 
-  private static double weight(int index, WordCountsArray wordCountsArray, DocumentCollection documentCollection) {
-    if (wordCountsArray.getWord(index).equals("") || documentCollection == null) return -1.0;
-
-    return wordCountsArray.getCount(index) * invertedFrequency(wordCountsArray.getWord(index), documentCollection);
-  }
-
-  private static double invertedFrequency(String word, DocumentCollection documentCollection) {
-    if (word == null || documentCollection == null) return -1.0;
-
-    return Math.log((double) documentCollection.numDocuments() / documentCollection.noOfDocumentsContainingWord(word));
-  }
-
   private void calculateNormalizedWeights(DocumentCollection documentCollection) {
     if (documentCollection == null) return;
 
     for (int i = 0; i < size(); ++i)
       wordCounts[i].setNormalizedWeight(normalizedWeight(i, this, documentCollection));
-  }
-
-  private static double normalizedWeight(int index, WordCountsArray wordCountsArray, DocumentCollection documentCollection) {
-    if (wordCountsArray.getWord(index).equals("") || documentCollection == null) return -1.0;
-
-    return weight(index, wordCountsArray, documentCollection) / rootedSumOfWeightsSquared(wordCountsArray, documentCollection);
-  }
-
-  private static double rootedSumOfWeightsSquared(WordCountsArray wordCountsArray, DocumentCollection documentCollection) {
-    if (documentCollection == null) return -1.0;
-
-    double sumOfWeightsSquared = 0.0;
-    for (int i = 0; i < wordCountsArray.size(); ++i)
-      sumOfWeightsSquared += + Math.pow(weight(i, wordCountsArray, documentCollection), 2);
-
-    return Math.sqrt(sumOfWeightsSquared);
   }
 }

@@ -17,6 +17,48 @@ public class Date {
     setDay(Terminal.TODAYS_DAY);
   }
 
+  /* Leap years are the years that are divisible by 4, except those that are divisible by 100 and not divisible by 400. */
+  private static boolean isLeapYear(int year) {
+    if (year % 100 == 0 && year % 400 != 0) return false;
+    return year % 4 == 0;
+  }
+
+  private static int daysSince(Date date, Date reference) {
+    int result = 0;
+
+    for (int year = reference.year + 1; year < date.year; ++year)
+      result += daysInYear(year);
+
+    return result + reference.daysFromDayInYear() + date.daysToDayInYear();
+  }
+
+  private static int yearsSince(Date date, Date reference) {
+    return date.year - reference.year;
+  }
+
+  private static int daysInYear(int year) {
+    if (isLeapYear(year)) return 366;
+    return 365;
+  }
+
+  private static int daysOfMonth(int month, int year) {
+    switch (month) {
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        return 30;
+      case 2:
+        if (isLeapYear(year)) {
+          return 29;
+        } else {
+          return 28;
+        }
+      default:
+        return 31;
+    }
+  }
+
   public String toString() {
     return "<Date year=" + year + " month=" + month + " day=" + day + ">";
   }
@@ -78,30 +120,6 @@ public class Date {
     return Date.yearsSince(date, this);
   }
 
-  /* Leap years are the years that are divisible by 4, except those that are divisible by 100 and not divisible by 400. */
-  private static boolean isLeapYear(int year) {
-    if (year % 100 == 0 && year % 400 != 0) return false;
-    return year % 4 == 0;
-  }
-
-  private static int daysSince(Date date, Date reference) {
-    int result = 0;
-
-    for (int year = reference.year + 1; year < date.year; ++year)
-      result += daysInYear(year);
-
-    return result + reference.daysFromDayInYear() + date.daysToDayInYear();
-  }
-
-  private static int yearsSince(Date date, Date reference) {
-    return date.year - reference.year;
-  }
-
-  private static int daysInYear(int year) {
-    if (isLeapYear(year)) return 366;
-    return 365;
-  }
-
   private int daysToDayInYear() {
     int result = 0;
 
@@ -118,23 +136,5 @@ public class Date {
       result += daysOfMonth(month, year);
 
     return result - day;
-  }
-
-  private static int daysOfMonth(int month, int year) {
-    switch (month) {
-      case 4:
-      case 6:
-      case 9:
-      case 11:
-        return 30;
-      case 2:
-        if (isLeapYear(year)) {
-          return 29;
-        } else {
-          return 28;
-        }
-      default:
-        return 31;
-    }
   }
 }

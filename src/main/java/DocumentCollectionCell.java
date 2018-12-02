@@ -19,8 +19,10 @@ public class DocumentCollectionCell {
 
   public boolean equals(DocumentCollectionCell documentCollectionCell) {
     if (documentCollectionCell == null) return false;
-    if (documentCollectionCell.next == null && next != null || documentCollectionCell.next != null && next == null) return false;
-    if (documentCollectionCell.previous == null && previous != null || documentCollectionCell.previous != null && previous == null) return false;
+    if (documentCollectionCell.next == null && next != null || documentCollectionCell.next != null && next == null)
+      return false;
+    if (documentCollectionCell.previous == null && previous != null || documentCollectionCell.previous != null && previous == null)
+      return false;
 
     boolean documentEqual = documentCollectionCell.document == null && document == null || documentCollectionCell.document.equals(document);
     boolean nextEqual = documentCollectionCell.next == null && next == null || documentCollectionCell.next.equals(next);

@@ -30,7 +30,6 @@ public class DocumentTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
     final boolean actual = document.equals(new Document("Title", "en", "Summary", releaseDate, author,
@@ -40,23 +39,21 @@ public class DocumentTest {
             "dollar müssen die fahrer zahlen noch einmal einhundertneunzig dollar wenn sie keinen helm tragen harte " +
             "strafen um die plage in den griff zu bekommen"));
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     final boolean actual = document.equals(new Document("Another Title", "de", "Another summary", releaseDate, author, "Content ..."));
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean expected = false;
     final boolean actual = document.equals(null);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test

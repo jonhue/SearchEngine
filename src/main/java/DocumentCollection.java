@@ -193,7 +193,7 @@ public class DocumentCollection {
     }
 
     // Sort array
-    mergeSortIt(arr);
+    MergeSort.sort(arr);
 
     // Build new list
     for (int i = 1; i < arr.length; ++i)
@@ -201,19 +201,21 @@ public class DocumentCollection {
     head = arr[0];
     tail = arr[arr.length - 1];
   }
+}
 
-  private static void mergeSortIt(DocumentCollectionCell[] arr) {
+class MergeSort {
+  public static void sort(DocumentCollectionCell[] arr) {
     for (int maxSortedPartLength = 1; maxSortedPartLength < arr.length; maxSortedPartLength *= 2) {
       int startPos = 0;
       while (startPos < arr.length) {
-        int endPos = mergeSortEndPos(startPos, maxSortedPartLength, arr.length);
-        java.lang.System.arraycopy(mergeSortMerge(arr, startPos, mergeSortDividePos(startPos, maxSortedPartLength, arr.length), endPos), 0, arr, startPos, endPos - startPos);
+        int endPos = endPos(startPos, maxSortedPartLength, arr.length);
+        java.lang.System.arraycopy(merge(arr, startPos, dividePos(startPos, maxSortedPartLength, arr.length), endPos), 0, arr, startPos, endPos - startPos);
         startPos = endPos;
       }
     }
   }
 
-  private static DocumentCollectionCell[] mergeSortMerge(DocumentCollectionCell[] arr, int startPos, int dividePos, int endPos) {
+  private static DocumentCollectionCell[] merge(DocumentCollectionCell[] arr, int startPos, int dividePos, int endPos) {
     DocumentCollectionCell[] b = new DocumentCollectionCell[endPos - startPos];
     int k = 0;
 
@@ -237,7 +239,7 @@ public class DocumentCollection {
     return b;
   }
 
-  private static int mergeSortDividePos(int startPos, int maxSortedPartLength, int arrLength) {
+  private static int dividePos(int startPos, int maxSortedPartLength, int arrLength) {
     if (startPos + maxSortedPartLength >= arrLength)
       return arrLength;
     else if (startPos + 2 * maxSortedPartLength >= arrLength)
@@ -246,7 +248,7 @@ public class DocumentCollection {
       return startPos + maxSortedPartLength;
   }
 
-  private static int mergeSortEndPos(int startPos, int maxSortedPartLength, int arrLength) {
+  private static int endPos(int startPos, int maxSortedPartLength, int arrLength) {
     if (startPos + 2 * maxSortedPartLength >= arrLength)
       return arrLength;
     else

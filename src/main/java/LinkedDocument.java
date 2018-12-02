@@ -15,6 +15,20 @@ public class LinkedDocument extends Document {
     incomingLinks = new LinkedDocumentCollection();
   }
 
+  public static LinkedDocument createLinkedDocumentFromFile(String fileName) {
+    String[] fileContent = Terminal.readFile(fileName);
+    if (fileContent == null || fileContent.length < 2) return null;
+
+    String ID = fileName.substring(fileName.lastIndexOf("/") + 1);
+    String title = fileContent[0];
+    String lang = "";
+    String summary = "";
+    Date releaseDate = new Date();
+    Author author = new Author("Foo", "Bar", new Date(), "Springfield", "me@jonhue.me");
+    String content = fileContent[1];
+    return new LinkedDocument(ID, title, lang, summary, releaseDate, author, content);
+  }
+
   public String toString() {
     return "<LinkedDocument id=" + ID + ">";
   }
@@ -85,19 +99,5 @@ public class LinkedDocument extends Document {
       if (!equals(linkedDocument))
         outgoingLinks.appendDocument(linkedDocument);
     }
-  }
-
-  public static LinkedDocument createLinkedDocumentFromFile(String fileName) {
-    String[] fileContent = Terminal.readFile(fileName);
-    if (fileContent == null || fileContent.length < 2) return null;
-
-    String ID = fileName.substring(fileName.lastIndexOf("/") + 1);
-    String title = fileContent[0];
-    String lang = "";
-    String summary = "";
-    Date releaseDate = new Date();
-    Author author = new Author("Foo", "Bar", new Date(), "Springfield", "me@jonhue.me");
-    String content = fileContent[1];
-    return new LinkedDocument(ID, title, lang, summary, releaseDate, author, content);
   }
 }

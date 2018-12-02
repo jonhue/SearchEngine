@@ -29,29 +29,26 @@ public class ReviewTest {
 
   @Test
   public void equals_detectsEquality() {
-    final boolean expected = true;
     releaseDate = new Date(9, 11, 2017);
     author = new Author("Jonas", "Hübotter", releaseDate, "Munich", "jonas.huebotter@tum.de");
     document = new Document("Title", "en", "Summary", releaseDate, author, "Content ...");
     final boolean actual = review.equals(new Review(author, document, "en", releaseDate, 5, "Content ..."));
 
-    assertEquals(expected, actual);
+    assertTrue(actual);
   }
 
   @Test
   public void equals_detectsInequality() {
-    final boolean expected = false;
     final boolean actual = review.equals(new Review(author, document, "de", releaseDate, 10, "More ..."));
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
   public void equals_detectsInequalityWhenNull() {
-    final boolean expected = false;
     final boolean actual = review.equals(null);
 
-    assertEquals(expected, actual);
+    assertFalse(actual);
   }
 
   @Test
