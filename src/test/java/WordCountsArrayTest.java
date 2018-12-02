@@ -50,7 +50,7 @@ public class WordCountsArrayTest {
 
   @Test
   public void getWord_invalidIndex() {
-    final String expected = null;
+    final String expected = "";
     final String actual = wordCountsArray.getWord(1);
 
     assertEquals(expected, actual);

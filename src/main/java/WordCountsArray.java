@@ -25,7 +25,7 @@ public class WordCountsArray {
   }
 
   public String getWord(int i) {
-    if (i >= size()) return null;
+    if (i >= size()) return "";
 
     return wordCounts[i].getWord();
   }
