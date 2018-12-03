@@ -100,7 +100,7 @@ public class WordCountsArray {
   }
 
   public void setCount(int i, int count) throws IllegalArgumentException {
-    if (i >= size())
+    if (i >= size() || i < 0)
       throw new IllegalArgumentException("Invalid index.");
 
     wordCounts[i].setCount(count);
