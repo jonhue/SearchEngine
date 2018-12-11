@@ -1,5 +1,3 @@
-package utils;
-
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.io.InputStreamReader;
 
 /**
  * Diese Klasse stellt einige einfache Methoden zur Ein- und Ausgabe auf einem
- * utils.Terminal zur Verf&uuml;gung.
+ * Terminal zur Verf&uuml;gung.
  * 
  */
 public final class Terminal {
@@ -57,7 +55,7 @@ public final class Terminal {
   private static final String ERROR_READ_FILE = "Fehler beim Lesen der Datei! ";
 
   /**
-   * Liest eine Zeichenkette vom utils.Terminal.
+   * Liest eine Zeichenkette vom Terminal.
    * 
    * @return das gelesene Zeichen. Modifiziert von A. L ochbihler, damit kein
    *         Null-String mehr zurueckgegeben wird.
@@ -92,7 +90,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest einen Wahrheitswert vom utils.Terminal. Die Zeichenkette "true"
+   * Liest einen Wahrheitswert vom Terminal. Die Zeichenkette "true"
    * (unabh&auml;ngig von Gro&szlig;-/Kleinschreibung) liefert true, alles andere
    * false.
    * 
@@ -116,7 +114,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest ein Zeichen vom utils.Terminal. Zeilenumbruche zaehlen als eigene Zeichen.
+   * Liest ein Zeichen vom Terminal. Zeilenumbruche zaehlen als eigene Zeichen.
    * 
    * @return das gelesene Zeichen.
    */
@@ -144,7 +142,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest eine ganze Zahl (8 Bit) vom utils.Terminal.
+   * Liest eine ganze Zahl (8 Bit) vom Terminal.
    * 
    * @return die gelesene Zahl.
    */
@@ -173,7 +171,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest eine ganze Zahl (16 Bit) vom utils.Terminal.
+   * Liest eine ganze Zahl (16 Bit) vom Terminal.
    * 
    * @return die gelesene Zahl.
    */
@@ -202,7 +200,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest eine ganze Zahl (32 Bit) vom utils.Terminal.
+   * Liest eine ganze Zahl (32 Bit) vom Terminal.
    * 
    * @return die gelesene Zahl.
    */
@@ -231,7 +229,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest eine ganze Zahl (64 Bit) vom utils.Terminal.
+   * Liest eine ganze Zahl (64 Bit) vom Terminal.
    * 
    * @return die gelesene Zahl.
    */
@@ -260,7 +258,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest eine Gleitpunktzahl(32 Bit) vom utils.Terminal.
+   * Liest eine Gleitpunktzahl(32 Bit) vom Terminal.
    * 
    * @return die gelesene Zahl.
    */
@@ -289,7 +287,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest eine Gleitpunktzahl(64 Bit) vom utils.Terminal.
+   * Liest eine Gleitpunktzahl(64 Bit) vom Terminal.
    * 
    * @return die gelesene Zahl.
    */
@@ -318,7 +316,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest ein Integer-Array vom utils.Terminal.
+   * Liest ein Integer-Array vom Terminal.
    * 
    * @return array das gelesene Array.
    * @throws NumberFormatException bei falschem Zahlenformat.
@@ -345,7 +343,7 @@ public final class Terminal {
   }
 
   /**
-   * Liest eine Integer-Matrix vom utils.Terminal.
+   * Liest eine Integer-Matrix vom Terminal.
    * 
    * @return matrix die gelesene Matrix..
    */
