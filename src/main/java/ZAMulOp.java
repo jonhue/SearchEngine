@@ -1,5 +1,5 @@
-public final class MulOp<T> extends BinOp<Integer> {
-  public MulOp(Expression<Integer> left, Expression<Integer> right) {
+public final class ZAMulOp<T, U> extends ZABinOp<Integer, Integer> {
+  public ZAMulOp(ZAExpression<Integer> left, ZAExpression<Integer> right) {
     super(left, right);
   }
 

@@ -1,7 +1,7 @@
-public final class NegOp<T> extends UnOp<T> {
+public final class ZANegOp<T> extends ZAUnOp<T> {
   private String symbol;
 
-  public NegOp(Expression<T> arg) throws IllegalArgumentException {
+  public ZANegOp(ZAExpression<T> arg) throws IllegalArgumentException {
     super(arg);
     setSymbol(arg.getValue());
   }

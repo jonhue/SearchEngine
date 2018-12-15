@@ -1,5 +1,5 @@
-public final class OrOp<T> extends BinOp<Boolean> {
-  public OrOp(Expression<Boolean> left, Expression<Boolean> right) {
+public final class ZAOrOp<T, U> extends ZABinOp<Boolean, Boolean> {
+  public ZAOrOp(ZAExpression<Boolean> left, ZAExpression<Boolean> right) {
     super(left, right);
   }
 

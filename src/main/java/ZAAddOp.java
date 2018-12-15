@@ -1,5 +1,5 @@
-public final class AddOp<T> extends BinOp<Integer> {
-  public AddOp(Expression<Integer> left, Expression<Integer> right) {
+public final class ZAAddOp<T, U> extends ZABinOp<Integer, Integer> {
+  public ZAAddOp(ZAExpression<Integer> left, ZAExpression<Integer> right) {
     super(left, right);
   }
 
