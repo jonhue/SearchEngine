@@ -137,4 +137,17 @@ public class DocumentCollectionCellTest {
 
     assertEquals(similarity, documentCollectionCell.getSimilarity(), 0);
   }
+
+  @Test
+  public void getRelevance() {
+    assertEquals(0.0, documentCollectionCell.getRelevance(), 0);
+  }
+
+  @Test
+  public void setRelevance() {
+    final double relevance = 0.5;
+    documentCollectionCell.setRelevance(relevance);
+
+    assertEquals(relevance, documentCollectionCell.getRelevance(), 0);
+  }
 }

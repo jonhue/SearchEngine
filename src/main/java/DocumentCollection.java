@@ -120,7 +120,7 @@ public class DocumentCollection {
   }
 
   public void match(String query) {
-    prependDocument(new Document(null, null, null, null, null, query));
+    prependDocument(new Document("query", "", "", new Date(), new Author("", "", new Date(), "", "a@b.de"), query));
 
     match();
   }
@@ -154,7 +154,7 @@ public class DocumentCollection {
     return num;
   }
 
-  private DocumentCollectionCell getCell(int index) {
+  protected DocumentCollectionCell getCell(int index) {
     if (index < 0 || index >= numDocuments()) return null;
 
     DocumentCollectionCell documentCollectionCell = head;
@@ -181,22 +181,31 @@ public class DocumentCollection {
   }
 
   private void sortBySimilarityDesc() {
-    // Build array from list
-    DocumentCollectionCell[] arr = new DocumentCollectionCell[numDocuments()];
-    for (int i = 0; i < arr.length; ++i)
-      arr[i] = getCell(i);
-
-    // Reset list elements
-    for (DocumentCollectionCell cell : arr) {
-      cell.setNext(null);
-      cell.setPrevious(null);
-    }
+    // Build array from list & reset list elements
+    DocumentCollectionCell[] arr = toArray();
 
     // Sort array
     MergeSort.sort(arr);
 
     // Build new list
-    for (int i = 1; i < arr.length; ++i)
+    fromArray(arr);
+  }
+
+  protected DocumentCollectionCell[] toArray() {
+    DocumentCollectionCell[] result = new DocumentCollectionCell[numDocuments()];
+    for (int i = 0; i < result.length; i++)
+      result[i] = getCell(i);
+
+    for (DocumentCollectionCell cell : result) {
+      cell.setNext(null);
+      cell.setPrevious(null);
+    }
+
+    return result;
+  }
+
+  protected void fromArray(DocumentCollectionCell[] arr) {
+    for (int i = 1; i < arr.length; i++)
       arr[i].setPrevious(arr[i - 1]);
     head = arr[0];
     tail = arr[arr.length - 1];

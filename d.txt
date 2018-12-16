@@ -1,0 +1,2 @@
+d.txt
+erase una vez link:c.txt

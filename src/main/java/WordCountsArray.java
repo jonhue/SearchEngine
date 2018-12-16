@@ -15,10 +15,14 @@ public class WordCountsArray {
   }
 
   private static int bucketSortBucketIndex(String word, int index) {
-    if (word.length() > index)
-      return word.charAt(index) - 96; // 'a' -> 1, 'z' -> 26
-    else
+    if (word.length() > index) {
+      if (word.charAt(index) - 96 < 0 || word.charAt(index) - 96 > 25)
+        return 0;
+      else
+        return word.charAt(index) - 96; // 'a' -> 1, 'z' -> 26
+    } else {
       return 0;
+    }
   }
 
   private static void bucketSortAddToBucket(WordCountsArray[] buckets, int bucketIndex, WordCount wordCount) {
@@ -130,7 +134,11 @@ public class WordCountsArray {
   }
 
   public double computeSimilarity(WordCountsArray wordCountsArray) {
-    return scalarProduct(wordCountsArray) / Math.sqrt(scalarProduct(this) * wordCountsArray.scalarProduct(wordCountsArray));
+    double sp1 = scalarProduct(this);
+    double sp2 = wordCountsArray.scalarProduct(wordCountsArray);
+
+    if (sp1 == 0 || sp2 == 0) return 0;
+    return scalarProduct(wordCountsArray) / Math.sqrt(sp1 * sp2);
   }
 
   public double computeSimilarity(WordCountsArray wordCountsArray, DocumentCollection documentCollection) {

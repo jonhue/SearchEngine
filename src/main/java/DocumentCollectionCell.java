@@ -3,6 +3,7 @@ public class DocumentCollectionCell {
   private DocumentCollectionCell next;
   private DocumentCollectionCell previous;
   private double similarity;
+  private double relevance;
 
   public DocumentCollectionCell(Document document) {
     setDocument(document);
@@ -64,5 +65,13 @@ public class DocumentCollectionCell {
 
   public void setSimilarity(double similarity) {
     this.similarity = similarity;
+  }
+
+  public double getRelevance() {
+    return relevance;
+  }
+
+  public void setRelevance(double relevance) {
+    this.relevance = relevance;
   }
 }
